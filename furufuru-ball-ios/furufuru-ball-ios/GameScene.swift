@@ -12,7 +12,7 @@ class GameScene: SKScene {
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
         // ShapeNodeを作成.
-        let Circle = SKShapeNode(circleOfRadius: 30)
+        let Circle = SKShapeNode(circleOfRadius: 40)
         
         // ShapeNodeの座標を指定.
         Circle.position = CGPointMake(self.frame.midX, self.frame.midY)
