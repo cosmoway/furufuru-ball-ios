@@ -8,14 +8,16 @@
 
 import SpriteKit
 
+let Circle = SKShapeNode(circleOfRadius: 40)
+
 class GameScene: SKScene {
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
-        let Circle = SKShapeNode(circleOfRadius: 40)
+        
         // ShapeNodeの座標を指定.
         Circle.position = CGPointMake(self.frame.midX, self.frame.midY)
         Circle.physicsBody = SKPhysicsBody(circleOfRadius: 40)
-        Circle.physicsBody?.affectedByGravity = true
+        Circle.physicsBody?.affectedByGravity = false
         
         // ShapeNodeの塗りつぶしの色を指定.
         Circle.fillColor = UIColor.greenColor()
@@ -40,11 +42,11 @@ class GameScene: SKScene {
         UnderLine.physicsBody?.affectedByGravity = false
         UnderLine.physicsBody?.dynamic = false
         
-        LeftLine.position = CGPointMake(self.frame.minX, self.frame.minY)
+        LeftLine.position = CGPointMake(self.frame.minX+300, self.frame.minY)
         LeftLine.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(1,self.frame.maxY+100))
         LeftLine.physicsBody?.affectedByGravity = false
         LeftLine.physicsBody?.dynamic = false
-        RightLine.position = CGPointMake(self.frame.maxX, self.frame.minY)
+        RightLine.position = CGPointMake(self.frame.maxX-300, self.frame.minY)
         RightLine.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(1,self.frame.maxY+100))
         RightLine.physicsBody?.affectedByGravity = false
         RightLine.physicsBody?.dynamic = false
@@ -58,5 +60,6 @@ class GameScene: SKScene {
     
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
+        Circle.position.x++
     }
 }
