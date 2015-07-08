@@ -10,10 +10,13 @@ import SpriteKit
 
 class GameScene: SKScene {
     override func didMoveToView(view: SKView) {
+        var radius = 40 as CGFloat
         /* Setup your scene here */
-        let Circle = SKShapeNode(circleOfRadius: 40)
+        let Circle = SKShapeNode(circleOfRadius: radius)
         // ShapeNodeの座標を指定.
         Circle.position = CGPointMake(self.frame.midX, self.frame.midY)
+        Circle.physicsBody = SKPhysicsBody(circleOfRadius: radius)
+        Circle.physicsBody?.affectedByGravity = true
         
         // ShapeNodeの塗りつぶしの色を指定.
         Circle.fillColor = UIColor.greenColor()
