@@ -12,6 +12,7 @@ import CoreMotion
 class GameScene: SKScene {
     var myMotionManager: CMMotionManager?
     override func didMoveToView(view: SKView) {
+        self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
         var radius = 40 as CGFloat
         /* Setup your scene here */
         let Circle = SKShapeNode(circleOfRadius: radius)
@@ -34,8 +35,16 @@ class GameScene: SKScene {
             var Vy = Vpy + accelerometerData.acceleration.y
             Vpx = Vx
             Vpy = Vy
-            Circle.position.x = Circle.position.x + CGFloat(Vx * 0.01)
-            Circle.position.y = Circle.position.y + CGFloat(Vy * 0.01)
+            if ((Circle.position.x + CGFloat(Vx*0.1)) < self.frame.maxX && (Circle.position.x + CGFloat(Vx*0.1)) > self.frame.minX) {
+                Circle.position.x = Circle.position.x + CGFloat(Vx*0.1)
+            } else {
+                -Vpx
+            }
+            if ((Circle.position.y + CGFloat(Vy*0.1)) < self.frame.maxY && (Circle.position.y + CGFloat(Vy*0.1)) > self.frame.minY) {
+                Circle.position.y = Circle.position.y + CGFloat(Vy*0.1)
+            } else {
+                -Vpy
+            }
         })
         
         // ShapeNodeの塗りつぶしの色を指定.
