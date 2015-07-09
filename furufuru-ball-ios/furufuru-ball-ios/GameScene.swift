@@ -34,9 +34,8 @@ class GameScene: SKScene {
             var Vy = Vpy + accelerometerData.acceleration.y
             Vpx = Vx
             Vpy = Vy
-            Circle.position.x = Circle.position.x + CGFloat(Vx * 0.1)
-            Circle.position.y = Circle.position.y + CGFloat(Vy * 0.1)
-            println(accelerometerData.acceleration.x)
+            Circle.position.x = Circle.position.x + CGFloat(Vx * 0.01)
+            Circle.position.y = Circle.position.y + CGFloat(Vy * 0.01)
         })
         
         // ShapeNodeの塗りつぶしの色を指定.
