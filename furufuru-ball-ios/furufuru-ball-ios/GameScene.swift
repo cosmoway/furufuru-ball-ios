@@ -30,8 +30,6 @@ class GameScene: SKScene {
         var vp_x = 0.0
         var vp_y = 0.0
         
-        let resilience = 0.9
-        
         // 加速度の取得を開始.
         myMotionManager!.startAccelerometerUpdatesToQueue(NSOperationQueue.mainQueue(), withHandler: {(accelerometerData:CMAccelerometerData!, error:NSError!) -> Void in
             //加速の計算
