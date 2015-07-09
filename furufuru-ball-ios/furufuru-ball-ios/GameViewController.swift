@@ -38,6 +38,8 @@ class GameViewController: UIViewController {
             
             /* Sprite Kit applies additional optimizations to improve rendering performance */
             skView.ignoresSiblingOrder = true
+            scene.size.width = self.view.frame.width
+            scene.size.height = self.view.frame.height
             
             /* Set the scale mode to scale to fit the window */
             scene.scaleMode = .AspectFill

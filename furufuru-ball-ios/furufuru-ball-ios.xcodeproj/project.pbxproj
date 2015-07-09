@@ -351,6 +351,7 @@
 				INFOPLIST_FILE = "furufuru-ball-ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -361,6 +362,7 @@
 				INFOPLIST_FILE = "furufuru-ball-ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -417,6 +419,7 @@
 				599CEBDC1B4BB5EA003B6B6D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		599CEBDD1B4BB5EA003B6B6D /* Build configuration list for PBXNativeTarget "furufuru-ball-iosTests" */ = {
 			isa = XCConfigurationList;
@@ -425,6 +428,7 @@
 				599CEBDF1B4BB5EA003B6B6D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
