@@ -23,11 +23,14 @@ class GameScene: SKScene {
         
         myMotionManager = CMMotionManager()
         let interval = 0.03
-        
+        //反発力
+        let resilience = 0.9
         // 更新周期を設定.
         myMotionManager!.accelerometerUpdateInterval = interval
         var vp_x = 0.0
         var vp_y = 0.0
+        
+        let resilience = 0.9
         
         // 加速度の取得を開始.
         myMotionManager!.startAccelerometerUpdatesToQueue(NSOperationQueue.mainQueue(), withHandler: {(accelerometerData:CMAccelerometerData!, error:NSError!) -> Void in
@@ -42,13 +45,13 @@ class GameScene: SKScene {
             } else {
                 //壁に当たった時の反発
                 Circle.position.x = Circle.position.x + CGFloat(v_x*interval)
-                vp_x = -vp_x * 0.9
+                vp_x = -vp_x * resilience
             }
             if ((Circle.position.y + CGFloat(v_y*interval)) < self.frame.maxY-radius && (Circle.position.y + CGFloat(v_y*interval)) > self.frame.minY+radius) {
                 Circle.position.y = Circle.position.y + CGFloat(v_y*interval)
             } else {
                 Circle.position.y = Circle.position.y + CGFloat(v_y*interval)
-                vp_y = -vp_y * 0.9
+                vp_y = -vp_y * resilience
             }
         })
         
