@@ -26,27 +26,29 @@ class GameScene: SKScene {
         
         // 更新周期を設定.
         myMotionManager!.accelerometerUpdateInterval = interval
-        var Vpx = 0.0
-        var Vpy = 0.0
+        var vp_x = 0.0
+        var vp_y = 0.0
         
         // 加速度の取得を開始.
         myMotionManager!.startAccelerometerUpdatesToQueue(NSOperationQueue.mainQueue(), withHandler: {(accelerometerData:CMAccelerometerData!, error:NSError!) -> Void in
             //加速の計算
-            var Vx = Vpx + accelerometerData.acceleration.x * 1000 * interval
-            var Vy = Vpy + accelerometerData.acceleration.y * 1000 * interval
-            Vpx = Vx
-            Vpy = Vy
+            var v_x = vp_x + accelerometerData.acceleration.x * 1000 * interval
+            var v_y = vp_y + accelerometerData.acceleration.y * 1000 * interval
+            vp_x = v_x
+            vp_y = v_y
             //壁に当たったか判定
-            if ((Circle.position.x + CGFloat(Vx*interval)) < self.frame.maxX-radius && (Circle.position.x + CGFloat(Vx*interval)) > self.frame.minX+radius) {
-                Circle.position.x = Circle.position.x + CGFloat(Vx*interval)
+            if ((Circle.position.x + CGFloat(v_x*interval)) < self.frame.maxX-radius && (Circle.position.x + CGFloat(v_x*interval)) > self.frame.minX+radius) {
+                Circle.position.x = Circle.position.x + CGFloat(v_x*interval)
             } else {
                 //壁に当たった時の反発
-                Vpx = -Vpx * 0.9
+                Circle.position.x = Circle.position.x + CGFloat(v_x*interval)
+                vp_x = -vp_x * 0.9
             }
-            if ((Circle.position.y + CGFloat(Vy*interval)) < self.frame.maxY-radius && (Circle.position.y + CGFloat(Vy*interval)) > self.frame.minY+radius) {
-                Circle.position.y = Circle.position.y + CGFloat(Vy*interval)
+            if ((Circle.position.y + CGFloat(v_y*interval)) < self.frame.maxY-radius && (Circle.position.y + CGFloat(v_y*interval)) > self.frame.minY+radius) {
+                Circle.position.y = Circle.position.y + CGFloat(v_y*interval)
             } else {
-                Vpy = -Vpy * 0.9
+                Circle.position.y = Circle.position.y + CGFloat(v_y*interval)
+                vp_y = -vp_y * 0.9
             }
         })
         
