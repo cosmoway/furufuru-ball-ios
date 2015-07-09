@@ -22,28 +22,31 @@ class GameScene: SKScene {
         Circle.physicsBody?.affectedByGravity = false
         
         myMotionManager = CMMotionManager()
+        let interval = 0.03
         
         // 更新周期を設定.
-        myMotionManager!.accelerometerUpdateInterval = 0.01
+        myMotionManager!.accelerometerUpdateInterval = interval
         var Vpx = 0.0
         var Vpy = 0.0
         
         // 加速度の取得を開始.
         myMotionManager!.startAccelerometerUpdatesToQueue(NSOperationQueue.mainQueue(), withHandler: {(accelerometerData:CMAccelerometerData!, error:NSError!) -> Void in
-            
-            var Vx = Vpx + accelerometerData.acceleration.x
-            var Vy = Vpy + accelerometerData.acceleration.y
+            //加速の計算
+            var Vx = Vpx + accelerometerData.acceleration.x * 1000 * interval
+            var Vy = Vpy + accelerometerData.acceleration.y * 1000 * interval
             Vpx = Vx
             Vpy = Vy
-            if ((Circle.position.x + CGFloat(Vx*0.1)) < self.frame.maxX && (Circle.position.x + CGFloat(Vx*0.1)) > self.frame.minX) {
-                Circle.position.x = Circle.position.x + CGFloat(Vx*0.1)
+            //壁に当たったか判定
+            if ((Circle.position.x + CGFloat(Vx*interval)) < self.frame.maxX-radius && (Circle.position.x + CGFloat(Vx*interval)) > self.frame.minX+radius) {
+                Circle.position.x = Circle.position.x + CGFloat(Vx*interval)
             } else {
-                -Vpx
+                //壁に当たった時の反発
+                Vpx = -Vpx * 0.9
             }
-            if ((Circle.position.y + CGFloat(Vy*0.1)) < self.frame.maxY && (Circle.position.y + CGFloat(Vy*0.1)) > self.frame.minY) {
-                Circle.position.y = Circle.position.y + CGFloat(Vy*0.1)
+            if ((Circle.position.y + CGFloat(Vy*interval)) < self.frame.maxY-radius && (Circle.position.y + CGFloat(Vy*interval)) > self.frame.minY+radius) {
+                Circle.position.y = Circle.position.y + CGFloat(Vy*interval)
             } else {
-                -Vpy
+                Vpy = -Vpy * 0.9
             }
         })
         
