@@ -7,9 +7,14 @@
 //
 
 import SpriteKit
+import AVFoundation
 
-class GameScene: SKScene {
+class GameScene: SKScene ,SKPhysicsContactDelegate{
+    let categoryA: UInt32 = 0x1 << 0
     override func didMoveToView(view: SKView) {
+        self.physicsWorld.contactDelegate = self
+        self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
+        self.physicsBody?.contactTestBitMask = categoryA
         var radius = 40 as CGFloat
         /* Setup your scene here */
         let Circle = SKShapeNode(circleOfRadius: radius)
@@ -17,6 +22,7 @@ class GameScene: SKScene {
         Circle.position = CGPointMake(self.frame.midX, self.frame.midY)
         Circle.physicsBody = SKPhysicsBody(circleOfRadius: radius)
         Circle.physicsBody?.affectedByGravity = true
+        Circle.physicsBody?.contactTestBitMask = categoryA
         
         // ShapeNodeの塗りつぶしの色を指定.
         Circle.fillColor = UIColor.greenColor()
@@ -27,5 +33,9 @@ class GameScene: SKScene {
     
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
+    }
+    func didBeginContact(contact: SKPhysicsContact) {
+        println("didBeginContact")
+        AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
     }
 }
