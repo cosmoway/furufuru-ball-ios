@@ -7,12 +7,14 @@
 //
 
 import SpriteKit
-import AVFoundation
 import CoreMotion
 
 class GameScene: SKScene ,SKPhysicsContactDelegate{
     let categoryA: UInt32 = 0x1 << 0
     var myMotionManager: CMMotionManager?
+    var i:Int = 0
+    var flag = true
+    
     override func didMoveToView(view: SKView) {
         self.physicsWorld.contactDelegate = self
         self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
@@ -44,14 +46,14 @@ class GameScene: SKScene ,SKPhysicsContactDelegate{
             vp_x = v_x
             vp_y = v_y
             //壁に当たったか判定
-            if ((Circle.position.x + CGFloat(v_x*interval)) < self.frame.maxX-radius && (Circle.position.x + CGFloat(v_x*interval)) > self.frame.minX+radius) {
+            if ((Circle.position.x + CGFloat(v_x*interval)) < self.frame.maxX-radius && (Circle.position.x + CGFloat(v_x*interval)) > self.frame.minX+radius || !self.flag) {
                 Circle.position.x = Circle.position.x + CGFloat(v_x*interval)
             } else {
                 //壁に当たった時の反発
                 Circle.position.x = Circle.position.x + CGFloat(v_x*interval)
                 vp_x = -vp_x * resilience
             }
-            if ((Circle.position.y + CGFloat(v_y*interval)) < self.frame.maxY-radius && (Circle.position.y + CGFloat(v_y*interval)) > self.frame.minY+radius) {
+            if ((Circle.position.y + CGFloat(v_y*interval)) < self.frame.maxY-radius && (Circle.position.y + CGFloat(v_y*interval)) > self.frame.minY+radius || !self.flag) {
                 Circle.position.y = Circle.position.y + CGFloat(v_y*interval)
             } else {
                 Circle.position.y = Circle.position.y + CGFloat(v_y*interval)
@@ -69,7 +71,11 @@ class GameScene: SKScene ,SKPhysicsContactDelegate{
         /* Called before each frame is rendered */
     }
     func didBeginContact(contact: SKPhysicsContact) {
-        println("didBeginContact")
-        AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+        println("didBeginContact\(i)")
+        i++
+        if (i>3) {
+            self.physicsBody = nil
+            flag = false
+        }
     }
 }
