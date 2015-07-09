@@ -24,11 +24,19 @@ class GameScene: SKScene {
         
         // 更新周期を設定.
         myMotionManager!.accelerometerUpdateInterval = 0.01
+        var Vpx = 0.0
+        var Vpy = 0.0
         
         // 加速度の取得を開始.
         myMotionManager!.startAccelerometerUpdatesToQueue(NSOperationQueue.mainQueue(), withHandler: {(accelerometerData:CMAccelerometerData!, error:NSError!) -> Void in
-            Circle.position.x += CGFloat(accelerometerData.acceleration.x)
-            Circle.position.y += CGFloat(accelerometerData.acceleration.y)
+            
+            var Vx = Vpx + accelerometerData.acceleration.x
+            var Vy = Vpy + accelerometerData.acceleration.y
+            Vpx = Vx
+            Vpy = Vy
+            Circle.position.x = Circle.position.x + CGFloat(Vx * 0.1)
+            Circle.position.y = Circle.position.y + CGFloat(Vy * 0.1)
+            println(accelerometerData.acceleration.x)
         })
         
         // ShapeNodeの塗りつぶしの色を指定.
