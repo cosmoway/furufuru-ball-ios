@@ -10,6 +10,7 @@ import SpriteKit
 import CoreMotion
 
 class GameScene: SKScene {
+    var myMotionManager: CMMotionManager?
     override func didMoveToView(view: SKView) {
         var radius = 40 as CGFloat
         /* Setup your scene here */
@@ -19,13 +20,13 @@ class GameScene: SKScene {
         Circle.physicsBody = SKPhysicsBody(circleOfRadius: radius)
         Circle.physicsBody?.affectedByGravity = false
         
-        let myMotionManager = CMMotionManager()
+        myMotionManager = CMMotionManager()
         
         // 更新周期を設定.
-        myMotionManager.accelerometerUpdateInterval = 0.01
+        myMotionManager!.accelerometerUpdateInterval = 0.01
         
         // 加速度の取得を開始.
-        myMotionManager.startAccelerometerUpdatesToQueue(NSOperationQueue.mainQueue(), withHandler: {(accelerometerData:CMAccelerometerData!, error:NSError!) -> Void in
+        myMotionManager!.startAccelerometerUpdatesToQueue(NSOperationQueue.mainQueue(), withHandler: {(accelerometerData:CMAccelerometerData!, error:NSError!) -> Void in
             Circle.position.x += CGFloat(accelerometerData.acceleration.x)
             Circle.position.y += CGFloat(accelerometerData.acceleration.y)
         })
