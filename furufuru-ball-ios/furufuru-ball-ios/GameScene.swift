@@ -9,8 +9,9 @@
 import SpriteKit
 import CoreMotion
 
-class GameScene: SKScene {
+class GameScene: SKScene, SRWebSocketDelegate {
     var myMotionManager: CMMotionManager?
+    let socket = SocketIOClient(socketURL: "localhost:3000")
     override func didMoveToView(view: SKView) {
         self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
         var radius = 40 as CGFloat
