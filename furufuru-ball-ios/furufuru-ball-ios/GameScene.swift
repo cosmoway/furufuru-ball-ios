@@ -9,7 +9,7 @@
 import SpriteKit
 import CoreMotion
 
-class GameScene: SKScene{
+class GameScene: SKScene, SRWebSocketDelegate{
     var myMotionManager: CMMotionManager?
     override func didMoveToView(view: SKView) {
         webSocketConnect()
@@ -65,7 +65,17 @@ class GameScene: SKScene{
     }
     func webSocketConnect() {
        let socketio = SRWebSocket(URLRequest: NSURLRequest(URL: NSURL(string: "url")!))
-        //socketio!.delegate = self
+        socketio!.delegate = self
         socketio!.open()
+    }
+    func webSocketDidOpen(webSocket:SRWebSocket){
+        webSocket.send("aa")
+    }
+    
+    func webSocket(webSocket: SRWebSocket!, didReceiveMessage message: AnyObject!){
+        
+    }
+    func webSocket(webSocket: SRWebSocket!, didFailWithError error: NSError){
+    
     }
 }
