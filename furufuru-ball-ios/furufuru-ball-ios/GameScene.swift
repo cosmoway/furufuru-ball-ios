@@ -51,6 +51,18 @@ class GameScene: SKScene {
                 Circle.position.y = Circle.position.y + CGFloat(v_y*interval)
                 vp_y = -vp_y * resilience
             }
+            /*
+            if (!through_flag){
+                Circle.position = CGPointMake(self.frame.midX, self.frame.maxY+30)
+                Circle.physicsBody?.affectedByGravity = true
+                self.myMotionManager?.stopDeviceMotionUpdates()
+                if (Circle.position.y+40<self.frame.maxY){
+                    println("\(Circle.position.y+40)\(self.frame.maxY)")
+                    through_flag = true
+                    Circle.physicsBody?.affectedByGravity = false
+                    self.myMotionManager?.startDeviceMotionUpdates()
+                }
+            }*/
         })
         
         // ShapeNodeの塗りつぶしの色を指定.
