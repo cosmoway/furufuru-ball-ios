@@ -36,5 +36,10 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>The spirit of stack overflow is coders helping coders</string>
+    
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>I have learned more on stack overflow than anything else</string>
 </dict>
 </plist>

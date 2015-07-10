@@ -8,10 +8,16 @@
 
 import SpriteKit
 import CoreMotion
+import CoreLocation
 
-class GameScene: SKScene {
+class GameScene: SKScene ,CLLocationManagerDelegate {
     var myMotionManager: CMMotionManager?
+    var lm: CLLocationManager! = nil
+    var longitude: CLLocationDegrees!
+    var latitude: CLLocationDegrees!
+    
     override func didMoveToView(view: SKView) {
+        gpsLcation()
         self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
         var radius = 40 as CGFloat
         /* Setup your scene here */
@@ -61,5 +67,28 @@ class GameScene: SKScene {
     
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
+    }
+    func gpsLcation() {
+        lm = CLLocationManager()
+        lm.delegate = self
+        //位置情報取得の可否。バックグラウンドで実行中の場合にもアプリが位置情報を利用することを許可する
+        lm.requestAlwaysAuthorization()
+        //位置情報の精度
+        lm.desiredAccuracy = kCLLocationAccuracyBest
+        //位置情報取得間隔(m)
+        lm.distanceFilter = 3
+        //現在地取得
+        lm.startUpdatingLocation()
+    }
+    /** 位置情報取得成功時 */
+    func locationManager(manager: CLLocationManager!, didUpdateToLocation newLocation: CLLocation!, fromLocation oldLocation: CLLocation!){
+        longitude = newLocation.coordinate.longitude
+        latitude = newLocation.coordinate.latitude
+        println("lan\(latitude)lon\(longitude)")
+    }
+    
+    /** 位置情報取得失敗時 */
+    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
+        NSLog("Error")
     }
 }
