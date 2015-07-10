@@ -76,7 +76,7 @@ class GameScene: SKScene ,CLLocationManagerDelegate {
         //位置情報の精度
         lm.desiredAccuracy = kCLLocationAccuracyBest
         //位置情報取得間隔(m)
-        lm.distanceFilter = 0.3
+        lm.distanceFilter = 3
         //現在地取得
         lm.startUpdatingLocation()
     }
