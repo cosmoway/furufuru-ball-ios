@@ -31,6 +31,7 @@ class GameScene: SKScene {
         myMotionManager?.deviceMotionUpdateInterval = interval
         var vp_x = 0.0
         var vp_y = 0.0
+        var through_flag = true
         // 加速度の取得を開始.
         myMotionManager!.startDeviceMotionUpdatesToQueue(NSOperationQueue.mainQueue(), withHandler: {(data: CMDeviceMotion!, error:NSError!) -> Void in
             //ユーザが動いた時の加速度が小さい為8倍する
@@ -49,7 +50,6 @@ class GameScene: SKScene {
             //加速の計算
             var v_x = vp_x + (x + data.gravity.x) * 1000 * interval
             var v_y = vp_y + (y + data.gravity.y) * 1000 * interval
-            var through_flag = true
             //速度
             let v = 2000.0
             if (v_x * v_x + v_y * v_y >= v * v) {
