@@ -71,6 +71,6 @@ class GameScene: SKScene ,SKPhysicsContactDelegate{
     }
     func didBeginContact(contact: SKPhysicsContact) {
         println("didBeginContact")
-        AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
     }
 }
