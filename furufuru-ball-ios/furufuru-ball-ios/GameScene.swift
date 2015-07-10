@@ -9,10 +9,10 @@
 import SpriteKit
 import CoreMotion
 
-class GameScene: SKScene, SRWebSocketDelegate {
+class GameScene: SKScene{
     var myMotionManager: CMMotionManager?
-    let socket = SocketIOClient(socketURL: "localhost:3000")
     override func didMoveToView(view: SKView) {
+        webSocketConnect()
         self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
         var radius = 40 as CGFloat
         /* Setup your scene here */
@@ -62,5 +62,10 @@ class GameScene: SKScene, SRWebSocketDelegate {
     
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
+    }
+    func webSocketConnect() {
+       let socketio = SRWebSocket(URLRequest: NSURLRequest(URL: NSURL(string: "url")!))
+        //socketio!.delegate = self
+        socketio!.open()
     }
 }
