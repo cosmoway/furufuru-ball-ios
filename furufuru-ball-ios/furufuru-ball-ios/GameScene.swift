@@ -43,11 +43,21 @@ class GameScene: SKScene {
                 Circle.position.x = Circle.position.x + CGFloat(v_x*interval)
             } else {
                 //壁に当たった時の反発
+                if ((Circle.position.x + CGFloat(v_x*interval)) >= self.frame.minX+radius) {
+                    Circle.position.x = self.frame.maxX-radius
+                } else {
+                    Circle.position.x = self.frame.minX+radius
+                }
                 vp_x = -vp_x * resilience
             }
             if ((Circle.position.y + CGFloat(v_y*interval)) <= self.frame.maxY-radius && (Circle.position.y + CGFloat(v_y*interval)) >= self.frame.minY+radius) {
                 Circle.position.y = Circle.position.y + CGFloat(v_y*interval)
             } else {
+                if ((Circle.position.y + CGFloat(v_y*interval)) >= self.frame.minY+radius) {
+                    Circle.position.y = self.frame.maxY-radius
+                } else {
+                    Circle.position.y = self.frame.minY+radius
+                }
                 vp_y = -vp_y * resilience
             }
         })
