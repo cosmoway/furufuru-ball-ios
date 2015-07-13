@@ -24,7 +24,7 @@ class GameScene: SKScene {
         myMotionManager = CMMotionManager()
         let interval = 0.03
         //反発力
-        let resilience = 0.8
+        let resilience = 0.9
         // 更新周期を設定.
         myMotionManager?.deviceMotionUpdateInterval = interval
         var vp_x = 0.0
