@@ -121,9 +121,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		599CEBB61B4BB5EA003B6B6D /* furufuru-ball-ios */ = {
+		599CEBB61B4BB5EA003B6B6D /* furufuruball */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 599CEBDA1B4BB5EA003B6B6D /* Build configuration list for PBXNativeTarget "furufuru-ball-ios" */;
+			buildConfigurationList = 599CEBDA1B4BB5EA003B6B6D /* Build configuration list for PBXNativeTarget "furufuruball" */;
 			buildPhases = (
 				599CEBB31B4BB5EA003B6B6D /* Sources */,
 				599CEBB41B4BB5EA003B6B6D /* Frameworks */,
@@ -133,14 +133,14 @@
 			);
 			dependencies = (
 			);
-			name = "furufuru-ball-ios";
+			name = furufuruball;
 			productName = "furufuru-ball-ios";
 			productReference = 599CEBB71B4BB5EA003B6B6D /* furufuru-ball-ios.app */;
 			productType = "com.apple.product-type.application";
 		};
-		599CEBCF1B4BB5EA003B6B6D /* furufuru-ball-iosTests */ = {
+		599CEBCF1B4BB5EA003B6B6D /* furufuruballTest */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 599CEBDD1B4BB5EA003B6B6D /* Build configuration list for PBXNativeTarget "furufuru-ball-iosTests" */;
+			buildConfigurationList = 599CEBDD1B4BB5EA003B6B6D /* Build configuration list for PBXNativeTarget "furufuruballTest" */;
 			buildPhases = (
 				599CEBCC1B4BB5EA003B6B6D /* Sources */,
 				599CEBCD1B4BB5EA003B6B6D /* Frameworks */,
@@ -151,7 +151,7 @@
 			dependencies = (
 				599CEBD21B4BB5EA003B6B6D /* PBXTargetDependency */,
 			);
-			name = "furufuru-ball-iosTests";
+			name = furufuruballTest;
 			productName = "furufuru-ball-iosTests";
 			productReference = 599CEBD01B4BB5EA003B6B6D /* furufuru-ball-iosTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -188,8 +188,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				599CEBB61B4BB5EA003B6B6D /* furufuru-ball-ios */,
-				599CEBCF1B4BB5EA003B6B6D /* furufuru-ball-iosTests */,
+				599CEBB61B4BB5EA003B6B6D /* furufuruball */,
+				599CEBCF1B4BB5EA003B6B6D /* furufuruballTest */,
 			);
 		};
 /* End PBXProject section */
@@ -239,7 +239,7 @@
 /* Begin PBXTargetDependency section */
 		599CEBD21B4BB5EA003B6B6D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 599CEBB61B4BB5EA003B6B6D /* furufuru-ball-ios */;
+			target = 599CEBB61B4BB5EA003B6B6D /* furufuruball */;
 			targetProxy = 599CEBD11B4BB5EA003B6B6D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -352,6 +352,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "furufuru-ball-ios/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -367,6 +368,7 @@
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: 健 坂野 (CA5CSE2XPB)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "furufuru-ball-ios/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -420,7 +422,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		599CEBDA1B4BB5EA003B6B6D /* Build configuration list for PBXNativeTarget "furufuru-ball-ios" */ = {
+		599CEBDA1B4BB5EA003B6B6D /* Build configuration list for PBXNativeTarget "furufuruball" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				599CEBDB1B4BB5EA003B6B6D /* Debug */,
@@ -429,7 +431,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		599CEBDD1B4BB5EA003B6B6D /* Build configuration list for PBXNativeTarget "furufuru-ball-iosTests" */ = {
+		599CEBDD1B4BB5EA003B6B6D /* Build configuration list for PBXNativeTarget "furufuruballTest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				599CEBDE1B4BB5EA003B6B6D /* Debug */,
