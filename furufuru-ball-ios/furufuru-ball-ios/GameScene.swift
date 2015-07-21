@@ -28,7 +28,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
         myMotionManager = CMMotionManager()
         let interval = 0.03
         //反発力
-        let resilience = 0.8
+        let resilience = 0.9
         // 更新周期を設定.
         myMotionManager?.deviceMotionUpdateInterval = interval
         var vp_x = 0.0
@@ -37,21 +37,10 @@ class GameScene: SKScene, SRWebSocketDelegate{
         // 加速度の取得を開始.
         myMotionManager!.startDeviceMotionUpdatesToQueue(NSOperationQueue.mainQueue(), withHandler: {(data: CMDeviceMotion!, error:NSError!) -> Void in
             //ユーザが動いた時の加速度が小さい為8倍する
-            var twice = 8.0
-            //ユーザが動いた時の加速度の最大値
-            var max_x = 8.0
-            var max_y = 8.0
-            var x = data.userAcceleration.x * twice
-            if (data.userAcceleration.x * twice >= 10) {
-                x = max_x
-            }
-            var y = data.userAcceleration.y * twice
-            if (data.userAcceleration.y * twice >= 10){
-                y = max_y
-            }
+            var twice = 10.0
             //加速の計算
-            var v_x = vp_x + (x + data.gravity.x) * 1000 * interval
-            var v_y = vp_y + (y + data.gravity.y) * 1000 * interval
+            var v_x = vp_x + (data.userAcceleration.x + data.gravity.x) * 1000 * interval
+            var v_y = vp_y + (data.userAcceleration.y + data.gravity.y) * 1000 * interval
             //速度
             let v = 2000.0
             if (v_x * v_x + v_y * v_y >= v * v) {
@@ -72,13 +61,21 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 Circle.position.x = Circle.position.x + CGFloat(v_x*interval)
             } else {
                 //壁に当たった時の反発
-                Circle.position.x = Circle.position.x + CGFloat(v_x*interval)
+                if ((Circle.position.x + CGFloat(v_x * interval)) >= self.frame.minX + radius) {
+                    Circle.position.x = self.frame.maxX - radius
+                } else {
+                    Circle.position.x = self.frame.minX + radius
+                }
                 vp_x = -vp_x * resilience
            }
             if ((Circle.position.y + CGFloat(v_y*interval)) <= self.frame.maxY-radius && (Circle.position.y + CGFloat(v_y*interval)) >= self.frame.minY+radius || !through_flag) {
                 Circle.position.y = Circle.position.y + CGFloat(v_y*interval)
             } else {
-                Circle.position.y = Circle.position.y + CGFloat(v_y*interval)
+                if ((Circle.position.y + CGFloat(v_y * interval)) >= self.frame.minY + radius) {
+                    Circle.position.y = self.frame.maxY - radius
+                } else {
+                    Circle.position.y = self.frame.minY + radius
+                }
                 vp_y = -vp_y * resilience
             }
         })
