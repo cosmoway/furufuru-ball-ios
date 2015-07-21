@@ -28,7 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		599CEBB71B4BB5EA003B6B6D /* furufuru-ball-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "furufuru-ball-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		599CEBB71B4BB5EA003B6B6D /* furufuruball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = furufuruball.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		599CEBBB1B4BB5EA003B6B6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		599CEBBC1B4BB5EA003B6B6D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		599CEBBE1B4BB5EA003B6B6D /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -37,7 +37,7 @@
 		599CEBC51B4BB5EA003B6B6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		599CEBC71B4BB5EA003B6B6D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		599CEBCA1B4BB5EA003B6B6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		599CEBD01B4BB5EA003B6B6D /* furufuru-ball-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "furufuru-ball-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		599CEBD01B4BB5EA003B6B6D /* furufuruballTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = furufuruballTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		599CEBD51B4BB5EA003B6B6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		599CEBD61B4BB5EA003B6B6D /* furufuru_ball_iosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = furufuru_ball_iosTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -72,8 +72,8 @@
 		599CEBB81B4BB5EA003B6B6D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				599CEBB71B4BB5EA003B6B6D /* furufuru-ball-ios.app */,
-				599CEBD01B4BB5EA003B6B6D /* furufuru-ball-iosTests.xctest */,
+				599CEBB71B4BB5EA003B6B6D /* furufuruball.app */,
+				599CEBD01B4BB5EA003B6B6D /* furufuruballTest.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -135,7 +135,7 @@
 			);
 			name = furufuruball;
 			productName = "furufuru-ball-ios";
-			productReference = 599CEBB71B4BB5EA003B6B6D /* furufuru-ball-ios.app */;
+			productReference = 599CEBB71B4BB5EA003B6B6D /* furufuruball.app */;
 			productType = "com.apple.product-type.application";
 		};
 		599CEBCF1B4BB5EA003B6B6D /* furufuruballTest */ = {
@@ -153,7 +153,7 @@
 			);
 			name = furufuruballTest;
 			productName = "furufuru-ball-iosTests";
-			productReference = 599CEBD01B4BB5EA003B6B6D /* furufuru-ball-iosTests.xctest */;
+			productReference = 599CEBD01B4BB5EA003B6B6D /* furufuruballTest.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
