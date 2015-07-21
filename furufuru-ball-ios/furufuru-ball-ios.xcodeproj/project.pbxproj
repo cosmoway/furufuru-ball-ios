@@ -16,7 +16,8 @@
 		599CEBC81B4BB5EA003B6B6D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 599CEBC71B4BB5EA003B6B6D /* Images.xcassets */; };
 		599CEBCB1B4BB5EA003B6B6D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 599CEBC91B4BB5EA003B6B6D /* LaunchScreen.xib */; };
 		599CEBD71B4BB5EA003B6B6D /* furufuru_ball_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599CEBD61B4BB5EA003B6B6D /* furufuru_ball_iosTests.swift */; };
-		91E1938D12D74FCCFB861B59 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A28410AB69066EAACAB172D /* libPods.a */; };
+		59E00F071B5E06B9000ACD21 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E00F061B5E06B9000ACD21 /* JSON.swift */; };
+		9DD840F8B56A529CB6CF03FA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 334C9367631844C3E26859A7 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,7 +31,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1A28410AB69066EAACAB172D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		334C9367631844C3E26859A7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5948C6DF1B4FA59000E754A5 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		5948C6E11B4FA62900E754A5 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		5948C6E21B4FAF0A00E754A5 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -48,6 +49,7 @@
 		599CEBD01B4BB5EA003B6B6D /* furufuru-ball-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "furufuru-ball-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		599CEBD51B4BB5EA003B6B6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		599CEBD61B4BB5EA003B6B6D /* furufuru_ball_iosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = furufuru_ball_iosTests.swift; sourceTree = "<group>"; };
+		59E00F061B5E06B9000ACD21 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		9448D7100CBE782D4E985F7C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D15F2ED662395F08C71E6AEE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -57,7 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				91E1938D12D74FCCFB861B59 /* libPods.a in Frameworks */,
+				9DD840F8B56A529CB6CF03FA /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +106,7 @@
 				599CEBC91B4BB5EA003B6B6D /* LaunchScreen.xib */,
 				599CEBBA1B4BB5EA003B6B6D /* Supporting Files */,
 				5948C6E11B4FA62900E754A5 /* Bridging-Header.h */,
+				59E00F061B5E06B9000ACD21 /* JSON.swift */,
 			);
 			path = "furufuru-ball-ios";
 			sourceTree = "<group>";
@@ -148,7 +151,7 @@
 				5948C6E61B4FAF1B00E754A5 /* Security.framework */,
 				5948C6E41B4FAF1100E754A5 /* Foundation.framework */,
 				5948C6E21B4FAF0A00E754A5 /* CFNetwork.framework */,
-				1A28410AB69066EAACAB172D /* libPods.a */,
+				334C9367631844C3E26859A7 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 				599CEBC11B4BB5EA003B6B6D /* GameScene.swift in Sources */,
 				599CEBC31B4BB5EA003B6B6D /* GameViewController.swift in Sources */,
 				599CEBBD1B4BB5EA003B6B6D /* AppDelegate.swift in Sources */,
+				59E00F071B5E06B9000ACD21 /* JSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

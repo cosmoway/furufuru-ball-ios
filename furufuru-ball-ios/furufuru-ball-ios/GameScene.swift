@@ -73,7 +73,11 @@ class GameScene: SKScene, SRWebSocketDelegate{
 
     }
     func webSocketDidOpen(webSocket:SRWebSocket){
-        //webSocket.send("aa")
+        let obj: [String:AnyObject] = [
+            "move" : "out"
+        ]
+        let json = JSON(obj).toString(pretty: true)
+        webSocket.send(json)
         println("aa")
     }
     
