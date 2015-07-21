@@ -64,18 +64,23 @@ class GameScene: SKScene, SRWebSocketDelegate{
         /* Called before each frame is rendered */
     }
     func webSocketConnect() {
-       let socketio = SRWebSocket(URLRequest: NSURLRequest(URL: NSURL(string: "url")!))
-        socketio!.delegate = self
-        socketio!.open()
+        var url = NSURL(string: "ws://furufuru-ball.herokuapp.com")
+        var request = NSMutableURLRequest(URL: url!)
+        
+        let webSocketClient = SRWebSocket(URLRequest: request)
+        webSocketClient?.delegate = self
+        webSocketClient?.open()
+
     }
     func webSocketDidOpen(webSocket:SRWebSocket){
-        webSocket.send("aa")
+        //webSocket.send("aa")
+        println("aa")
     }
     
     func webSocket(webSocket: SRWebSocket!, didReceiveMessage message: AnyObject!){
         
     }
     func webSocket(webSocket: SRWebSocket!, didFailWithError error: NSError){
-    
+        println("error")
     }
 }
