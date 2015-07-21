@@ -57,11 +57,13 @@ class GameScene: SKScene, SRWebSocketDelegate{
             if (v_x * v_x + v_y * v_y >= v * v) {
                 self.physicsBody = nil
                 through_flag = false
+                if (self.isOpen()) {
                 let obj: [String:AnyObject] = [
                     "move" : "out"
                 ]
                 let json = JSON(obj).toString(pretty: true)
                 self.webSocketClient?.send(json)
+                }
             }
             vp_x = v_x
             vp_y = v_y
@@ -87,16 +89,31 @@ class GameScene: SKScene, SRWebSocketDelegate{
         self.backgroundColor = UIColor.blackColor()
     }
     
+    private func isOpen() -> Bool {
+        if webSocketClient != nil {
+            if webSocketClient!.readyState.value == SR_OPEN.value {
+                return true
+            }
+        }
+        return false
+    }
+    
+    private func isClosed() -> Bool {
+        return !isOpen()
+    }
+    
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
     }
     func webSocketConnect() {
+        if isClosed() {
         var url = NSURL(string: "ws://furufuru-ball.herokuapp.com")
         var request = NSMutableURLRequest(URL: url!)
         
         webSocketClient = SRWebSocket(URLRequest: request)
         webSocketClient?.delegate = self
         webSocketClient?.open()
+        }
 
     }
     func webSocketDidOpen(webSocket:SRWebSocket){
