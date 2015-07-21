@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5948C6E01B4FA59000E754A5 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 5948C6DF1B4FA59000E754A5 /* Podfile */; };
 		599CEBBD1B4BB5EA003B6B6D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599CEBBC1B4BB5EA003B6B6D /* AppDelegate.swift */; };
 		599CEBBF1B4BB5EA003B6B6D /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 599CEBBE1B4BB5EA003B6B6D /* GameScene.sks */; };
 		599CEBC11B4BB5EA003B6B6D /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599CEBC01B4BB5EA003B6B6D /* GameScene.swift */; };
@@ -15,6 +16,8 @@
 		599CEBC81B4BB5EA003B6B6D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 599CEBC71B4BB5EA003B6B6D /* Images.xcassets */; };
 		599CEBCB1B4BB5EA003B6B6D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 599CEBC91B4BB5EA003B6B6D /* LaunchScreen.xib */; };
 		599CEBD71B4BB5EA003B6B6D /* furufuru_ball_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599CEBD61B4BB5EA003B6B6D /* furufuru_ball_iosTests.swift */; };
+		59E00F071B5E06B9000ACD21 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E00F061B5E06B9000ACD21 /* JSON.swift */; };
+		9DD840F8B56A529CB6CF03FA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 334C9367631844C3E26859A7 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,6 +31,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		334C9367631844C3E26859A7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		5948C6DF1B4FA59000E754A5 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		5948C6E11B4FA62900E754A5 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		5948C6E21B4FAF0A00E754A5 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		5948C6E41B4FAF1100E754A5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		5948C6E61B4FAF1B00E754A5 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		599CEBB71B4BB5EA003B6B6D /* furufuru-ball-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "furufuru-ball-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		599CEBBB1B4BB5EA003B6B6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		599CEBBC1B4BB5EA003B6B6D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -40,6 +49,9 @@
 		599CEBD01B4BB5EA003B6B6D /* furufuru-ball-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "furufuru-ball-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		599CEBD51B4BB5EA003B6B6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		599CEBD61B4BB5EA003B6B6D /* furufuru_ball_iosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = furufuru_ball_iosTests.swift; sourceTree = "<group>"; };
+		59E00F061B5E06B9000ACD21 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
+		9448D7100CBE782D4E985F7C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		D15F2ED662395F08C71E6AEE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DD840F8B56A529CB6CF03FA /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,9 +76,12 @@
 		599CEBAE1B4BB5EA003B6B6D = {
 			isa = PBXGroup;
 			children = (
+				5948C6DF1B4FA59000E754A5 /* Podfile */,
 				599CEBB91B4BB5EA003B6B6D /* furufuru-ball-ios */,
 				599CEBD31B4BB5EA003B6B6D /* furufuru-ball-iosTests */,
 				599CEBB81B4BB5EA003B6B6D /* Products */,
+				774657FFA3E5ED05A7754EE2 /* Pods */,
+				A1140869071C772C13D689B8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -89,6 +105,8 @@
 				599CEBC71B4BB5EA003B6B6D /* Images.xcassets */,
 				599CEBC91B4BB5EA003B6B6D /* LaunchScreen.xib */,
 				599CEBBA1B4BB5EA003B6B6D /* Supporting Files */,
+				5948C6E11B4FA62900E754A5 /* Bridging-Header.h */,
+				59E00F061B5E06B9000ACD21 /* JSON.swift */,
 			);
 			path = "furufuru-ball-ios";
 			sourceTree = "<group>";
@@ -118,6 +136,26 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		774657FFA3E5ED05A7754EE2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D15F2ED662395F08C71E6AEE /* Pods.debug.xcconfig */,
+				9448D7100CBE782D4E985F7C /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		A1140869071C772C13D689B8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5948C6E61B4FAF1B00E754A5 /* Security.framework */,
+				5948C6E41B4FAF1100E754A5 /* Foundation.framework */,
+				5948C6E21B4FAF0A00E754A5 /* CFNetwork.framework */,
+				334C9367631844C3E26859A7 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -125,9 +163,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 599CEBDA1B4BB5EA003B6B6D /* Build configuration list for PBXNativeTarget "furufuru-ball-ios" */;
 			buildPhases = (
+				AAE873E2EDE7B6ACFFB39184 /* Check Pods Manifest.lock */,
 				599CEBB31B4BB5EA003B6B6D /* Sources */,
 				599CEBB41B4BB5EA003B6B6D /* Frameworks */,
 				599CEBB51B4BB5EA003B6B6D /* Resources */,
+				A6B67BFE05B76EB011A11D6B /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -199,6 +239,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5948C6E01B4FA59000E754A5 /* Podfile in Resources */,
 				599CEBCB1B4BB5EA003B6B6D /* LaunchScreen.xib in Resources */,
 				599CEBC81B4BB5EA003B6B6D /* Images.xcassets in Resources */,
 				599CEBBF1B4BB5EA003B6B6D /* GameScene.sks in Resources */,
@@ -215,6 +256,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		A6B67BFE05B76EB011A11D6B /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AAE873E2EDE7B6ACFFB39184 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		599CEBB31B4BB5EA003B6B6D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -223,6 +297,7 @@
 				599CEBC11B4BB5EA003B6B6D /* GameScene.swift in Sources */,
 				599CEBC31B4BB5EA003B6B6D /* GameViewController.swift in Sources */,
 				599CEBBD1B4BB5EA003B6B6D /* AppDelegate.swift in Sources */,
+				59E00F071B5E06B9000ACD21 /* JSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,6 +422,7 @@
 		};
 		599CEBDB1B4BB5EA003B6B6D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D15F2ED662395F08C71E6AEE /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -355,12 +431,14 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PROJECT)/Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		599CEBDC1B4BB5EA003B6B6D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9448D7100CBE782D4E985F7C /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -369,6 +447,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PROJECT)/Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
