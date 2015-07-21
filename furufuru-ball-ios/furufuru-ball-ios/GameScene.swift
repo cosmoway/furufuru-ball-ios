@@ -11,6 +11,7 @@ import CoreMotion
 
 class GameScene: SKScene, SRWebSocketDelegate{
     var myMotionManager: CMMotionManager?
+    private var webSocketClient: SRWebSocket?
     
     override func didMoveToView(view: SKView) {
         webSocketConnect()
@@ -56,6 +57,11 @@ class GameScene: SKScene, SRWebSocketDelegate{
             if (v_x * v_x + v_y * v_y >= v * v) {
                 self.physicsBody = nil
                 through_flag = false
+                let obj: [String:AnyObject] = [
+                    "move" : "out"
+                ]
+                let json = JSON(obj).toString(pretty: true)
+                self.webSocketClient?.send(json)
             }
             vp_x = v_x
             vp_y = v_y
@@ -88,17 +94,12 @@ class GameScene: SKScene, SRWebSocketDelegate{
         var url = NSURL(string: "ws://furufuru-ball.herokuapp.com")
         var request = NSMutableURLRequest(URL: url!)
         
-        let webSocketClient = SRWebSocket(URLRequest: request)
+        webSocketClient = SRWebSocket(URLRequest: request)
         webSocketClient?.delegate = self
         webSocketClient?.open()
 
     }
     func webSocketDidOpen(webSocket:SRWebSocket){
-        let obj: [String:AnyObject] = [
-            "move" : "out"
-        ]
-        let json = JSON(obj).toString(pretty: true)
-        webSocket.send(json)
     }
     
     func webSocket(webSocket: SRWebSocket!, didReceiveMessage message: AnyObject!){
