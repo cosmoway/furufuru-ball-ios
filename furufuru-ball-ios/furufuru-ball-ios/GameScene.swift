@@ -9,9 +9,10 @@
 import SpriteKit
 import CoreMotion
 
-class GameScene: SKScene {
+class GameScene: SKScene, SRWebSocketDelegate{
     var myMotionManager: CMMotionManager?
     override func didMoveToView(view: SKView) {
+        webSocketConnect()
         self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
         var radius = 40 as CGFloat
         /* Setup your scene here */
@@ -61,5 +62,28 @@ class GameScene: SKScene {
     
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
+    }
+    func webSocketConnect() {
+        var url = NSURL(string: "ws://furufuru-ball.herokuapp.com")
+        var request = NSMutableURLRequest(URL: url!)
+        
+        let webSocketClient = SRWebSocket(URLRequest: request)
+        webSocketClient?.delegate = self
+        webSocketClient?.open()
+
+    }
+    func webSocketDidOpen(webSocket:SRWebSocket){
+        let obj: [String:AnyObject] = [
+            "move" : "out"
+        ]
+        let json = JSON(obj).toString(pretty: true)
+        webSocket.send(json)
+    }
+    
+    func webSocket(webSocket: SRWebSocket!, didReceiveMessage message: AnyObject!){
+        
+    }
+    func webSocket(webSocket: SRWebSocket!, didFailWithError error: NSError){
+        println("error")
     }
 }
