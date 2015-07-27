@@ -46,19 +46,15 @@ class GameScene: SKScene, SRWebSocketDelegate{
             if (v_x * v_x + v_y * v_y >= v * v) {
                 self.physicsBody = nil
                 through_flag = false
-                if (self.isOpen()) {
-                let obj: [String:AnyObject] = [
-                    "move" : "out"
-                ]
-                let json = JSON(obj).toString(pretty: true)
-                self.webSocketClient?.send(json)
-                }
             }
             vp_x = v_x
             vp_y = v_y
             //壁に当たったか判定
             if ((Circle.position.x + CGFloat(v_x*interval)) <= self.frame.maxX-radius && (Circle.position.x + CGFloat(v_x*interval)) >= self.frame.minX+radius || !through_flag) {
                 Circle.position.x = Circle.position.x + CGFloat(v_x*interval)
+                if (Circle.position.x > self.frame.maxX+radius || Circle.position.x < self.frame.minX-radius) {
+                    self.moveOut()
+                }
             } else {
                 //壁に当たった時の反発
                 if ((Circle.position.x + CGFloat(v_x * interval)) >= self.frame.minX + radius) {
@@ -70,6 +66,9 @@ class GameScene: SKScene, SRWebSocketDelegate{
            }
             if ((Circle.position.y + CGFloat(v_y*interval)) <= self.frame.maxY-radius && (Circle.position.y + CGFloat(v_y*interval)) >= self.frame.minY+radius || !through_flag) {
                 Circle.position.y = Circle.position.y + CGFloat(v_y*interval)
+                if (Circle.position.y > self.frame.maxY+radius || Circle.position.y < self.frame.minY+radius) {
+                    self.moveOut()
+                }
             } else {
                 if ((Circle.position.y + CGFloat(v_y * interval)) >= self.frame.minY + radius) {
                     Circle.position.y = self.frame.maxY - radius
@@ -121,5 +120,18 @@ class GameScene: SKScene, SRWebSocketDelegate{
     }
     func webSocket(webSocket: SRWebSocket!, didFailWithError error: NSError){
         println("error")
+    }
+    func moveOut(){
+        if (self.isOpen()) {
+            let obj: [String:AnyObject] = [
+                "move" : "out"
+            ]
+            let json = JSON(obj).toString(pretty: true)
+            self.webSocketClient?.send(json)
+        }
+        self.myMotionManager!.stopDeviceMotionUpdates()
+    }
+    func motion(){
+        
     }
 }
