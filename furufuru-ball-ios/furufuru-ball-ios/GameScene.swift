@@ -128,7 +128,11 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 }
             } else {
                 if (self.flag) {
-                    self.Circle?.position.x = self.Circle!.position.x+30
+                    if (self.Circle?.position.x<0){
+                        self.Circle?.position.x = self.Circle!.position.x+30
+                    }else{
+                        self.Circle?.position.x = self.Circle!.position.x-30
+                    }
                     if (self.Circle!.position.x < self.frame.maxX-radius && self.Circle!.position.x > self.frame.minX+radius) {
                         self.flag=false
                         self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
@@ -153,7 +157,11 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 }
             } else {
                 if (self.flag) {
-                    self.Circle?.position.y = self.Circle!.position.y+30
+                    if (self.Circle?.position.y<0){
+                        self.Circle?.position.y = self.Circle!.position.y+30
+                    }else{
+                        self.Circle?.position.y = self.Circle!.position.y-30
+                    }
                     if (self.Circle!.position.y < self.frame.maxY-radius && self.Circle!.position.y > self.frame.minY+radius) {
                         self.flag=false
                         self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
