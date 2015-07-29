@@ -14,10 +14,11 @@ class GameScene: SKScene, SRWebSocketDelegate{
     var Circle: SKShapeNode?
     private var webSocketClient: SRWebSocket?
     var through_flag = true
+    var flag = false
     
     override func didMoveToView(view: SKView) {
         webSocketConnect()
-        
+        self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
         var radius = 40 as CGFloat
         /* Setup your scene here */
         Circle = SKShapeNode(circleOfRadius: radius)
@@ -25,65 +26,9 @@ class GameScene: SKScene, SRWebSocketDelegate{
         Circle!.physicsBody = SKPhysicsBody(circleOfRadius: radius)
         //重力はfalseにしてあります。
         Circle!.physicsBody?.affectedByGravity = false
+        Circle!.position = CGPointMake(self.frame.midX, self.frame.maxY-40.0)
         
-        myMotionManager = CMMotionManager()
-        let interval = 0.03
-        //反発力
-        let resilience = 0.9
-        // 更新周期を設定.
-        myMotionManager?.deviceMotionUpdateInterval = interval
-        var vp_x = 0.0
-        var vp_y = 0.0
         
-        // 加速度の取得を開始.
-        myMotionManager!.startDeviceMotionUpdatesToQueue(NSOperationQueue.mainQueue(), withHandler: {(data: CMDeviceMotion!, error:NSError!) -> Void in
-            //ユーザが動いた時の加速度が小さい為8倍する
-            var twice = 10.0
-            //加速の計算
-            var v_x = vp_x + (data.userAcceleration.x * twice + data.gravity.x) * 1000 * interval
-            var v_y = vp_y + (data.userAcceleration.y * twice + data.gravity.y) * 1000 * interval
-            //速度
-            let v = 2000.0
-            if (v_x * v_x >= v * v || v_y * v_y >= v * v) {
-                self.physicsBody = nil
-                vp_x=0;
-                vp_y=0;
-                v_x=0;
-                v_y=0;
-                self.through_flag = false
-                if (self.isOpen()) {
-                let obj: [String:AnyObject] = [
-                    "move" : "out"
-                ]
-                let json = JSON(obj).toString(pretty: true)
-                self.webSocketClient?.send(json)
-                }
-            }
-            vp_x = v_x
-            vp_y = v_y
-            //壁に当たったか判定
-            if ((self.Circle!.position.x + CGFloat(v_x*interval)) <= self.frame.maxX-radius && (self.Circle!.position.x + CGFloat(v_x*interval)) >= self.frame.minX+radius || !self.through_flag) {
-                self.Circle!.position.x = self.Circle!.position.x + CGFloat(v_x*interval)
-            } else {
-                //壁に当たった時の反発
-                if ((self.Circle!.position.x + CGFloat(v_x * interval)) >= self.frame.minX + radius) {
-                    self.Circle!.position.x = self.frame.maxX - radius
-                } else {
-                    self.Circle!.position.x = self.frame.minX + radius
-                }
-                vp_x = -vp_x * resilience
-           }
-            if ((self.Circle!.position.y + CGFloat(v_y*interval)) <= self.frame.maxY-radius && (self.Circle!.position.y + CGFloat(v_y*interval)) >= self.frame.minY+radius || !self.through_flag) {
-                self.Circle!.position.y = self.Circle!.position.y + CGFloat(v_y*interval)
-            } else {
-                if ((self.Circle!.position.y + CGFloat(v_y * interval)) >= self.frame.minY + radius) {
-                    self.Circle!.position.y = self.frame.maxY - radius
-                } else {
-                    self.Circle!.position.y = self.frame.minY + radius
-                }
-                vp_y = -vp_y * resilience
-            }
-        })
         
         // ShapeNodeの塗りつぶしの色を指定.
         Circle!.fillColor = UIColor.greenColor()
@@ -107,6 +52,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
     }
+    
     func webSocketConnect() {
         if isClosed() {
         var url = NSURL(string: "ws://furufuru-ball.herokuapp.com")
@@ -118,19 +64,109 @@ class GameScene: SKScene, SRWebSocketDelegate{
         }
 
     }
+    
     func webSocketDidOpen(webSocket:SRWebSocket){
     }
     
     func webSocket(webSocket: SRWebSocket!, didReceiveMessage message: AnyObject!){
-       // through_flag = true
-       // Circle.physicsBody?.affectedByGravity = false
-       // self.myMotionManager?.startDeviceMotionUpdates()
-        Circle!.position = CGPointMake(self.frame.midX, self.frame.midY)
         println(message)
-        self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
-        self.through_flag = true
+        through_flag = true
+        motion(40.0)
     }
+    
     func webSocket(webSocket: SRWebSocket!, didFailWithError error: NSError){
         println("error")
+    }
+    
+    //ボールが壁をすり抜けたら呼ばれる関数
+    func moveOut(){
+        if (self.isOpen()) {
+            //サーバーにメッセージをjson形式で送る処理
+            let obj: [String:AnyObject] = [
+                "move" : "out"
+            ]
+            let json = JSON(obj).toString(pretty: true)
+            self.webSocketClient?.send(json)
+        }
+        //センサーの停止
+        self.myMotionManager!.stopDeviceMotionUpdates()
+    }
+    
+    func motion(radius: CGFloat) {
+        myMotionManager = CMMotionManager()
+        let interval = 0.03
+        //反発力
+        let resilience = 0.9
+        // 更新周期を設定.
+        myMotionManager?.deviceMotionUpdateInterval = interval
+        var vp_x = 0.0
+        var vp_y = 0.0
+        
+        // 加速度の取得を開始.
+        myMotionManager!.startDeviceMotionUpdatesToQueue(NSOperationQueue.mainQueue(), withHandler: {(data: CMDeviceMotion!, error:NSError!) -> Void in
+            //ユーザが動いた時の加速度が小さい為10倍する
+            var twice = 10.0
+            
+            //加速の計算
+            var v_x = vp_x + (data.userAcceleration.x * twice + data.gravity.x) * 1000 * interval
+            var v_y = vp_y + (data.userAcceleration.y * twice + data.gravity.y) * 1000 * interval
+            //速度
+            let v = 2000.0
+            if (v_x * v_x >= v * v || v_y * v_y >= v * v) {
+                self.physicsBody = nil
+                self.through_flag = false
+            }
+            vp_x = v_x
+            vp_y = v_y
+            //壁に当たったか判定
+            if ((self.Circle!.position.x + CGFloat(v_x*interval)) <= self.frame.maxX-radius && (self.Circle!.position.x + CGFloat(v_x*interval)) >= self.frame.minX+radius || !self.through_flag) {
+                self.Circle!.position.x = self.Circle!.position.x + CGFloat(v_x*interval)
+                //ボールが壁をすり抜けたか判定
+                if (self.Circle!.position.x > self.frame.maxX+radius || self.Circle!.position.x < self.frame.minX-radius) {
+                    self.moveOut()
+                    self.flag = true
+                }
+            } else {
+                if (self.flag) {
+                    self.Circle?.position.x = self.Circle!.position.x+30
+                    if (self.Circle!.position.x < self.frame.maxX-radius && self.Circle!.position.x > self.frame.minX+radius) {
+                        self.flag=false
+                        self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
+                    }
+                }else{
+                    //壁に当たった時の反発
+                    if ((self.Circle!.position.x + CGFloat(v_x * interval)) >= self.frame.minX + radius) {
+                        self.Circle!.position.x = self.frame.maxX - radius
+                    } else {
+                        self.Circle!.position.x = self.frame.minX + radius
+                    }
+                    vp_x = -vp_x * resilience
+                }
+            }
+            
+            if ((self.Circle!.position.y + CGFloat(v_y*interval)) <= self.frame.maxY-radius && (self.Circle!.position.y + CGFloat(v_y*interval)) >= self.frame.minY+radius || !self.through_flag) {
+                self.Circle!.position.y = self.Circle!.position.y + CGFloat(v_y*interval)
+                //ボールが壁をすり抜けたか判定
+                if (self.Circle!.position.y > self.frame.maxY+radius || self.Circle!.position.y < self.frame.minY-radius) {
+                    self.moveOut()
+                    self.flag = true
+                }
+            } else {
+                if (self.flag) {
+                    self.Circle?.position.y = self.Circle!.position.y+30
+                    if (self.Circle!.position.y < self.frame.maxY-radius && self.Circle!.position.y > self.frame.minY+radius) {
+                        self.flag=false
+                        self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
+                    }
+                }else{
+                    if ((self.Circle!.position.y + CGFloat(v_y * interval)) >= self.frame.minY + radius) {
+                        self.Circle!.position.y = self.frame.maxY - radius
+                    } else {
+                        self.Circle!.position.y = self.frame.minY + radius
+                    }
+                    vp_y = -vp_y * resilience
+                }
+            }
+        })
     }
 }
