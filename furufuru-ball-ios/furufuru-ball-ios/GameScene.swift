@@ -43,6 +43,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
             var v_y = vp_y + (data.userAcceleration.y * twice + data.gravity.y) * 1000 * interval
             //速度
             let v = 2000.0
+            //壁すり抜け用の速度判定
             if (v_x * v_x + v_y * v_y >= v * v) {
                 self.physicsBody = nil
                 through_flag = false
@@ -52,6 +53,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
             //壁に当たったか判定
             if ((Circle.position.x + CGFloat(v_x*interval)) <= self.frame.maxX-radius && (Circle.position.x + CGFloat(v_x*interval)) >= self.frame.minX+radius || !through_flag) {
                 Circle.position.x = Circle.position.x + CGFloat(v_x*interval)
+                //ボールが壁をすり抜けたか判定
                 if (Circle.position.x > self.frame.maxX+radius || Circle.position.x < self.frame.minX-radius) {
                     self.moveOut()
                 }
@@ -66,7 +68,8 @@ class GameScene: SKScene, SRWebSocketDelegate{
            }
             if ((Circle.position.y + CGFloat(v_y*interval)) <= self.frame.maxY-radius && (Circle.position.y + CGFloat(v_y*interval)) >= self.frame.minY+radius || !through_flag) {
                 Circle.position.y = Circle.position.y + CGFloat(v_y*interval)
-                if (Circle.position.y > self.frame.maxY+radius || Circle.position.y < self.frame.minY+radius) {
+                //ボールが壁をすり抜けたか判定
+                if (Circle.position.y > self.frame.maxY+radius || Circle.position.y < self.frame.minY-radius) {
                     self.moveOut()
                 }
             } else {
@@ -121,17 +124,17 @@ class GameScene: SKScene, SRWebSocketDelegate{
     func webSocket(webSocket: SRWebSocket!, didFailWithError error: NSError){
         println("error")
     }
+    //ボールが壁をすり抜けたら呼ばれる関数
     func moveOut(){
         if (self.isOpen()) {
+            //サーバーにメッセージをjson形式で送る処理
             let obj: [String:AnyObject] = [
                 "move" : "out"
             ]
             let json = JSON(obj).toString(pretty: true)
             self.webSocketClient?.send(json)
         }
+        //センサーの停止
         self.myMotionManager!.stopDeviceMotionUpdates()
-    }
-    func motion(){
-        
     }
 }
