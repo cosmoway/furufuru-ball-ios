@@ -36,7 +36,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
         var through_flag = true
         // 加速度の取得を開始.
         myMotionManager!.startDeviceMotionUpdatesToQueue(NSOperationQueue.mainQueue(), withHandler: {(data: CMDeviceMotion!, error:NSError!) -> Void in
-            //ユーザが動いた時の加速度が小さい為8倍する
+            //ユーザが動いた時の加速度が小さい為10倍する
             var twice = 10.0
             //加速の計算
             var v_x = vp_x + (data.userAcceleration.x * twice + data.gravity.x) * 1000 * interval
