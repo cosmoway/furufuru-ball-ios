@@ -40,7 +40,7 @@ class GameScene: SKScene {
             var v_x = vp_x + (data.userAcceleration.x * twice + data.gravity.x) * 1000 * interval
             var v_y = vp_y + (data.userAcceleration.y * twice + data.gravity.y) * 1000 * interval
             //速度
-            let v = 3000.0
+            let v = 2000.0
             if (v_x * v_x >= v * v || v_y * v_y >= v * v) {
                 self.physicsBody = nil
                 through_flag = false
