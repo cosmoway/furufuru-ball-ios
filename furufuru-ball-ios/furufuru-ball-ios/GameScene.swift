@@ -14,7 +14,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
     var Circle: SKShapeNode?
     private var webSocketClient: SRWebSocket?
     var through_flag = true
-    var flag = true
+    var ballout_flag = true
     
     override func didMoveToView(view: SKView) {
         webSocketConnect()
@@ -99,7 +99,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
         let resilience = 0.9
         // 更新周期を設定.
         myMotionManager?.deviceMotionUpdateInterval = interval
-        var vp_x = 30.0
+        var vp_x = 0.0
         var vp_y = 30.0
         
         // 加速度の取得を開始.
@@ -124,22 +124,24 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 //ボールが壁をすり抜けたか判定
                 if (self.Circle!.position.x > self.frame.maxX+radius || self.Circle!.position.x < self.frame.minX-radius) {
                     self.moveOut()
-                    self.flag = true
+                    self.ballout_flag = true
                     self.through_flag = true
                     v_x = 0
                 }
             } else {
                 //ボールが壁の外にあるか
-                if (self.flag) {
+                if (self.ballout_flag) {
                     //ボールが外にあれば中に戻す
-                    if (self.Circle?.position.x<radius){
-                        self.Circle?.position.x = self.Circle!.position.x + 30
-                    }else{
-                        self.Circle?.position.x = self.Circle!.position.x - 30
+                    if (self.Circle?.position.x<self.frame.minY+radius){
+                        vp_x = 30
+                        self.Circle!.position.x += CGFloat(v_x)
+                    }else if(self.Circle?.position.x>self.frame.maxX-radius){
+                        vp_x = -30
+                        self.Circle?.position.x += CGFloat(v_x)
                     }
                     //ボールが中に入ったら壁を作る.
                     if (self.Circle!.position.x < self.frame.maxX-radius && self.Circle!.position.x > self.frame.minX+radius) {
-                        self.flag=false
+                        self.ballout_flag=false
                         self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
                     }
                 }else{
@@ -157,22 +159,24 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 //ボールが壁をすり抜けたか判定
                 if (self.Circle!.position.y > self.frame.maxY+radius || self.Circle!.position.y < self.frame.minY-radius) {
                     self.moveOut()
-                    self.flag = true
+                    self.ballout_flag = true
                     self.through_flag = true
                     v_y = 0
                 }
             } else {
                 //ボールが壁の外にあるか
-                if (self.flag) {
+                if (self.ballout_flag) {
                     //ボールが外にあれば中に戻す
-                    if (self.Circle?.position.y<radius){
-                        self.Circle?.position.y = self.Circle!.position.y + 30
-                    }else{
-                        self.Circle?.position.y = self.Circle!.position.y - 30
+                    if (self.Circle?.position.y<self.frame.minY+radius){
+                        vp_y = 30
+                        self.Circle?.position.y += CGFloat(v_y)
+                    }else if(self.Circle?.position.y > self.frame.maxY-radius){
+                        vp_x = -30
+                        self.Circle?.position.y += CGFloat(v_y)
                     }
                     //ボールが中に入ったら壁を作る.
                     if (self.Circle!.position.y < self.frame.maxY-radius && self.Circle!.position.y > self.frame.minY+radius) {
-                        self.flag=false
+                        self.ballout_flag=false
                         self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
                     }
                 }else{
