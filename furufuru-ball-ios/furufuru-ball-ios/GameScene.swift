@@ -44,7 +44,9 @@ class GameScene: SKScene, SRWebSocketDelegate{
     //一秒ごと呼ばれる関数
     func update(){
         println("\(count++)")
+        //10秒たったか判定
         if (count > 10){
+            //センサー、タイマーを止めるボールを灰色にするGAME OVERと表示させる
             myMotionManager?.stopDeviceMotionUpdates()
             Circle?.physicsBody?.affectedByGravity = true
             Circle?.fillColor = UIColor.grayColor()
