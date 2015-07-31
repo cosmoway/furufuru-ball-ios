@@ -11,6 +11,8 @@ import CoreMotion
 
 class GameScene: SKScene, SRWebSocketDelegate{
     var myMotionManager: CMMotionManager?
+    var count = 0
+    var timer: NSTimer?
     override func didMoveToView(view: SKView) {
         webSocketConnect()
         self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
@@ -58,6 +60,11 @@ class GameScene: SKScene, SRWebSocketDelegate{
         Circle.fillColor = UIColor.greenColor()
         self.addChild(Circle)
         self.backgroundColor = UIColor.blackColor()
+        
+        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "update", userInfo: nil, repeats: true)
+    }
+    func update(){
+        println("\(count++)")
     }
     
     override func update(currentTime: CFTimeInterval) {
