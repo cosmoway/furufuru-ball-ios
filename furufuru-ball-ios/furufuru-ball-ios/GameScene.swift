@@ -97,12 +97,16 @@ class GameScene: SKScene, SRWebSocketDelegate{
     
     func webSocket(webSocket: SRWebSocket!, didReceiveMessage message: AnyObject!){
         println(message)
-        let json = JSON(message).toString(pretty: true)
-        for (:)
-        through_flag = true
-        motion(40.0)
-        //ボールが入ってきた時タイマーに値を入れる
-        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "update", userInfo: nil, repeats: true)
+        //messageをjsonに変えてその中身がinならスタート
+        if let string = message as? String {
+            let object = JSON.parse(string)
+            if ("in" == object["move"].asString) {
+                through_flag = true
+                motion(40.0)
+                //ボールが入ってきた時タイマーに値を入れる
+                timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "update", userInfo: nil, repeats: true)
+            }
+        }
     }
     
     func webSocket(webSocket: SRWebSocket!, didFailWithError error: NSError){
