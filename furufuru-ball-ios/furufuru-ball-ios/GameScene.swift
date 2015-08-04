@@ -35,10 +35,10 @@ class GameScene: SKScene {
         // 加速度の取得を開始.
         myMotionManager!.startDeviceMotionUpdatesToQueue(NSOperationQueue.mainQueue(), withHandler: {(data: CMDeviceMotion!, error:NSError!) -> Void in
             //ユーザが動いた時の加速度が小さい為10倍する
-            var twice = 10.0
+            var fold = 10.0
             //加速の計算
-            var v_x = vp_x + (data.userAcceleration.x * twice + data.gravity.x) * 1000 * interval
-            var v_y = vp_y + (data.userAcceleration.y * twice + data.gravity.y) * 1000 * interval
+            var v_x = vp_x + (data.userAcceleration.x * fold + data.gravity.x) * 1000 * interval
+            var v_y = vp_y + (data.userAcceleration.y * fold + data.gravity.y) * 1000 * interval
             //速度
             let v = 2000.0
             vp_x = v_x
