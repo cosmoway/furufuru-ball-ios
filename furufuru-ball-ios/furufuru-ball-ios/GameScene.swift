@@ -11,6 +11,8 @@ import CoreMotion
 
 class GameScene: SKScene, SRWebSocketDelegate{
     var myMotionManager: CMMotionManager?
+    var count = 0
+    var timer: NSTimer?
     var Circle: SKShapeNode?
     private var webSocketClient: SRWebSocket?
     var through_flag = false
@@ -34,6 +36,11 @@ class GameScene: SKScene, SRWebSocketDelegate{
         Circle!.fillColor = UIColor.greenColor()
         self.addChild(Circle!)
         self.backgroundColor = UIColor.blackColor()
+        
+    }
+    //一秒ごと呼ばれる関数
+    func update(){
+        println("\(count++)")
     }
     
     private func isOpen() -> Bool {
@@ -90,6 +97,8 @@ class GameScene: SKScene, SRWebSocketDelegate{
         }
         //センサーの停止
         self.myMotionManager!.stopDeviceMotionUpdates()
+        //ボールが出た時タイマーを削除
+        timer?.invalidate()
     }
     
     func motion(radius: CGFloat) {
@@ -142,6 +151,10 @@ class GameScene: SKScene, SRWebSocketDelegate{
                     if (self.Circle!.position.x < self.frame.maxX-radius && self.Circle!.position.x > self.frame.minX+radius) {
                         self.ballout_flag=false
                         self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
+                        //timerが他にセットされていれば削除する
+                        self.timer?.invalidate()
+                        //ボールが入ってきた時タイマーに値を入れる
+                        self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "update", userInfo: nil, repeats: true)
                     }
                 }else{
                     if (v_x * v_x >= v * v){
@@ -181,6 +194,10 @@ class GameScene: SKScene, SRWebSocketDelegate{
                     if (self.Circle!.position.y < self.frame.maxY-radius && self.Circle!.position.y > self.frame.minY+radius) {
                         self.ballout_flag=false
                         self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
+                        //timerが他にセットされていれば削除する
+                        self.timer?.invalidate()
+                        //ボールが入ってきた時タイマーに値を入れる
+                        self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "update", userInfo: nil, repeats: true)
                     }
                 }else{
                     if (v_y * v_y >= v * v){
