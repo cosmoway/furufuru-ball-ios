@@ -11,13 +11,14 @@ import CoreMotion
 
 class GameScene: SKScene, SRWebSocketDelegate{
     var myMotionManager: CMMotionManager?
-    var count = 0.0
+    var count = 0
     var timer: NSTimer?
     var Circle: SKShapeNode?
     private var webSocketClient: SRWebSocket?
     var through_flag = true
     var ballout_flag = true
     let myLabel = SKLabelNode(fontNamed:"Chalkduster")
+    var timeLabel:String?
     
     override func didMoveToView(view: SKView) {
         webSocketConnect()
@@ -43,8 +44,8 @@ class GameScene: SKScene, SRWebSocketDelegate{
     }
     //一秒ごと呼ばれる関数
     func update(){
-        var cnt=count+0.001
-        println(cnt)
+        println(count++)
+        timeFormot(count)
         //10秒たったか判定
         if (count > 10){
             //センサー、タイマーを止めるボールを灰色にするGAME OVERと表示させる
@@ -62,6 +63,11 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 self.webSocketClient?.send(json)
             }
         }
+    }
+    func timeFormot(countNum:Int){
+        let ms = countNum % 100
+        let s = (countNum - ms)/100%60
+        timeLabel=String(format:"%02d.%02d",s,ms)
     }
     
     private func isOpen() -> Bool {
@@ -105,7 +111,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 through_flag = true
                 motion(40.0)
                 //ボールが入ってきた時タイマーに値を入れる
-                timer = NSTimer.scheduledTimerWithTimeInterval(0.001, target: self, selector: "update", userInfo: nil, repeats: true)
+                timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "update", userInfo: nil, repeats: true)
             }
             if("over"==object["game"].asString){
                 //センサーの停止
@@ -115,7 +121,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 if(myLabel.text==""){
                     //ゲームオーバー時にカウントを表示
                     myLabel.fontSize = 30
-                    myLabel.text="あなたの記録は"+count.description+"秒でした。"
+                    myLabel.text="あなたの記録は"+timeLabel!+"秒でした。"
                 }
             }
         }
