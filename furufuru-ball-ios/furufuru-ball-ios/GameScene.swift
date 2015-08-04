@@ -104,7 +104,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 through_flag = true
                 motion(40.0)
                 //ボールが入ってきた時タイマーに値を入れる
-                timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "update", userInfo: nil, repeats: true)
+                timer = NSTimer.scheduledTimerWithTimeInterval(0.001, target: self, selector: "update", userInfo: nil, repeats: true)
             }
             if("over"==object["game"].asString){
                 //センサーの停止
@@ -112,7 +112,8 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 //ボールが出た時タイマーを削除
                 timer?.invalidate()
                 if(myLabel.text==""){
-                    myLabel.text=String(count)
+                    //ゲームオーバー時にカウントを表示
+                    myLabel.text="あなたの記録は"+String(count)+"病でした。"
                 }
             }
         }
