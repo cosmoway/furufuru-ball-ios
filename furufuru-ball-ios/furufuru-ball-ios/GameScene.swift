@@ -31,7 +31,7 @@ class GameScene: SKScene {
         myMotionManager?.deviceMotionUpdateInterval = interval
         var vp_x = 0.0
         var vp_y = 0.0
-        var through_flag = true
+        var through_flag = false
         // 加速度の取得を開始.
         myMotionManager!.startDeviceMotionUpdatesToQueue(NSOperationQueue.mainQueue(), withHandler: {(data: CMDeviceMotion!, error:NSError!) -> Void in
             //ユーザが動いた時の加速度が小さい為10倍する
@@ -44,12 +44,12 @@ class GameScene: SKScene {
             vp_x = v_x
             vp_y = v_y
             //壁に当たったか判定
-            if ((Circle.position.x + CGFloat(v_x*interval)) <= self.frame.maxX-radius && (Circle.position.x + CGFloat(v_x*interval)) >= self.frame.minX+radius || !through_flag) {
+            if ((Circle.position.x + CGFloat(v_x*interval)) <= self.frame.maxX-radius && (Circle.position.x + CGFloat(v_x*interval)) >= self.frame.minX+radius || through_flag) {
                 Circle.position.x = Circle.position.x + CGFloat(v_x*interval)
             } else {
                 if (v_x * v_x >= v * v){
                     self.physicsBody = nil
-                    through_flag = false
+                    through_flag = true
                 }
                 //壁に当たった時の反発
                 if ((Circle.position.x + CGFloat(v_x * interval)) >= self.frame.minX + radius) {
@@ -59,12 +59,12 @@ class GameScene: SKScene {
                 }
                 vp_x = -vp_x * resilience
            }
-            if ((Circle.position.y + CGFloat(v_y*interval)) <= self.frame.maxY-radius && (Circle.position.y + CGFloat(v_y*interval)) >= self.frame.minY+radius || !through_flag) {
+            if ((Circle.position.y + CGFloat(v_y*interval)) <= self.frame.maxY-radius && (Circle.position.y + CGFloat(v_y*interval)) >= self.frame.minY+radius || through_flag) {
                 Circle.position.y = Circle.position.y + CGFloat(v_y*interval)
             } else {
                 if (v_y * v_y >= v * v){
                     self.physicsBody = nil
-                    through_flag = false
+                    through_flag = true
                 }
                 //壁に当たった時の反発
                 if ((Circle.position.y + CGFloat(v_y * interval)) >= self.frame.minY + radius) {
