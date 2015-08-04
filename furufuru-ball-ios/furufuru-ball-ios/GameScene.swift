@@ -11,7 +11,7 @@ import CoreMotion
 
 class GameScene: SKScene, SRWebSocketDelegate{
     var myMotionManager: CMMotionManager?
-    var count = 0
+    var count = 0.0
     var timer: NSTimer?
     var Circle: SKShapeNode?
     private var webSocketClient: SRWebSocket?
@@ -43,7 +43,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
     }
     //一秒ごと呼ばれる関数
     func update(){
-        println("\(count++)")
+        println("\(count += 0.001)")
         //10秒たったか判定
         if (count > 10){
             //センサー、タイマーを止めるボールを灰色にするGAME OVERと表示させる
@@ -113,7 +113,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 timer?.invalidate()
                 if(myLabel.text==""){
                     //ゲームオーバー時にカウントを表示
-                    myLabel.text="あなたの記録は"+String(count)+"病でした。"
+                    myLabel.text="あなたの記録は"+count.description+"病でした。"
                 }
             }
         }
