@@ -108,10 +108,12 @@ class GameScene: SKScene, SRWebSocketDelegate{
             }
             if("over"==object["game"].asString){
                 //センサーの停止
-                self.myMotionManager!.stopDeviceMotionUpdates()
+                self.myMotionManager?.stopDeviceMotionUpdates()
                 //ボールが出た時タイマーを削除
                 timer?.invalidate()
-                myLabel.text=String(count)
+                if(myLabel.text==""){
+                    myLabel.text=String(count)
+                }
             }
         }
     }
