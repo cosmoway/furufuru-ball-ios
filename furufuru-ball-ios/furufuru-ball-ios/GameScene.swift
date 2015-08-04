@@ -106,6 +106,13 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 //ボールが入ってきた時タイマーに値を入れる
                 timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "update", userInfo: nil, repeats: true)
             }
+            if("over"==object["game"].asString){
+                //センサーの停止
+                self.myMotionManager!.stopDeviceMotionUpdates()
+                //ボールが出た時タイマーを削除
+                timer?.invalidate()
+                myLabel.text =String(count)
+            }
         }
     }
     
