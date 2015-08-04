@@ -45,6 +45,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
     //一秒ごと呼ばれる関数
     func update(){
         println(count++)
+        //ミリ秒まで表示
         let ms = count % 100
         let s = (count - ms)/100%60
         timeLabel=String(format:"%01d.%02d",s,ms)
