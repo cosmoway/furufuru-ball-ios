@@ -171,7 +171,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                         vp_y = 30
                         self.Circle?.position.y += CGFloat(v_y)
                     }else if(self.Circle?.position.y > self.frame.maxY-radius){
-                        vp_x = -30
+                        vp_y = -30
                         self.Circle?.position.y += CGFloat(v_y)
                     }
                     //ボールが中に入ったら壁を作る.
