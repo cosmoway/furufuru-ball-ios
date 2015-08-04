@@ -106,10 +106,13 @@ class GameScene: SKScene, SRWebSocketDelegate{
         myMotionManager!.startDeviceMotionUpdatesToQueue(NSOperationQueue.mainQueue(), withHandler: {(data: CMDeviceMotion!, error:NSError!) -> Void in
             //ユーザが動いた時の加速度が小さい為10倍する
             var twice = 10.0
-            
+            var v_x = vp_x
+            var v_y = vp_y
+            if (self.Circle?.position.x < self.frame.maxX-radius && self.Circle?.position.x > self.frame.minY+radius && self.Circle?.position.y < self.frame.maxY-radius && self.Circle?.position.y > self.frame.minY+radius) {
             //加速の計算
-            var v_x = vp_x + (data.userAcceleration.x * twice + data.gravity.x) * 1000 * interval
-            var v_y = vp_y + (data.userAcceleration.y * twice + data.gravity.y) * 1000 * interval
+            v_x = vp_x + (data.userAcceleration.x * twice + data.gravity.x) * 1000 * interval
+            v_y = vp_y + (data.userAcceleration.y * twice + data.gravity.y) * 1000 * interval
+            }
             //速度
             let v = 2000.0
             if (v_x * v_x >= v * v || v_y * v_y >= v * v) {
