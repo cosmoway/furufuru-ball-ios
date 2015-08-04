@@ -111,7 +111,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 self.myMotionManager!.stopDeviceMotionUpdates()
                 //ボールが出た時タイマーを削除
                 timer?.invalidate()
-                myLabel.text =String(count)
+                myLabel.text=String(count)
             }
         }
     }
