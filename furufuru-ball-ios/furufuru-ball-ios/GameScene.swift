@@ -135,7 +135,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 //ボールが壁の外にあるか
                 if (self.ballout_flag) {
                     //ボールが外にあれば中に戻す
-                    if (self.Circle?.position.x<self.frame.minY+radius){
+                    if (self.Circle?.position.x<self.frame.minX+radius){
                         vp_x = 30
                         self.Circle!.position.x += CGFloat(v_x)
                     }else if(self.Circle?.position.x>self.frame.maxX-radius){
