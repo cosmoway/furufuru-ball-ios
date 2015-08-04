@@ -47,7 +47,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
         println(count++)
         let ms = count % 100
         let s = (count - ms)/100%60
-        timeLabel=String(format:"%02d.%02d",s,ms)
+        timeLabel=String(format:"%01d.%02d",s,ms)
         //10秒たったか判定
         if (s > 10){
             //センサー、タイマーを止めるボールを灰色にするGAME OVERと表示させる
@@ -117,7 +117,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 timer?.invalidate()
                 if(myLabel.text==""){
                     //ゲームオーバー時にカウントを表示
-                    myLabel.fontSize = 30
+                    myLabel.fontSize = 20
                     myLabel.text="あなたの記録は"+timeLabel+"秒でした。"
                 }
             }
