@@ -45,9 +45,11 @@ class GameScene: SKScene, SRWebSocketDelegate{
     //一秒ごと呼ばれる関数
     func update(){
         println(count++)
-        timeFormot(count)
+        let ms = count % 100
+        let s = (count - ms)/100%60
+        timeLabel=String(format:"%02d.%02d",s,ms)
         //10秒たったか判定
-        if (count > 10){
+        if (s > 10){
             //センサー、タイマーを止めるボールを灰色にするGAME OVERと表示させる
             myMotionManager?.stopDeviceMotionUpdates()
             Circle?.physicsBody?.affectedByGravity = true
@@ -63,11 +65,6 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 self.webSocketClient?.send(json)
             }
         }
-    }
-    func timeFormot(countNum:Int){
-        let ms = countNum % 100
-        let s = (countNum - ms)/100%60
-        timeLabel=String(format:"%02d.%02d",s,ms)
     }
     
     private func isOpen() -> Bool {
