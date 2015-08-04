@@ -72,6 +72,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
         return false
     }
     
+    
     private func isClosed() -> Bool {
         return !isOpen()
     }
