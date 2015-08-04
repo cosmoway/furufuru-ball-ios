@@ -18,7 +18,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
     var through_flag = true
     var ballout_flag = true
     let myLabel = SKLabelNode(fontNamed:"Chalkduster")
-    var timeLabel:String?
+    var timeLabel = "0.00"
     
     override func didMoveToView(view: SKView) {
         webSocketConnect()
@@ -121,7 +121,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 if(myLabel.text==""){
                     //ゲームオーバー時にカウントを表示
                     myLabel.fontSize = 30
-                    myLabel.text="あなたの記録は"+timeLabel!+"秒でした。"
+                    myLabel.text="あなたの記録は"+timeLabel+"秒でした。"
                 }
             }
         }
