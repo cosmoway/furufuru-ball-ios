@@ -41,16 +41,16 @@ class GameScene: SKScene {
             var v_y = vp_y + (data.userAcceleration.y * twice + data.gravity.y) * 1000 * interval
             //速度
             let v = 2000.0
-            if (v_x * v_x >= v * v || v_y * v_y >= v * v) {
-                self.physicsBody = nil
-                through_flag = false
-            }
             vp_x = v_x
             vp_y = v_y
             //壁に当たったか判定
             if ((Circle.position.x + CGFloat(v_x*interval)) <= self.frame.maxX-radius && (Circle.position.x + CGFloat(v_x*interval)) >= self.frame.minX+radius || !through_flag) {
                 Circle.position.x = Circle.position.x + CGFloat(v_x*interval)
             } else {
+                if (v_x * v_x >= v * v){
+                    self.physicsBody = nil
+                    through_flag = false
+                }
                 //壁に当たった時の反発
                 if ((Circle.position.x + CGFloat(v_x * interval)) >= self.frame.minX + radius) {
                     Circle.position.x = self.frame.maxX - radius
@@ -62,13 +62,18 @@ class GameScene: SKScene {
             if ((Circle.position.y + CGFloat(v_y*interval)) <= self.frame.maxY-radius && (Circle.position.y + CGFloat(v_y*interval)) >= self.frame.minY+radius || !through_flag) {
                 Circle.position.y = Circle.position.y + CGFloat(v_y*interval)
             } else {
+                if (v_y * v_y >= v * v){
+                    self.physicsBody = nil
+                    through_flag = false
+                }
                 //壁に当たった時の反発
                 if ((Circle.position.y + CGFloat(v_y * interval)) >= self.frame.minY + radius) {
                     Circle.position.y = self.frame.maxY - radius
                 } else {
                     Circle.position.y = self.frame.minY + radius
                 }
-                vp_y = -vp_y * resilience            }
+                vp_y = -vp_y * resilience
+            }
         })
         
         // ShapeNodeの塗りつぶしの色を指定.
