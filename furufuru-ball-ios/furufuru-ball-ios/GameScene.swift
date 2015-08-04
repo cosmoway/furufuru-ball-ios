@@ -43,7 +43,8 @@ class GameScene: SKScene, SRWebSocketDelegate{
     }
     //一秒ごと呼ばれる関数
     func update(){
-        println("\(count += 0.001)")
+        var cnt=count+0.001
+        println(cnt)
         //10秒たったか判定
         if (count > 10){
             //センサー、タイマーを止めるボールを灰色にするGAME OVERと表示させる
@@ -113,7 +114,8 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 timer?.invalidate()
                 if(myLabel.text==""){
                     //ゲームオーバー時にカウントを表示
-                    myLabel.text="あなたの記録は"+count.description+"病でした。"
+                    myLabel.fontSize = 30
+                    myLabel.text="あなたの記録は"+count.description+"秒でした。"
                 }
             }
         }
