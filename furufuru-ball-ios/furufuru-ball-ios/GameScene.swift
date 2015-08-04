@@ -90,7 +90,6 @@ class GameScene: SKScene, SRWebSocketDelegate{
         webSocketClient?.delegate = self
         webSocketClient?.open()
         }
-
     }
     
     func webSocketDidOpen(webSocket:SRWebSocket){
