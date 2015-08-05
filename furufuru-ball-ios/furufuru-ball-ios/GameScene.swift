@@ -17,6 +17,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
     private var webSocketClient: SRWebSocket?
     var through_flag = false
     var ballout_flag = true
+    let myLabel = SKLabelNode(fontNamed:"Chalkduster")
     
     override func didMoveToView(view: SKView) {
         webSocketConnect()
@@ -30,7 +31,9 @@ class GameScene: SKScene, SRWebSocketDelegate{
         Circle!.physicsBody?.affectedByGravity = false
         Circle!.position = CGPointMake(self.frame.midX, self.frame.maxY+40.0)
         
-        
+        myLabel.fontSize = 40
+        myLabel.position = CGPoint(x: self.frame.midX,y: self.frame.midY)
+        self.addChild(myLabel)
         
         // ShapeNodeの塗りつぶしの色を指定.
         Circle!.fillColor = UIColor.greenColor()
@@ -41,6 +44,15 @@ class GameScene: SKScene, SRWebSocketDelegate{
     //一秒ごと呼ばれる関数
     func update(){
         println("\(count++)")
+        //10秒たったか判定
+        if (count > 10){
+            //センサー、タイマーを止めるボールを灰色にするGAME OVERと表示させる
+            myMotionManager?.stopDeviceMotionUpdates()
+            Circle?.physicsBody?.affectedByGravity = true
+            Circle?.fillColor = UIColor.grayColor()
+            timer?.invalidate()
+            myLabel.text = "GAME OVER"
+        }
     }
     
     private func isOpen() -> Bool {
