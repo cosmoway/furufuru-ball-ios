@@ -140,11 +140,11 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 if (self.ballout_flag) {
                     //ボールが外にあれば中に戻す
                     if (self.Circle?.position.x<self.frame.minX+radius){
-                        vp_x += 100
-                        self.Circle!.position.x += CGFloat(v_x)
+                        vp_x = 1000
+                        self.Circle!.position.x += CGFloat(v_x*interval)
                     }else if(self.Circle?.position.x>self.frame.maxX-radius){
-                        vp_x += -100
-                        self.Circle?.position.x += CGFloat(v_x)
+                        vp_x = -1000
+                        self.Circle?.position.x += CGFloat(v_x*interval)
                     }
                     //ボールが中に入ったら壁を作る.
                     if (self.Circle!.position.x < self.frame.maxX-radius && self.Circle!.position.x > self.frame.minX+radius) {
@@ -183,11 +183,11 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 if (self.ballout_flag) {
                     //ボールが外にあれば中に戻す
                     if (self.Circle?.position.y<self.frame.minY+radius){
-                        vp_y += 100
-                        self.Circle?.position.y += CGFloat(v_y)
+                        vp_y = 1000
+                        self.Circle?.position.y += CGFloat(v_y*interval)
                     }else if(self.Circle?.position.y > self.frame.maxY-radius){
-                        vp_y += -100
-                        self.Circle?.position.y += CGFloat(v_y)
+                        vp_y = -1000
+                        self.Circle?.position.y += CGFloat(v_y*interval)
                     }
                     //ボールが中に入ったら壁を作る.
                     if (self.Circle!.position.y < self.frame.maxY-radius && self.Circle!.position.y > self.frame.minY+radius) {
