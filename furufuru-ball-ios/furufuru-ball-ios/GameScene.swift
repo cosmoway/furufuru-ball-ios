@@ -116,7 +116,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 timer?.invalidate()
                 if (isOpen()) {
                     //websocketの通信をとめる
-                    webSocketClient?.close()
+                   webSocketClient?.closeWithCode(1000, reason: "user closed.")
                 }
                 if(myLabel.text==""){
                     //ゲームオーバー時にカウントを表示
