@@ -116,7 +116,10 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 self.myMotionManager?.stopDeviceMotionUpdates()
                 //ボールが出た時タイマーを削除
                 timer?.invalidate()
-                webSocketClient?.close()
+                if (isOpen()) {
+                    //websocketの通信をとめる
+                    webSocketClient?.close()
+                }
                 if(myLabel.text==""){
                     //ゲームオーバー時にカウントを表示
                     myLabel.fontSize = 20
@@ -127,7 +130,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
     }
     
     func webSocket(webSocket: SRWebSocket!, didFailWithError error: NSError){
-        println("error")
+        println(error)
     }
     
     //ボールが壁をすり抜けたら呼ばれる関数
