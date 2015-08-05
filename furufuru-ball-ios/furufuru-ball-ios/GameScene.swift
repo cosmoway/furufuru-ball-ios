@@ -45,13 +45,21 @@ class GameScene: SKScene, SRWebSocketDelegate{
     func update(){
         println("\(count++)")
         //10秒たったか判定
-        if (count > 10){
+        if (count >= 10){
             //センサー、タイマーを止めるボールを灰色にするGAME OVERと表示させる
             myMotionManager?.stopDeviceMotionUpdates()
             Circle?.physicsBody?.affectedByGravity = true
             Circle?.fillColor = UIColor.grayColor()
             timer?.invalidate()
             myLabel.text = "GAME OVER"
+            if (self.isOpen()) {
+                //サーバーにメッセージをjson形式で送る処理
+                let obj: [String:AnyObject] = [
+                    "game" : "over"
+                ]
+                let json = JSON(obj).toString(pretty: true)
+                self.webSocketClient?.send(json)
+            }
         }
     }
     
@@ -89,8 +97,16 @@ class GameScene: SKScene, SRWebSocketDelegate{
     
     func webSocket(webSocket: SRWebSocket!, didReceiveMessage message: AnyObject!){
         println(message)
-        through_flag = false
-        motion(40.0)
+        //messageをjsonに変えてその中身がinならスタート
+        if let string = message as? String {
+            let object = JSON.parse(string)
+            if ("in" == object["move"].asString) {
+                through_flag = false
+                motion(40.0)
+                //ボールが入ってきた時タイマーに値を入れる
+                timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "update", userInfo: nil, repeats: true)
+            }
+        }
     }
     
     func webSocket(webSocket: SRWebSocket!, didFailWithError error: NSError){
