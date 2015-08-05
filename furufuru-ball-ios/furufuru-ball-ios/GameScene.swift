@@ -140,10 +140,10 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 if (self.ballout_flag) {
                     //ボールが外にあれば中に戻す
                     if (self.Circle?.position.x<self.frame.minX+radius){
-                        vp_x += 30
+                        vp_x += 70
                         self.Circle!.position.x += CGFloat(v_x)
                     }else if(self.Circle?.position.x>self.frame.maxX-radius){
-                        vp_x += -30
+                        vp_x += -70
                         self.Circle?.position.x += CGFloat(v_x)
                     }
                     //ボールが中に入ったら壁を作る.
@@ -154,6 +154,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                         self.timer?.invalidate()
                         //ボールが入ってきた時タイマーに値を入れる
                         self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "update", userInfo: nil, repeats: true)
+                        println("in")
                     }
                 }else{
                     if (v_x * v_x >= v * v){
@@ -182,10 +183,10 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 if (self.ballout_flag) {
                     //ボールが外にあれば中に戻す
                     if (self.Circle?.position.y<self.frame.minY+radius){
-                        vp_y += 30
+                        vp_y += 70
                         self.Circle?.position.y += CGFloat(v_y)
                     }else if(self.Circle?.position.y > self.frame.maxY-radius){
-                        vp_y += -30
+                        vp_y += -70
                         self.Circle?.position.y += CGFloat(v_y)
                     }
                     //ボールが中に入ったら壁を作る.
