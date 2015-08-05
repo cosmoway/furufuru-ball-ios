@@ -18,6 +18,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
     var through_flag = true
     var ballout_flag = true
     let myLabel = SKLabelNode(fontNamed:"Chalkduster")
+    let startLabel = SKLabelNode(fontNamed: "Copperplate")
     var timeLabel = "0.00"
     
     override func didMoveToView(view: SKView) {
@@ -41,7 +42,28 @@ class GameScene: SKScene, SRWebSocketDelegate{
         self.addChild(Circle!)
         self.backgroundColor = UIColor.blackColor()
         
+        // 「Start」を表示。
+        startLabel.fontSize = 36
+        startLabel.position = CGPoint(x: CGRectGetMidX(self.frame), y: 200)
+        startLabel.name = "Start"
+        self.addChild(startLabel)
+        
     }
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        
+        let touch: AnyObject! = touches
+        let location = touch.locationInNode(self)
+        let touchedNode = self.nodeAtPoint(location)
+        
+        if (touchedNode.name != nil) {
+            if touchedNode.name == "Start" {
+                let newScene = GameScene(size: self.scene!.size)
+                newScene.scaleMode = SKSceneScaleMode.AspectFill
+                self.view!.presentScene(newScene)
+            }
+        }
+    }
+    
     //一秒ごと呼ばれる関数
     func update(){
         println(count++)
@@ -57,6 +79,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
             Circle?.fillColor = UIColor.grayColor()
             timer?.invalidate()
             myLabel.text = "GAME OVER"
+            startLabel.text = "Start"
             if (self.isOpen()) {
                 //サーバーにメッセージをjson形式で送る処理
                 let obj: [String:AnyObject] = [
