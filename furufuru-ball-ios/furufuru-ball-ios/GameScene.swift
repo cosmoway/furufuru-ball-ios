@@ -52,7 +52,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
         
     }
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        webSocketClient?.close()
+        webSocketClient?.closeWithCode(1000, reason: "user closed.")
         for touch: AnyObject in touches {
             var t: UITouch = touch as! UITouch
             if t.view.tag == self.startlabel.tag {
