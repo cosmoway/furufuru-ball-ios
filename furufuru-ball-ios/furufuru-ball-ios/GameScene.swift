@@ -82,7 +82,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
     }
     
     func webSocket(webSocket: SRWebSocket!, didFailWithError error: NSError){
-        println("error")
+        println(error)
     }
     
     //ボールが壁をすり抜けたら呼ばれる関数
