@@ -134,17 +134,16 @@ class GameScene: SKScene, SRWebSocketDelegate{
                     self.moveOut()
                     self.ballout_flag = true
                     self.through_flag = true
-                    v_x = 0
                 }
             } else {
                 //ボールが壁の外にあるか
                 if (self.ballout_flag) {
                     //ボールが外にあれば中に戻す
                     if (self.Circle?.position.x<self.frame.minX+radius){
-                        vp_x = 30
+                        vp_x += 30
                         self.Circle!.position.x += CGFloat(v_x)
                     }else if(self.Circle?.position.x>self.frame.maxX-radius){
-                        vp_x = -30
+                        vp_x += -30
                         self.Circle?.position.x += CGFloat(v_x)
                     }
                     //ボールが中に入ったら壁を作る.
@@ -177,17 +176,16 @@ class GameScene: SKScene, SRWebSocketDelegate{
                     self.moveOut()
                     self.ballout_flag = true
                     self.through_flag = true
-                    v_y = 0
                 }
             } else {
                 //ボールが壁の外にあるか
                 if (self.ballout_flag) {
                     //ボールが外にあれば中に戻す
                     if (self.Circle?.position.y<self.frame.minY+radius){
-                        vp_y = 30
+                        vp_y += 30
                         self.Circle?.position.y += CGFloat(v_y)
                     }else if(self.Circle?.position.y > self.frame.maxY-radius){
-                        vp_y = -30
+                        vp_y += -30
                         self.Circle?.position.y += CGFloat(v_y)
                     }
                     //ボールが中に入ったら壁を作る.
