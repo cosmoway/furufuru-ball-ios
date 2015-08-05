@@ -116,6 +116,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 self.myMotionManager?.stopDeviceMotionUpdates()
                 //ボールが出た時タイマーを削除
                 timer?.invalidate()
+                webSocketClient?.close()
                 if(myLabel.text==""){
                     //ゲームオーバー時にカウントを表示
                     myLabel.fontSize = 20
