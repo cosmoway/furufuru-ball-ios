@@ -108,8 +108,6 @@ class GameScene: SKScene, SRWebSocketDelegate{
             if ("in" == object["move"].asString) {
                 through_flag = false
                 motion(40.0)
-                //ボールが入ってきた時タイマーに値を入れる
-                timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "update", userInfo: nil, repeats: true)
             }
             if("over"==object["game"].asString){
                 //センサーの停止
@@ -202,7 +200,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                         //timerが他にセットされていれば削除する
                         self.timer?.invalidate()
                         //ボールが入ってきた時タイマーに値を入れる
-                        self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "update", userInfo: nil, repeats: true)
+                        self.timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "update", userInfo: nil, repeats: true)
                     }
                 }else{
                     if (v_x * v_x >= v * v){
@@ -245,7 +243,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                         //timerが他にセットされていれば削除する
                         self.timer?.invalidate()
                         //ボールが入ってきた時タイマーに値を入れる
-                        self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "update", userInfo: nil, repeats: true)
+                        self.timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "update", userInfo: nil, repeats: true)
                     }
                 }else{
                     if (v_y * v_y >= v * v){
