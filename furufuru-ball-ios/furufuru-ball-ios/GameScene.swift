@@ -86,7 +86,6 @@ class GameScene: SKScene, SRWebSocketDelegate{
             Circle?.fillColor = UIColor.grayColor()
             timer?.invalidate()
             myLabel.text = "GAME OVER"
-            startlabel.text = "Start"
             
             if (self.isOpen()) {
                 //サーバーにメッセージをjson形式で送る処理
@@ -143,6 +142,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "update", userInfo: nil, repeats: true)
             }
             if("over"==object["game"].asString){
+                startlabel.text = "Start"
                 //センサーの停止
                 self.myMotionManager?.stopDeviceMotionUpdates()
                 //ボールが出た時タイマーを削除
