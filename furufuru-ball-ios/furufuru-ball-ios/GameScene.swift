@@ -41,16 +41,22 @@ class GameScene: SKScene, SRWebSocketDelegate{
         Circle!.fillColor = UIColor.greenColor()
         self.addChild(Circle!)
         self.backgroundColor = UIColor.blackColor()
-        
+        //リスタートのテキスト設定
         startlabel.fontSize = 40
+        startlabel.name="start"
         startlabel.position = CGPoint(x: self.frame.midX,y: self.frame.midY-100)
         self.addChild(startlabel)
         
     }
+    //リスタートのボタン
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         for touch: AnyObject in touches {
-            var t: UITouch = touch as! UITouch
-            if t == startlabel.text{
+            let location = touch.locationInNode(self)
+            let touchNode = self.nodeAtPoint(location)
+            //var t: UITouch = touch as! UITouch
+            if myLabel.text != "" {
+            if touchNode.name == "start"{
+                //リスタートの処理
                 webSocketConnect()
                 Circle!.physicsBody?.affectedByGravity = false
                 Circle!.position = CGPointMake(self.frame.midX, self.frame.maxY+40.0)
@@ -59,6 +65,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 timer?.invalidate()
                 myLabel.text = ""
                 startlabel.text = ""
+                }
             }
         }
     }
