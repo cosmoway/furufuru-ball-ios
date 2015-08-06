@@ -17,6 +17,8 @@ class GameScene: SKScene, SRWebSocketDelegate{
     private var webSocketClient: SRWebSocket?
     var through_flag = false
     var ballout_flag = true
+    let myLabel = SKLabelNode(fontNamed:"Chalkduster")
+    var timeLabel = "0.00"
     
     override func didMoveToView(view: SKView) {
         webSocketConnect()
@@ -30,7 +32,9 @@ class GameScene: SKScene, SRWebSocketDelegate{
         Circle!.physicsBody?.affectedByGravity = false
         Circle!.position = CGPointMake(self.frame.midX, self.frame.maxY+40.0)
         
-        
+        myLabel.fontSize = 40
+        myLabel.position = CGPoint(x: self.frame.midX,y: self.frame.midY)
+        self.addChild(myLabel)
         
         // ShapeNodeの塗りつぶしの色を指定.
         Circle!.fillColor = UIColor.greenColor()
@@ -38,9 +42,30 @@ class GameScene: SKScene, SRWebSocketDelegate{
         self.backgroundColor = UIColor.blackColor()
         
     }
-    //一秒ごと呼ばれる関数
+    //0.01秒ごと呼ばれる関数
     func update(){
-        println("\(count++)")
+        println(count++)
+        //ミリ秒まで表示
+        let ms = count % 100
+        let s = (count - ms)/100
+        timeLabel=String(format:"%01d.%02d",s,ms)
+        //10秒たったか判定
+        if (s >= 10){
+            //センサー、タイマーを止めるボールを灰色にするGAME OVERと表示させる
+            myMotionManager?.stopDeviceMotionUpdates()
+            Circle?.physicsBody?.affectedByGravity = true
+            Circle?.fillColor = UIColor.grayColor()
+            timer?.invalidate()
+            myLabel.text = "GAME OVER"
+            if (self.isOpen()) {
+                //サーバーにメッセージをjson形式で送る処理
+                let obj: [String:AnyObject] = [
+                    "game" : "over"
+                ]
+                let json = JSON(obj).toString(pretty: true)
+                self.webSocketClient?.send(json)
+            }
+        }
     }
     
     private func isOpen() -> Bool {
@@ -51,6 +76,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
         }
         return false
     }
+    
     
     private func isClosed() -> Bool {
         return !isOpen()
@@ -69,7 +95,6 @@ class GameScene: SKScene, SRWebSocketDelegate{
         webSocketClient?.delegate = self
         webSocketClient?.open()
         }
-
     }
     
     func webSocketDidOpen(webSocket:SRWebSocket){
@@ -77,8 +102,29 @@ class GameScene: SKScene, SRWebSocketDelegate{
     
     func webSocket(webSocket: SRWebSocket!, didReceiveMessage message: AnyObject!){
         println(message)
-        through_flag = false
-        motion(40.0)
+        //messageをjsonに変えてその中身がinならスタート
+        if let string = message as? String {
+            let object = JSON.parse(string)
+            if ("in" == object["move"].asString) {
+                through_flag = false
+                motion(40.0)
+            }
+            if("over"==object["game"].asString){
+                //センサーの停止
+                self.myMotionManager?.stopDeviceMotionUpdates()
+                //ボールが出た時タイマーを削除
+                timer?.invalidate()
+                if (isOpen()) {
+                    //websocketの通信をとめる
+                   webSocketClient?.closeWithCode(1000, reason: "user closed.")
+                }
+                if(myLabel.text==""){
+                    //ゲームオーバー時にカウントを表示
+                    myLabel.fontSize = 20
+                    myLabel.text="あなたの記録は"+timeLabel+"秒でした。"
+                }
+            }
+        }
     }
     
     func webSocket(webSocket: SRWebSocket!, didFailWithError error: NSError){
@@ -153,7 +199,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                         //timerが他にセットされていれば削除する
                         self.timer?.invalidate()
                         //ボールが入ってきた時タイマーに値を入れる
-                        self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "update", userInfo: nil, repeats: true)
+                        self.timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "update", userInfo: nil, repeats: true)
                         println("in")
                     }
                 }else{
@@ -196,7 +242,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                         //timerが他にセットされていれば削除する
                         self.timer?.invalidate()
                         //ボールが入ってきた時タイマーに値を入れる
-                        self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "update", userInfo: nil, repeats: true)
+                        self.timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "update", userInfo: nil, repeats: true)
                     }
                 }else{
                     if (v_y * v_y >= v * v){
