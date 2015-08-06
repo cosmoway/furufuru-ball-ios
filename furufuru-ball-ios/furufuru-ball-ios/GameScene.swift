@@ -42,12 +42,12 @@ class GameScene: SKScene, SRWebSocketDelegate{
         self.backgroundColor = UIColor.blackColor()
         
     }
-    //一秒ごと呼ばれる関数
+    //0.01秒ごと呼ばれる関数
     func update(){
         println(count++)
         //ミリ秒まで表示
         let ms = count % 100
-        let s = (count - ms)/100%60
+        let s = (count - ms)/100
         timeLabel=String(format:"%01d.%02d",s,ms)
         //10秒たったか判定
         if (s >= 10){
