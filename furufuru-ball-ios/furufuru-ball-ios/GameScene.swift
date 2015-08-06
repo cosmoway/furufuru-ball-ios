@@ -180,18 +180,17 @@ class GameScene: SKScene, SRWebSocketDelegate{
                     self.moveOut()
                     self.ballout_flag = true
                     self.through_flag = true
-                    v_x = 0
                 }
             } else {
                 //ボールが壁の外にあるか
                 if (self.ballout_flag) {
                     //ボールが外にあれば中に戻す
                     if (self.Circle?.position.x<self.frame.minX+radius){
-                        vp_x = 30
-                        self.Circle!.position.x += CGFloat(v_x)
+                        vp_x = 1000
+                        self.Circle!.position.x += CGFloat(v_x*interval)
                     }else if(self.Circle?.position.x>self.frame.maxX-radius){
-                        vp_x = -30
-                        self.Circle?.position.x += CGFloat(v_x)
+                        vp_x = -1000
+                        self.Circle?.position.x += CGFloat(v_x*interval)
                     }
                     //ボールが中に入ったら壁を作る.
                     if (self.Circle!.position.x < self.frame.maxX-radius && self.Circle!.position.x > self.frame.minX+radius) {
@@ -201,6 +200,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                         self.timer?.invalidate()
                         //ボールが入ってきた時タイマーに値を入れる
                         self.timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "update", userInfo: nil, repeats: true)
+                        println("in")
                     }
                 }else{
                     if (v_x * v_x >= v * v){
@@ -223,18 +223,17 @@ class GameScene: SKScene, SRWebSocketDelegate{
                     self.moveOut()
                     self.ballout_flag = true
                     self.through_flag = true
-                    v_y = 0
                 }
             } else {
                 //ボールが壁の外にあるか
                 if (self.ballout_flag) {
                     //ボールが外にあれば中に戻す
                     if (self.Circle?.position.y<self.frame.minY+radius){
-                        vp_y = 30
-                        self.Circle?.position.y += CGFloat(v_y)
+                        vp_y = 1000
+                        self.Circle?.position.y += CGFloat(v_y*interval)
                     }else if(self.Circle?.position.y > self.frame.maxY-radius){
-                        vp_y = -30
-                        self.Circle?.position.y += CGFloat(v_y)
+                        vp_y = -1000
+                        self.Circle?.position.y += CGFloat(v_y*interval)
                     }
                     //ボールが中に入ったら壁を作る.
                     if (self.Circle!.position.y < self.frame.maxY-radius && self.Circle!.position.y > self.frame.minY+radius) {
