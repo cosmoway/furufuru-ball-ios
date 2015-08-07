@@ -185,7 +185,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
         // 更新周期を設定.
         myMotionManager?.deviceMotionUpdateInterval = interval
         var vp_x = 0.0
-        var vp_y = 30.0
+        var vp_y = 0.0
         
         // 加速度の取得を開始.
         myMotionManager!.startDeviceMotionUpdatesToQueue(NSOperationQueue.mainQueue(), withHandler: {(data: CMDeviceMotion!, error:NSError!) -> Void in
