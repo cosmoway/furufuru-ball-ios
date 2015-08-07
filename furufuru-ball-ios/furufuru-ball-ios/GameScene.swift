@@ -31,7 +31,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
         Circle!.physicsBody = SKPhysicsBody(circleOfRadius: radius)
         //重力はfalseにしてあります。
         Circle!.physicsBody?.affectedByGravity = false
-        Circle!.position = CGPointMake(self.frame.midX, self.frame.maxY+40.0)
+        Circle!.position = CGPointMake(self.frame.midX, self.frame.maxY+50.0)
         
         
         gameover_label.position = CGPoint(x: self.frame.midX,y: self.frame.midY)
@@ -59,7 +59,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 //リスタートの処理
                 webSocketConnect()
                 Circle!.physicsBody?.affectedByGravity = false
-                Circle!.position = CGPointMake(self.frame.midX, self.frame.maxY+40.0)
+                Circle!.position = CGPointMake(self.frame.midX, self.frame.maxY+50.0)
                 Circle!.fillColor = UIColor.greenColor()
                 count=0
                 timer?.invalidate()
@@ -150,9 +150,15 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 timer?.invalidate()
                 webSocketClient?.closeWithCode(1000, reason: "user closed.")
                 if(gameover_label.text==""){
-                    //ゲームオーバー時にカウントを表示
-                    gameover_label.fontSize = 20
-                    gameover_label.text="あなたの記録は"+time_label+"秒でした。"
+                    if (UIScreen.mainScreen().bounds.maxX<=500) {
+                        //ゲームオーバー時にカウントを表示
+                        gameover_label.fontSize = 20
+                        gameover_label.text="あなたの記録は"+time_label+"秒でした。"
+                    }else{
+                        //ゲームオーバー時にカウントを表示
+                        gameover_label.fontSize = 40
+                        gameover_label.text="あなたの記録は"+time_label+"秒でした。"
+                    }
                 }
             }
         }
