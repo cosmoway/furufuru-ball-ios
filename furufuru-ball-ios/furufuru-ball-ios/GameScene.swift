@@ -17,9 +17,9 @@ class GameScene: SKScene, SRWebSocketDelegate{
     private var webSocketClient: SRWebSocket?
     var through_flag = true
     var ballout_flag = true
-    let myLabel = SKLabelNode(fontNamed:"Chalkduster")
-    var timeLabel = "0.00"
-    var startlabel = SKLabelNode(fontNamed:"Chalkduster")
+    let gameover_label = SKLabelNode(fontNamed:"Chalkduster")
+    var time_label = "0.00"
+    var restart_label = SKLabelNode(fontNamed:"Chalkduster")
     
     override func didMoveToView(view: SKView) {
         webSocketConnect()
@@ -33,19 +33,19 @@ class GameScene: SKScene, SRWebSocketDelegate{
         Circle!.physicsBody?.affectedByGravity = false
         Circle!.position = CGPointMake(self.frame.midX, self.frame.maxY+40.0)
         
-        myLabel.fontSize = 40
-        myLabel.position = CGPoint(x: self.frame.midX,y: self.frame.midY)
-        self.addChild(myLabel)
+        
+        gameover_label.position = CGPoint(x: self.frame.midX,y: self.frame.midY)
+        self.addChild(gameover_label)
         
         // ShapeNodeの塗りつぶしの色を指定.
         Circle!.fillColor = UIColor.greenColor()
         self.addChild(Circle!)
         self.backgroundColor = UIColor.blackColor()
         //リスタートのテキスト設定
-        startlabel.fontSize = 40
-        startlabel.name="start"
-        startlabel.position = CGPoint(x: self.frame.midX,y: self.frame.midY-100)
-        self.addChild(startlabel)
+        restart_label.fontSize = 40
+        restart_label.name="start"
+        restart_label.position = CGPoint(x: self.frame.midX,y: self.frame.midY-100)
+        self.addChild(restart_label)
         
     }
     //リスタートのボタン
@@ -54,7 +54,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
             let location = touch.locationInNode(self)
             let touchNode = self.nodeAtPoint(location)
             //var t: UITouch = touch as! UITouch
-            if myLabel.text != "" {
+            if gameover_label.text != "" {
             if touchNode.name == "start"{
                 //リスタートの処理
                 webSocketConnect()
@@ -63,8 +63,8 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 Circle!.fillColor = UIColor.greenColor()
                 count=0
                 timer?.invalidate()
-                myLabel.text = ""
-                startlabel.text = ""
+                gameover_label.text = ""
+                restart_label.text = ""
                 }
             }
         }
@@ -77,7 +77,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
         //ミリ秒まで表示
         let ms = count % 100
         let s = (count - ms)/100
-        timeLabel=String(format:"%01d.%02d",s,ms)
+        time_label=String(format:"%01d.%02d",s,ms)
         //10秒たったか判定
         if (s >= 10){
             //センサー、タイマーを止めるボールを灰色にするGAME OVERと表示させる
@@ -85,7 +85,8 @@ class GameScene: SKScene, SRWebSocketDelegate{
             Circle?.physicsBody?.affectedByGravity = true
             Circle?.fillColor = UIColor.grayColor()
             timer?.invalidate()
-            myLabel.text = "GAME OVER"
+            gameover_label.fontSize = 40
+            gameover_label.text = "GAME OVER"
             
             if (self.isOpen()) {
                 //サーバーにメッセージをjson形式で送る処理
@@ -142,16 +143,16 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "update", userInfo: nil, repeats: true)
             }
             if("over"==object["game"].asString){
-                startlabel.text = "Start"
+                restart_label.text = "Start"
                 //センサーの停止
                 self.myMotionManager?.stopDeviceMotionUpdates()
                 //ボールが出た時タイマーを削除
                 timer?.invalidate()
                 webSocketClient?.closeWithCode(1000, reason: "user closed.")
-                if(myLabel.text==""){
+                if(gameover_label.text==""){
                     //ゲームオーバー時にカウントを表示
-                    myLabel.fontSize = 20
-                    myLabel.text="あなたの記録は"+timeLabel+"秒でした。"
+                    gameover_label.fontSize = 20
+                    gameover_label.text="あなたの記録は"+time_label+"秒でした。"
                 }
             }
         }
