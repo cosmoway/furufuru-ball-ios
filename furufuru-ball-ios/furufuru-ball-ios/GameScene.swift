@@ -43,7 +43,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
         self.backgroundColor = UIColor.blackColor()
         //リスタートのテキスト設定
         restart_label.fontSize = 40
-        restart_label.name="start"
+        restart_label.name="RESTART"
         restart_label.position = CGPoint(x: self.frame.midX,y: self.frame.midY-100)
         self.addChild(restart_label)
         
@@ -55,7 +55,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
             let touchNode = self.nodeAtPoint(location)
             //var t: UITouch = touch as! UITouch
             if gameover_label.text != "" {
-            if touchNode.name == "start"{
+            if touchNode.name == "RESTART"{
                 //リスタートの処理
                 webSocketConnect()
                 Circle!.physicsBody?.affectedByGravity = false
@@ -143,7 +143,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "update", userInfo: nil, repeats: true)
             }
             if("over"==object["game"].asString){
-                restart_label.text = "Start"
+                restart_label.text = "RESTART"
                 //センサーの停止
                 self.myMotionManager?.stopDeviceMotionUpdates()
                 //ボールが出た時タイマーを削除
