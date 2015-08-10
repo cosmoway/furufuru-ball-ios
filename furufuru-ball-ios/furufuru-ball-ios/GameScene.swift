@@ -116,7 +116,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                     //websocketの通信をとめる
                    webSocketClient?.closeWithCode(1000, reason: "user closed.")
                 }
-                if(myLabel.text==""){
+                if(myLabel.text.isEmpty){
                     //ゲームオーバー時にカウントを表示
                     myLabel.fontSize = 20
                     myLabel.text="あなたの記録は"+timeLabel+"秒でした。"
