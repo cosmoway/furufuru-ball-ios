@@ -22,9 +22,9 @@ class GameScene: SKScene, SRWebSocketDelegate{
     override func didMoveToView(view: SKView) {
         webSocketConnect()
         var radius = 40 as CGFloat
-        /* Setup your scene here */
+        //Circleの作成
         Circle = SKShapeNode(circleOfRadius: radius)
-        // ShapeNodeの座標を指定.
+        //Circleに物体の設定
         Circle!.physicsBody = SKPhysicsBody(circleOfRadius: radius)
         //重力はfalseにしてあります。
         Circle!.physicsBody?.affectedByGravity = false
