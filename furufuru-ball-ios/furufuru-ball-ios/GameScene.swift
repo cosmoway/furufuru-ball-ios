@@ -15,7 +15,6 @@ class GameScene: SKScene, SRWebSocketDelegate{
     var timer: NSTimer?
     var Circle: SKShapeNode?
     private var webSocketClient: SRWebSocket?
-    var through_flag = false
     var ballout_flag = true
     let myLabel = SKLabelNode(fontNamed:"Chalkduster")
     var timeLabel = "0.00"
@@ -106,7 +105,6 @@ class GameScene: SKScene, SRWebSocketDelegate{
         if let string = message as? String {
             let object = JSON.parse(string)
             if ("in" == object["move"].asString) {
-                through_flag = false
                 motion(40.0)
             }
             if("over"==object["game"].asString){
@@ -169,18 +167,13 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 v_y = vp_y + (data.userAcceleration.y * weight + data.gravity.y) * 1000 * interval
             }
             //速度
-            let v = 2000.0
+            let v = 3000.0
             vp_x = v_x
             vp_y = v_y
             //壁に当たったか判定
-            if ((self.Circle!.position.x + CGFloat(v_x*interval)) <= self.frame.maxX-radius && (self.Circle!.position.x + CGFloat(v_x*interval)) >= self.frame.minX+radius || self.through_flag) {
+            if ((self.Circle!.position.x + CGFloat(v_x*interval)) <= self.frame.maxX-radius && (self.Circle!.position.x + CGFloat(v_x*interval)) >= self.frame.minX+radius) {
                 self.Circle!.position.x = self.Circle!.position.x + CGFloat(v_x*interval)
-                //ボールが壁をすり抜けたか判定
-                if (self.Circle!.position.x > self.frame.maxX+radius || self.Circle!.position.x < self.frame.minX-radius) {
-                    self.moveOut()
-                    self.ballout_flag = true
-                    self.through_flag = true
-                }
+                
             } else {
                 //ボールが壁の外にあるか
                 if (self.ballout_flag) {
@@ -203,27 +196,27 @@ class GameScene: SKScene, SRWebSocketDelegate{
                         println("in")
                     }
                 }else{
-                    if (v_x * v_x >= v * v){
+                    if (v_x * v_x <= v * v){
+                        //壁に当たった時の反発
+                        if ((self.Circle!.position.x + CGFloat(v_x * interval)) >= self.frame.minX + radius) {
+                            self.Circle!.position.x = self.frame.maxX - radius
+                        } else {
+                            self.Circle!.position.x = self.frame.minX + radius
+                        }
+                        vp_x = -vp_x * resilience
+                    }else{
                         self.physicsBody = nil
-                        self.through_flag = true
+                        self.Circle!.position.x = self.Circle!.position.x + CGFloat(v_x*interval)
+                        //ボールが壁をすり抜けたか判定
+                        if (self.Circle!.position.x > self.frame.maxX+radius || self.Circle!.position.x < self.frame.minX-radius) {
+                            self.moveOut()
+                            self.ballout_flag = true
+                        }
                     }
-                    //壁に当たった時の反発
-                    if ((self.Circle!.position.x + CGFloat(v_x * interval)) >= self.frame.minX + radius) {
-                        self.Circle!.position.x = self.frame.maxX - radius
-                    } else {
-                        self.Circle!.position.x = self.frame.minX + radius
-                    }
-                    vp_x = -vp_x * resilience
                 }
             }
-            if ((self.Circle!.position.y + CGFloat(v_y*interval)) <= self.frame.maxY-radius && (self.Circle!.position.y + CGFloat(v_y*interval)) >= self.frame.minY+radius || self.through_flag) {
+            if ((self.Circle!.position.y + CGFloat(v_y*interval)) <= self.frame.maxY-radius && (self.Circle!.position.y + CGFloat(v_y*interval)) >= self.frame.minY+radius) {
                 self.Circle!.position.y = self.Circle!.position.y + CGFloat(v_y*interval)
-                //ボールが壁をすり抜けたか判定
-                if (self.Circle!.position.y > self.frame.maxY+radius || self.Circle!.position.y < self.frame.minY-radius) {
-                    self.moveOut()
-                    self.ballout_flag = true
-                    self.through_flag = true
-                }
             } else {
                 //ボールが壁の外にあるか
                 if (self.ballout_flag) {
@@ -245,17 +238,23 @@ class GameScene: SKScene, SRWebSocketDelegate{
                         self.timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "update", userInfo: nil, repeats: true)
                     }
                 }else{
-                    if (v_y * v_y >= v * v){
+                    if (v_y * v_y <= v * v){
+                        //壁に当たった時の反発
+                        if ((self.Circle!.position.y + CGFloat(v_y * interval)) >= self.frame.minY + radius) {
+                            self.Circle!.position.y = self.frame.maxY - radius
+                        } else {
+                            self.Circle!.position.y = self.frame.minY + radius
+                        }
+                        vp_y = -vp_y * resilience
+                    }else{
                         self.physicsBody = nil
-                        self.through_flag = true
+                        self.Circle!.position.y = self.Circle!.position.y + CGFloat(v_y*interval)
+                        //ボールが壁をすり抜けたか判定
+                        if (self.Circle!.position.y > self.frame.maxY+radius || self.Circle!.position.y < self.frame.minY-radius) {
+                            self.moveOut()
+                            self.ballout_flag = true
+                        }
                     }
-                    //壁に当たった時の反発
-                    if ((self.Circle!.position.y + CGFloat(v_y * interval)) >= self.frame.minY + radius) {
-                        self.Circle!.position.y = self.frame.maxY - radius
-                    } else {
-                        self.Circle!.position.y = self.frame.minY + radius
-                    }
-                    vp_y = -vp_y * resilience
                 }
             }
         })
