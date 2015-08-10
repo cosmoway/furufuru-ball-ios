@@ -37,7 +37,7 @@
 		5948C6E21B4FAF0A00E754A5 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		5948C6E41B4FAF1100E754A5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5948C6E61B4FAF1B00E754A5 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		599CEBB71B4BB5EA003B6B6D /* furufuru-ball-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "furufuru-ball-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		599CEBB71B4BB5EA003B6B6D /* furufuruball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = furufuruball.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		599CEBBB1B4BB5EA003B6B6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		599CEBBC1B4BB5EA003B6B6D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		599CEBBE1B4BB5EA003B6B6D /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -88,7 +88,7 @@
 		599CEBB81B4BB5EA003B6B6D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				599CEBB71B4BB5EA003B6B6D /* furufuru-ball-ios.app */,
+				599CEBB71B4BB5EA003B6B6D /* furufuruball.app */,
 				599CEBD01B4BB5EA003B6B6D /* furufuru-ball-iosTests.xctest */,
 			);
 			name = Products;
@@ -175,7 +175,7 @@
 			);
 			name = "furufuru-ball-ios";
 			productName = "furufuru-ball-ios";
-			productReference = 599CEBB71B4BB5EA003B6B6D /* furufuru-ball-ios.app */;
+			productReference = 599CEBB71B4BB5EA003B6B6D /* furufuruball.app */;
 			productType = "com.apple.product-type.application";
 		};
 		599CEBCF1B4BB5EA003B6B6D /* furufuru-ball-iosTests */ = {
@@ -429,7 +429,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "furufuru-ball-ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = furufuruball;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PROJECT)/Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -445,7 +445,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "furufuru-ball-ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = furufuruball;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PROJECT)/Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
