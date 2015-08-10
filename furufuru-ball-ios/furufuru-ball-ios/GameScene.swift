@@ -21,7 +21,6 @@ class GameScene: SKScene, SRWebSocketDelegate{
     
     override func didMoveToView(view: SKView) {
         webSocketConnect()
-        //self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
         var radius = 40 as CGFloat
         /* Setup your scene here */
         Circle = SKShapeNode(circleOfRadius: radius)
