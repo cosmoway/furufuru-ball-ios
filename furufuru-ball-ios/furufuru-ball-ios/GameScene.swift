@@ -65,6 +65,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 timer?.invalidate()
                 gameover_label.text = ""
                 restart_label.text = ""
+                ballout_flag = true
                 }
             }
         }
@@ -139,8 +140,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
             if ("in" == object["move"].asString) {
                 through_flag = true
                 motion(40.0)
-                //ボールが入ってきた時タイマーに値を入れる
-                timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "update", userInfo: nil, repeats: true)
+                
             }
             if("over"==object["game"].asString){
                 restart_label.text = "RESTART"
@@ -235,6 +235,9 @@ class GameScene: SKScene, SRWebSocketDelegate{
                     if (self.Circle!.position.x < self.frame.maxX-radius && self.Circle!.position.x > self.frame.minX+radius) {
                         self.ballout_flag=false
                         self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
+                        self.timer?.invalidate()
+                        //ボールが入ってきた時タイマーに値を入れる
+                        self.timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "update", userInfo: nil, repeats: true)
                     }
                 }else{
                     //壁に当たった時の反発
@@ -270,6 +273,9 @@ class GameScene: SKScene, SRWebSocketDelegate{
                     if (self.Circle!.position.y < self.frame.maxY-radius && self.Circle!.position.y > self.frame.minY+radius) {
                         self.ballout_flag=false
                         self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
+                        self.timer?.invalidate()
+                        //ボールが入ってきた時タイマーに値を入れる
+                        self.timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "update", userInfo: nil, repeats: true)
                     }
                 }else{
                     //壁に当たった時の反発
