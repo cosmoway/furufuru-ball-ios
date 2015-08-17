@@ -56,22 +56,25 @@ class GameScene: SKScene, SRWebSocketDelegate{
             //var t: UITouch = touch as! UITouch
             if gameover_label.text != "" {
                 if touchNode.name == "RESTART"{
-                    self.physicsBody = nil
                     //リスタートの処理
-                    Circle!.position = CGPointMake(self.frame.midX, self.frame.maxY+50.0)
-                    Circle!.physicsBody?.affectedByGravity = false
-                    Circle!.fillColor = UIColor.greenColor()
-                    count=0
-                    timer?.invalidate()
-                    gameover_label.text = ""
-                    restart_label.text = ""
-                    ballout_flag = true
-                    through_flag = false
-                    time_label = "0.00"
+                    initialize()
                     webSocketConnect()
                 }
             }
         }
+    }
+    func initialize(){
+        self.physicsBody = nil
+        Circle!.position = CGPointMake(self.frame.midX, self.frame.maxY+50.0)
+        Circle!.physicsBody?.affectedByGravity = false
+        Circle!.fillColor = UIColor.greenColor()
+        count=0
+        timer?.invalidate()
+        gameover_label.text = ""
+        restart_label.text = ""
+        ballout_flag = true
+        through_flag = false
+        time_label = "0.00"
     }
     
     //0.01秒ごと呼ばれる関数
@@ -143,6 +146,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 motion(40.0)
             }
             if("over"==object["game"].asString){
+                self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
                 restart_label.text = "RESTART"
                 //センサーの停止
                 self.myMotionManager?.stopDeviceMotionUpdates()
@@ -240,7 +244,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                         self.timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "update", userInfo: nil, repeats: true)
                     }
                     //ボールが中に入ったら壁を作る.
-                    if (self.Circle!.position.x < self.frame.maxX-radius && self.Circle!.position.x > self.frame.minX+radius) {
+                    if (self.Circle!.position.x < self.frame.maxX && self.Circle!.position.x > self.frame.minX) {
                         self.ballout_flag=false
                         self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
                         println("in")
@@ -288,7 +292,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                         self.timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "update", userInfo: nil, repeats: true)
                     }
                     //ボールが中に入ったら壁を作る.
-                    if (self.Circle!.position.y < self.frame.maxY-radius && self.Circle!.position.y > self.frame.minY+radius) {
+                    if (self.Circle!.position.y < self.frame.maxY && self.Circle!.position.y > self.frame.minY) {
                         self.ballout_flag=false
                         self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
                         println("in")
