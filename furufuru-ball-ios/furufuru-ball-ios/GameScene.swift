@@ -18,10 +18,35 @@ class GameScene: SKScene, SRWebSocketDelegate{
     var through_flag = false
     var ballout_flag = true
     let myLabel = SKLabelNode(fontNamed:"Chalkduster")
+    let start_label = SKLabelNode(fontNamed: "HiraKakuProN")
     var timeLabel = "0.00"
     
     override func didMoveToView(view: SKView) {
-        webSocketConnect()
+        let margin:CGFloat = 30.0
+        let join_label = SKLabelNode(fontNamed: "AppleSDGothicNeo")
+        join_label.text = "join"
+        join_label.fontSize = 30
+        join_label.position = CGPointMake(self.frame.maxX-margin, self.frame.maxY-margin)
+        self.addChild(join_label)
+        
+        let help_label = SKLabelNode(fontNamed: "AppleSDGothicNeo")
+        help_label.text = "?"
+        help_label.fontSize = 30
+        help_label.position = CGPointMake(self.frame.minX+margin, self.frame.maxY-margin)
+        self.addChild(help_label)
+        
+        
+        start_label.text = "start"
+        start_label.fontSize = 40
+        start_label.position = CGPointMake(self.frame.midX, self.frame.midY-50.0)
+        self.addChild(start_label)
+        
+        myLabel.text = "ふるふるボール"
+        myLabel.fontSize = 40
+        myLabel.position = CGPointMake(self.frame.midX,self.frame.midY)
+        self.addChild(myLabel)
+        
+        //webSocketConnect()
         //self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
         var radius = 40 as CGFloat
         /* Setup your scene here */
@@ -31,10 +56,6 @@ class GameScene: SKScene, SRWebSocketDelegate{
         //重力はfalseにしてあります。
         Circle!.physicsBody?.affectedByGravity = false
         Circle!.position = CGPointMake(self.frame.midX, self.frame.maxY+40.0)
-        
-        myLabel.fontSize = 40
-        myLabel.position = CGPoint(x: self.frame.midX,y: self.frame.midY)
-        self.addChild(myLabel)
         
         // ShapeNodeの塗りつぶしの色を指定.
         Circle!.fillColor = UIColor.greenColor()
