@@ -20,6 +20,8 @@ class GameScene: SKScene, SRWebSocketDelegate{
     let gameover_label = SKLabelNode(fontNamed:"Chalkduster")
     var time_label = "0.00"
     var restart_label = SKLabelNode(fontNamed:"Chalkduster")
+    let start_label = SKLabelNode(fontNamed: "AppleSDGothicNeo")
+    
     
     override func didMoveToView(view: SKView) {
         let margin:CGFloat = 30.0
@@ -35,14 +37,14 @@ class GameScene: SKScene, SRWebSocketDelegate{
         help_label.position = CGPointMake(self.frame.minX+margin, self.frame.maxY-margin)
         self.addChild(help_label)
         
-        let start_label = SKLabelNode(fontNamed: "AppleSDGothicNeo")
+        
         start_label.text = "start"
         start_label.name = "START"
         start_label.fontSize = 40
         start_label.position = CGPointMake(self.frame.midX, self.frame.midY-50.0)
         self.addChild(start_label)
         
-    
+         webSocketConnect()    
         
         gameover_label.text = "ふるふるボール"
         gameover_label.fontSize = 40
@@ -88,7 +90,11 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 }
                 if touchNode.name == "START"{
                     initialize()
-                    webSocketConnect()
+                    let obj:[String:AnyObject] = [
+                        "game" : "start"
+                    ]
+                    let json = JSON(obj).toString(pretty: true)
+                    self.webSocketClient?.send(json)
                 }
             }
         }
@@ -105,7 +111,9 @@ class GameScene: SKScene, SRWebSocketDelegate{
         ballout_flag = true
         through_flag = false
         time_label = "0.00"
+        start_label.text = ""
     }
+    
     
     //0.01秒ごと呼ばれる関数
     func update(){
@@ -174,6 +182,9 @@ class GameScene: SKScene, SRWebSocketDelegate{
             let object = JSON.parse(string)
             if ("in" == object["move"].asString) {
                 motion(40.0)
+            }
+                if ("start" == object["game"].asString){
+                    motion(40)
             }
             if("over"==object["game"].asString){
                 self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
