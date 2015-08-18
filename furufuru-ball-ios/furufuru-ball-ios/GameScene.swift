@@ -23,6 +23,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
     let start_label = SKLabelNode(fontNamed: "AppleSDGothicNeo")
     
     
+    
     override func didMoveToView(view: SKView) {
         let margin:CGFloat = 30.0
         let join_label = SKLabelNode(fontNamed: "AppleSDGothicNeo")
@@ -30,7 +31,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
         join_label.fontSize = 30
         join_label.position = CGPointMake(self.frame.maxX-margin, self.frame.maxY-margin)
         self.addChild(join_label)
-        
+        //ヘルプ
         let help_label = SKLabelNode(fontNamed: "AppleSDGothicNeo")
         help_label.text = "?"
         help_label.fontSize = 30
@@ -38,18 +39,21 @@ class GameScene: SKScene, SRWebSocketDelegate{
         self.addChild(help_label)
         
         
+        //テキストスタート
         start_label.text = "start"
         start_label.name = "START"
         start_label.fontSize = 40
         start_label.position = CGPointMake(self.frame.midX, self.frame.midY-50.0)
         self.addChild(start_label)
         
-         webSocketConnect()    
         
+         webSocketConnect()    
+        //ふるふるボールのテキスト
         gameover_label.text = "ふるふるボール"
         gameover_label.fontSize = 40
         gameover_label.position = CGPointMake(self.frame.midX,self.frame.midY)
         self.addChild(gameover_label)
+        
         
         //webSocketConnect()
         //self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
@@ -87,7 +91,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                     initialize()
                     webSocketConnect()
                     
-                }
+                }//スタートをタッチでサーバーに伝達
                 if touchNode.name == "START"{
                     initialize()
                     let obj:[String:AnyObject] = [
@@ -95,10 +99,12 @@ class GameScene: SKScene, SRWebSocketDelegate{
                     ]
                     let json = JSON(obj).toString(pretty: true)
                     self.webSocketClient?.send(json)
+                    //
                 }
             }
         }
     }
+    //初期化
     func initialize(){
         self.physicsBody = nil
         Circle!.position = CGPointMake(self.frame.midX, self.frame.maxY+50.0)
@@ -112,6 +118,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
         through_flag = false
         time_label = "0.00"
         start_label.text = ""
+        
     }
     
     
@@ -139,6 +146,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 ]
                 let json = JSON(obj).toString(pretty: true)
                 self.webSocketClient?.send(json)
+                //サーバーに伝達
             }
         }
     }
@@ -185,6 +193,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
             }
                 if ("start" == object["game"].asString){
                     motion(40)
+                    //ゲームスタートでボールを出す
             }
             if("over"==object["game"].asString){
                 self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
