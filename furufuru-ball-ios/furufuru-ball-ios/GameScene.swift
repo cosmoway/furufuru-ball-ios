@@ -37,6 +37,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
         
         let start_label = SKLabelNode(fontNamed: "AppleSDGothicNeo")
         start_label.text = "start"
+        start_label.name = "START"
         start_label.fontSize = 40
         start_label.position = CGPointMake(self.frame.midX, self.frame.midY-50.0)
         self.addChild(start_label)
@@ -69,6 +70,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
         restart_label.name="RESTART"
         restart_label.position = CGPoint(x: self.frame.midX,y: self.frame.midY-100)
         self.addChild(restart_label)
+        
         
     }
     //リスタートのボタン
