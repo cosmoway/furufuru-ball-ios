@@ -22,28 +22,28 @@ class GameScene: SKScene, SRWebSocketDelegate{
     var restart_label = SKLabelNode(fontNamed:"Chalkduster")
     
     override func didMoveToView(view: SKView) {
-        let margin:CGFloat = 30.0
+        let margin:CGFloat = 50.0
         let join_label = SKLabelNode(fontNamed: "AppleSDGothicNeo")
-        join_label.text = "join"
-        join_label.fontSize = 30
-        join_label.position = CGPointMake(self.frame.maxX-margin, self.frame.maxY-margin)
+        join_label.text = "join:1"
+        join_label.fontSize = 50
+        join_label.position = CGPointMake(self.frame.maxX-90.0, self.frame.maxY-margin)
         self.addChild(join_label)
         
         let help_label = SKLabelNode(fontNamed: "AppleSDGothicNeo")
         help_label.text = "?"
-        help_label.fontSize = 30
+        help_label.fontSize = 50
         help_label.position = CGPointMake(self.frame.minX+margin, self.frame.maxY-margin)
         self.addChild(help_label)
         
         let start_label = SKLabelNode(fontNamed: "AppleSDGothicNeo")
         start_label.text = "start"
-        start_label.fontSize = 40
+        start_label.fontSize = 60
         start_label.position = CGPointMake(self.frame.midX, self.frame.midY-50.0)
         self.addChild(start_label)
         
         gameover_label.text = "ふるふるボール"
-        gameover_label.fontSize = 40
-        gameover_label.position = CGPointMake(self.frame.midX,self.frame.midY)
+        gameover_label.fontSize = 60
+        gameover_label.position = CGPointMake(self.frame.midX,self.frame.midY+20)
         self.addChild(gameover_label)
         
         //webSocketConnect()
