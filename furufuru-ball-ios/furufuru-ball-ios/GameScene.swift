@@ -17,15 +17,9 @@ class GameScene: SKScene, SRWebSocketDelegate{
     private var webSocketClient: SRWebSocket?
     var through_flag = false
     var ballout_flag = true
-<<<<<<< HEAD
-    let myLabel = SKLabelNode(fontNamed:"Chalkduster")
-    let start_label = SKLabelNode(fontNamed: "HiraKakuProN")
-    var timeLabel = "0.00"
-=======
     let gameover_label = SKLabelNode(fontNamed:"Chalkduster")
     var time_label = "0.00"
     var restart_label = SKLabelNode(fontNamed:"Chalkduster")
->>>>>>> master
     
     override func didMoveToView(view: SKView) {
         let margin:CGFloat = 30.0
@@ -42,15 +36,15 @@ class GameScene: SKScene, SRWebSocketDelegate{
         self.addChild(help_label)
         
         
-        start_label.text = "start"
-        start_label.fontSize = 40
-        start_label.position = CGPointMake(self.frame.midX, self.frame.midY-50.0)
-        self.addChild(start_label)
+        restart_label.text = "start"
+        restart_label.fontSize = 40
+        restart_label.position = CGPointMake(self.frame.midX, self.frame.midY-50.0)
+        self.addChild(restart_label)
         
-        myLabel.text = "ふるふるボール"
-        myLabel.fontSize = 40
-        myLabel.position = CGPointMake(self.frame.midX,self.frame.midY)
-        self.addChild(myLabel)
+        gameover_label.text = "ふるふるボール"
+        gameover_label.fontSize = 40
+        gameover_label.position = CGPointMake(self.frame.midX,self.frame.midY)
+        self.addChild(gameover_label)
         
         //webSocketConnect()
         //self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
@@ -62,14 +56,9 @@ class GameScene: SKScene, SRWebSocketDelegate{
         //重力はfalseにしてあります。
         Circle!.physicsBody?.affectedByGravity = false
         Circle!.position = CGPointMake(self.frame.midX, self.frame.maxY+50.0)
-        
-<<<<<<< HEAD
-=======
-        
         gameover_label.position = CGPoint(x: self.frame.midX,y: self.frame.midY)
         self.addChild(gameover_label)
         
->>>>>>> master
         // ShapeNodeの塗りつぶしの色を指定.
         Circle!.fillColor = UIColor.greenColor()
         self.addChild(Circle!)
