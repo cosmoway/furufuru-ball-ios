@@ -211,8 +211,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 v_x = vp_x + (data.userAcceleration.x * weight + data.gravity.x) * 1000 * interval
                 v_y = vp_y + (data.userAcceleration.y * weight + data.gravity.y) * 1000 * interval
             }
-            //速度
-            let v = 2000.0
+            
             vp_x = v_x
             vp_y = v_y
             //壁に当たったか判定
@@ -234,10 +233,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                     }
                    self.makeWall(self.Circle!.position.x,max: self.frame.maxX,min: self.frame.minX)
                 }else{
-                    if (v_x * v_x >= v * v){
-                        self.physicsBody = nil
-                        self.through_flag = true
-                    }
+                    self.speedOver(v_x)
                     //壁に当たった時の反発
                     if ((self.Circle!.position.x + CGFloat(v_x * interval)) >= self.frame.minX + radius) {
                         self.Circle!.position.x = self.frame.maxX - radius
@@ -266,10 +262,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                     }
                     self.makeWall(self.Circle!.position.y,max: self.frame.maxY,min: self.frame.minY)
                 }else{
-                    if (v_y * v_y >= v * v){
-                        self.physicsBody = nil
-                        self.through_flag = true
-                    }
+                    self.speedOver(v_y)
                     //壁に当たった時の反発
                     if ((self.Circle!.position.y + CGFloat(v_y * interval)) >= self.frame.minY + radius) {
                         self.Circle!.position.y = self.frame.maxY - radius
@@ -301,6 +294,14 @@ class GameScene: SKScene, SRWebSocketDelegate{
             self.moveOut()
             self.ballout_flag = true
             self.through_flag = false
+        }
+    }
+    func speedOver(speed:Double){
+        //速度
+        let v = 2000.0
+        if (speed * speed >= v * v){
+            self.physicsBody = nil
+            self.through_flag = true
         }
     }
 }
