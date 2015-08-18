@@ -218,12 +218,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
             //壁に当たったか判定
             if ((self.Circle!.position.x + CGFloat(v_x*interval)) <= self.frame.maxX-radius && (self.Circle!.position.x + CGFloat(v_x*interval)) >= self.frame.minX+radius || self.through_flag) {
                 self.Circle!.position.x = self.Circle!.position.x + CGFloat(v_x*interval)
-                //ボールが壁をすり抜けたか判定
-                if (self.Circle!.position.x > self.frame.maxX+radius || self.Circle!.position.x < self.frame.minX-radius) {
-                    self.moveOut()
-                    self.ballout_flag = true
-                    self.through_flag = false
-                }
+               self.ballout(self.Circle!.position.x,max: self.frame.maxX,min: self.frame.minX,radius: radius)
             } else {
                 //ボールが壁の外にあるか
                 if (self.ballout_flag) {
@@ -254,12 +249,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
             }
             if ((self.Circle!.position.y + CGFloat(v_y*interval)) <= self.frame.maxY-radius && (self.Circle!.position.y + CGFloat(v_y*interval)) >= self.frame.minY+radius || self.through_flag) {
                 self.Circle!.position.y = self.Circle!.position.y + CGFloat(v_y*interval)
-                //ボールが壁をすり抜けたか判定
-                if (self.Circle!.position.y > self.frame.maxY+radius || self.Circle!.position.y < self.frame.minY-radius) {
-                    self.moveOut()
-                    self.ballout_flag = true
-                    self.through_flag = false
-                }
+                self.ballout(self.Circle!.position.y,max: self.frame.maxY,min: self.frame.minY,radius: radius)
             } else {
                 //ボールが壁の外にあるか
                 if (self.ballout_flag) {
@@ -303,6 +293,14 @@ class GameScene: SKScene, SRWebSocketDelegate{
             self.ballout_flag=false
             self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
             println("in")
+        }
+    }
+    func ballout(circle_position:CGFloat,max:CGFloat,min:CGFloat,radius:CGFloat){
+        //ボールが壁をすり抜けたか判定
+        if (circle_position > max+radius || circle_position < min-radius) {
+            self.moveOut()
+            self.ballout_flag = true
+            self.through_flag = false
         }
     }
 }
