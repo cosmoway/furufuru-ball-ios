@@ -21,9 +21,9 @@ class GameScene: SKScene, SRWebSocketDelegate{
     let time_label = SKLabelNode(fontNamed: "AppleSDGothicNeo")
     var next_label = SKLabelNode(fontNamed:"Chalkduster")
     let start_label = SKLabelNode(fontNamed: "AppleSDGothicNeo")
-    let help_label = SKLabelNode(fontNamed: "AppleSDGothicNeo")
     let join_label = SKLabelNode(fontNamed: "AppleSDGothicNeo")
     var time = "0.00"
+    let help = SKSpriteNode(imageNamed: "Help")
 
     
     override func didMoveToView(view: SKView) {
@@ -33,10 +33,9 @@ class GameScene: SKScene, SRWebSocketDelegate{
         join_label.position = CGPointMake(self.frame.maxX-90.0, self.frame.maxY-margin)
         self.addChild(join_label)
         
-        help_label.text = "?"
-        help_label.fontSize = 50
-        help_label.position = CGPointMake(self.frame.minX+margin, self.frame.maxY-margin)
-        self.addChild(help_label)
+        
+        help.position = CGPointMake(self.frame.minX+margin, self.frame.maxY-margin)
+        self.addChild(help)
         
         start_label.text = "start"
         start_label.fontSize = 60
@@ -54,7 +53,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
         next_label.position = CGPoint(x: self.frame.midX,y: self.frame.midY-100)
         self.addChild(next_label)
         
-        time_label.position = CGPointMake(self.frame.midX, self.frame.midY)
+        time_label.position = CGPointMake(self.frame.midX, self.frame.midY-50.0)
         self.addChild(time_label)
         
         webSocketConnect()
@@ -99,11 +98,11 @@ class GameScene: SKScene, SRWebSocketDelegate{
         next_label.text = ""
         time_label.text = ""
         start_label.text = ""
-        help_label.text = ""
         ballout_flag = true
         through_flag = false
         time = "0.00"
         join_label.text = "join:1"
+        help.hidden = true
     }
     
     //0.01秒ごと呼ばれる関数
