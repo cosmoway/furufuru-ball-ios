@@ -41,6 +41,8 @@ class GameScene: SKScene, SRWebSocketDelegate{
         start_label.position = CGPointMake(self.frame.midX, self.frame.midY-50.0)
         self.addChild(start_label)
         
+    
+        
         gameover_label.text = "ふるふるボール"
         gameover_label.fontSize = 40
         gameover_label.position = CGPointMake(self.frame.midX,self.frame.midY)
@@ -78,6 +80,11 @@ class GameScene: SKScene, SRWebSocketDelegate{
             if gameover_label.text != "" {
                 if touchNode.name == "RESTART"{
                     //リスタートの処理
+                    initialize()
+                    webSocketConnect()
+                    
+                }
+                if touchNode.name == "START"{
                     initialize()
                     webSocketConnect()
                 }
