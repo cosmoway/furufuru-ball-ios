@@ -27,10 +27,10 @@ class GameScene: SKScene, SRWebSocketDelegate{
 
     
     override func didMoveToView(view: SKView) {
-        let margin:CGFloat = 50.0
+        let margin:CGFloat = 30.0
         join_label.text = "join:1"
-        join_label.fontSize = 50
-        join_label.position = CGPointMake(self.frame.maxX-90.0, self.frame.maxY-margin)
+        join_label.fontSize = 30
+        join_label.position = CGPointMake(self.frame.maxX-50.0, self.frame.maxY-margin)
         self.addChild(join_label)
         
         
@@ -38,12 +38,13 @@ class GameScene: SKScene, SRWebSocketDelegate{
         self.addChild(help)
         
         start_label.text = "start"
+        start_label.name = "START"
         start_label.fontSize = 60
         start_label.position = CGPointMake(self.frame.midX, self.frame.midY-50.0)
         self.addChild(start_label)
         
         gameover_label.text = "ふるふるボール"
-        gameover_label.fontSize = 60
+        gameover_label.fontSize = 40
         gameover_label.position = CGPointMake(self.frame.midX,self.frame.midY+20)
         self.addChild(gameover_label)
         
@@ -56,7 +57,6 @@ class GameScene: SKScene, SRWebSocketDelegate{
         time_label.position = CGPointMake(self.frame.midX, self.frame.midY-50.0)
         self.addChild(time_label)
         
-        webSocketConnect()
         var radius = 40 as CGFloat
         /* Setup your scene here */
         Circle = SKShapeNode(circleOfRadius: radius)
@@ -82,8 +82,15 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 if touchNode.name == "NEXT"{
                     //リスタートの処理
                     initialize()
-                    webSocketConnect()
+                    gameover_label.text = "ふるふるボール"
+                    start_label.text = "start"
+                    help.hidden = false
                 }
+            }
+            if touchNode.name == "START"{
+                //リスタートの処理
+                initialize()
+                webSocketConnect()
             }
         }
     }
@@ -94,14 +101,14 @@ class GameScene: SKScene, SRWebSocketDelegate{
         Circle!.fillColor = UIColor.greenColor()
         count=0
         timer?.invalidate()
-        gameover_label.text = ""
         next_label.text = ""
         time_label.text = ""
-        start_label.text = ""
+        gameover_label.text = ""
         ballout_flag = true
         through_flag = false
         time = "0.00"
         join_label.text = "join:1"
+        start_label.text = ""
         help.hidden = true
     }
     
