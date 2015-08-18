@@ -35,11 +35,11 @@ class GameScene: SKScene, SRWebSocketDelegate{
         help_label.position = CGPointMake(self.frame.minX+margin, self.frame.maxY-margin)
         self.addChild(help_label)
         
-        
-        restart_label.text = "start"
-        restart_label.fontSize = 40
-        restart_label.position = CGPointMake(self.frame.midX, self.frame.midY-50.0)
-        self.addChild(restart_label)
+        let start_label = SKLabelNode(fontNamed: "AppleSDGothicNeo")
+        start_label.text = "start"
+        start_label.fontSize = 40
+        start_label.position = CGPointMake(self.frame.midX, self.frame.midY-50.0)
+        self.addChild(start_label)
         
         gameover_label.text = "ふるふるボール"
         gameover_label.fontSize = 40
@@ -56,8 +56,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
         //重力はfalseにしてあります。
         Circle!.physicsBody?.affectedByGravity = false
         Circle!.position = CGPointMake(self.frame.midX, self.frame.maxY+50.0)
-        gameover_label.position = CGPoint(x: self.frame.midX,y: self.frame.midY)
-        self.addChild(gameover_label)
+        
         
         // ShapeNodeの塗りつぶしの色を指定.
         Circle!.fillColor = UIColor.greenColor()
