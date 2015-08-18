@@ -237,12 +237,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                         self.Circle?.position.x += CGFloat(v_x*interval)
                         self.timerSet()
                     }
-                    //ボールが中に入ったら壁を作る.
-                    if (self.Circle!.position.x < self.frame.maxX && self.Circle!.position.x > self.frame.minX) {
-                        self.ballout_flag=false
-                        self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
-                        println("in")
-                    }
+                   self.makeWall(self.Circle!.position.x,max: self.frame.maxX,min: self.frame.minX)
                 }else{
                     if (v_x * v_x >= v * v){
                         self.physicsBody = nil
@@ -279,12 +274,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                         self.Circle?.position.y += CGFloat(v_y*interval)
                         self.timerSet()
                     }
-                    //ボールが中に入ったら壁を作る.
-                    if (self.Circle!.position.y < self.frame.maxY && self.Circle!.position.y > self.frame.minY) {
-                        self.ballout_flag=false
-                        self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
-                        println("in")
-                    }
+                    self.makeWall(self.Circle!.position.y,max: self.frame.maxY,min: self.frame.minY)
                 }else{
                     if (v_y * v_y >= v * v){
                         self.physicsBody = nil
@@ -306,5 +296,13 @@ class GameScene: SKScene, SRWebSocketDelegate{
         self.timer?.invalidate()
         //ボールが入ってきた時タイマーに値を入れる
         self.timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "update", userInfo: nil, repeats: true)
+    }
+    func makeWall(circle_position:CGFloat,max:CGFloat,min:CGFloat){
+        //ボールが中に入ったら壁を作る.
+        if (circle_position < max && circle_position > min) {
+            self.ballout_flag=false
+            self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
+            println("in")
+        }
     }
 }
