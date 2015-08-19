@@ -18,6 +18,7 @@
 		599CEBD71B4BB5EA003B6B6D /* furufuru_ball_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599CEBD61B4BB5EA003B6B6D /* furufuru_ball_iosTests.swift */; };
 		59E00F071B5E06B9000ACD21 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E00F061B5E06B9000ACD21 /* JSON.swift */; };
 		9DD840F8B56A529CB6CF03FA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 334C9367631844C3E26859A7 /* libPods.a */; };
+		AC95A8611B846018009D2658 /* CustamDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC95A8601B846018009D2658 /* CustamDialog.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		599CEBD61B4BB5EA003B6B6D /* furufuru_ball_iosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = furufuru_ball_iosTests.swift; sourceTree = "<group>"; };
 		59E00F061B5E06B9000ACD21 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		9448D7100CBE782D4E985F7C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		AC95A8601B846018009D2658 /* CustamDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustamDialog.swift; sourceTree = "<group>"; };
 		D15F2ED662395F08C71E6AEE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,6 +109,7 @@
 				599CEBBA1B4BB5EA003B6B6D /* Supporting Files */,
 				5948C6E11B4FA62900E754A5 /* Bridging-Header.h */,
 				59E00F061B5E06B9000ACD21 /* JSON.swift */,
+				AC95A8601B846018009D2658 /* CustamDialog.swift */,
 			);
 			path = "furufuru-ball-ios";
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 				599CEBC31B4BB5EA003B6B6D /* GameViewController.swift in Sources */,
 				599CEBBD1B4BB5EA003B6B6D /* AppDelegate.swift in Sources */,
 				59E00F071B5E06B9000ACD21 /* JSON.swift in Sources */,
+				AC95A8611B846018009D2658 /* CustamDialog.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
