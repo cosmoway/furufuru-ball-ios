@@ -17,9 +17,9 @@ class GameScene: SKScene, SRWebSocketDelegate{
     private var webSocketClient: SRWebSocket?
     var through_flag = false
     var ballout_flag = true
-    let gameover_label = SKLabelNode(fontNamed:"Chalkduster")
+    let gameover_label = SKLabelNode(fontNamed:"AppleSDGothicNeo")
     let time_label = SKLabelNode(fontNamed: "AppleSDGothicNeo")
-    var next_label = SKLabelNode(fontNamed:"Chalkduster")
+    var next_label = SKLabelNode(fontNamed:"AppleSDGothicNeo")
     let start_label = SKLabelNode(fontNamed: "AppleSDGothicNeo")
     let join_label = SKLabelNode(fontNamed: "AppleSDGothicNeo")
     var time = "0.00"
@@ -55,6 +55,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
         self.addChild(next_label)
         
         time_label.position = CGPointMake(self.frame.midX, self.frame.midY-50.0)
+        time_label.fontSize = 35
         self.addChild(time_label)
         
         var radius = 40 as CGFloat
