@@ -37,12 +37,14 @@ class GameScene: SKScene, SRWebSocketDelegate{
         help.position = CGPointMake(self.frame.minX+margin, self.frame.maxY-margin)
         self.addChild(help)
         
+        //テキストスタート
         start_label.text = "START"
         start_label.name = "START"
         start_label.fontSize = 40
         start_label.position = CGPointMake(self.frame.midX, self.frame.midY-50.0)
         self.addChild(start_label)
         
+        //ふるふるボールのテキスト
         title_label.text = "ふるふるボール"
         title_label.fontSize = 40
         title_label.position = CGPointMake(self.frame.midX,self.frame.midY+20)
@@ -67,7 +69,6 @@ class GameScene: SKScene, SRWebSocketDelegate{
         Circle!.physicsBody?.affectedByGravity = false
         Circle!.position = CGPointMake(self.frame.midX, self.frame.maxY+50.0)
         
-        
         // ShapeNodeの塗りつぶしの色を指定.
         Circle!.fillColor = UIColor.greenColor()
         self.addChild(Circle!)
@@ -90,6 +91,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                     webSocketConnect()
                 }
             }
+            //スタートをタッチでサーバーに伝達
             if touchNode.name == "START"{
                 //リスタートの処理
                 initialize()
@@ -104,6 +106,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
             }
         }
     }
+    //初期化
     func initialize(){
         self.physicsBody = nil
         Circle!.position = CGPointMake(self.frame.midX, self.frame.maxY+50.0)
@@ -191,7 +194,12 @@ class GameScene: SKScene, SRWebSocketDelegate{
             if ("in" == object["move"].asString) {
                 motion(40.0)
             }
-            if("over"==object["game"].asString){
+            //文字を消す
+            if ("start" == object["game"].asString){
+                start_label.text = ""
+                title_label.text = ""
+            }
+            if ("over" == object["game"].asString) {
                 self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
                 next_label.text = "NEXT"
                 join_label.text = ""
@@ -207,8 +215,6 @@ class GameScene: SKScene, SRWebSocketDelegate{
                     //websocketの通信をとめる
                    webSocketClient?.closeWithCode(1000, reason: "user closed.")
                 }
-                
-                
             }
         }
     }
