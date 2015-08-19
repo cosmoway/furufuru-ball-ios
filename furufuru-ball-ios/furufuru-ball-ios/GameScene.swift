@@ -23,7 +23,6 @@ class GameScene: SKScene, SRWebSocketDelegate{
     let start_label = SKLabelNode(fontNamed: "AppleSDGothicNeo")
     let help_label = SKLabelNode(fontNamed: "AppleSDGothicNeo")
     
-    
     override func didMoveToView(view: SKView) {
         let margin:CGFloat = 30.0
         let join_label = SKLabelNode(fontNamed: "AppleSDGothicNeo")
@@ -37,7 +36,6 @@ class GameScene: SKScene, SRWebSocketDelegate{
         help_label.position = CGPointMake(self.frame.minX+margin, self.frame.maxY-margin)
         self.addChild(help_label)
         
-        
         //テキストスタート
         start_label.text = "start"
         start_label.name = "START"
@@ -45,14 +43,12 @@ class GameScene: SKScene, SRWebSocketDelegate{
         start_label.position = CGPointMake(self.frame.midX, self.frame.midY-50.0)
         self.addChild(start_label)
         
-        
-         webSocketConnect()    
+        webSocketConnect()
         //ふるふるボールのテキスト
         gameover_label.text = "ふるふるボール"
         gameover_label.fontSize = 40
         gameover_label.position = CGPointMake(self.frame.midX,self.frame.midY)
         self.addChild(gameover_label)
-        
         
         //webSocketConnect()
         //self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
@@ -65,18 +61,15 @@ class GameScene: SKScene, SRWebSocketDelegate{
         Circle!.physicsBody?.affectedByGravity = false
         Circle!.position = CGPointMake(self.frame.midX, self.frame.maxY+50.0)
         
-        
         // ShapeNodeの塗りつぶしの色を指定.
         Circle!.fillColor = UIColor.greenColor()
         self.addChild(Circle!)
         self.backgroundColor = UIColor.blackColor()
         //リスタートのテキスト設定
         restart_label.fontSize = 40
-        restart_label.name="RESTART"
+        restart_label.name = "RESTART"
         restart_label.position = CGPoint(x: self.frame.midX,y: self.frame.midY-100)
         self.addChild(restart_label)
-        
-        
     }
     //リスタートのボタン
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
@@ -85,20 +78,19 @@ class GameScene: SKScene, SRWebSocketDelegate{
             let touchNode = self.nodeAtPoint(location)
             //var t: UITouch = touch as! UITouch
             if gameover_label.text != "" {
-                if touchNode.name == "RESTART"{
+                if touchNode.name == "RESTART" {
                     //リスタートの処理
                     initialize()
                     webSocketConnect()
-                    
-                }//スタートをタッチでサーバーに伝達
-                if touchNode.name == "START"{
+                }
+                //スタートをタッチでサーバーに伝達
+                if touchNode.name == "START" {
                     initialize()
                     let obj:[String:AnyObject] = [
                         "game" : "start"
                     ]
                     let json = JSON(obj).toString(pretty: true)
                     self.webSocketClient?.send(json)
-                    //
                 }
             }
         }
@@ -117,9 +109,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
         through_flag = false
         time_label = "0.00"
         start_label.text = ""
-        
     }
-    
     
     //0.01秒ごと呼ばれる関数
     func update(){
@@ -127,7 +117,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
         //ミリ秒まで表示
         let ms = count % 100
         let s = (count - ms)/100
-        time_label=String(format:"%01d.%02d",s,ms)
+        time_label = String(format:"%01d.%02d",s,ms)
         //10秒たったか判定
         if (s >= 10){
             //センサー、タイマーを止めるボールを灰色にするGAME OVERと表示させる
@@ -189,22 +179,18 @@ class GameScene: SKScene, SRWebSocketDelegate{
             if ("in" == object["move"].asString) {
                 motion(40.0)
             }
-                  //文字を消す
-                if ("start" == object["game"].asString){
-                    
-                    start_label.text = ""
-                    help_label.text = ""
-                     gameover_label.text = ""
-                    
-                    
-                    
+            //文字を消す
+            if ("start" == object["game"].asString){
+                start_label.text = ""
+                help_label.text = ""
+                gameover_label.text = ""
             }
-            if("over"==object["game"].asString){
+            if ("over" == object["game"].asString) {
                 self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
                 restart_label.text = "RESTART"
                 //センサーの停止
                 self.myMotionManager?.stopDeviceMotionUpdates()
-                if(gameover_label.text==""){
+                if (gameover_label.text == "") {
                     if (UIScreen.mainScreen().bounds.maxX<=500) {
                         //ゲームオーバー時にカウントを表示
                         gameover_label.fontSize = 20
@@ -219,8 +205,6 @@ class GameScene: SKScene, SRWebSocketDelegate{
                     //websocketの通信をとめる
                    webSocketClient?.closeWithCode(1000, reason: "user closed.")
                 }
-                
-                
             }
         }
     }
