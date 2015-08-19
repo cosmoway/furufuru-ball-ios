@@ -41,12 +41,12 @@ class GameScene: SKScene, SRWebSocketDelegate{
         start_label.text = "START"
         start_label.name = "START"
         start_label.fontSize = 40
-        start_label.position = CGPointMake(self.frame.midX, self.frame.midY-50.0)
+        start_label.position = CGPointMake(self.frame.midX, self.frame.midY-30.0)
         self.addChild(start_label)
         
         title_label.text = "ふるふるボール"
         title_label.fontSize = 40
-        title_label.position = CGPointMake(self.frame.midX,self.frame.midY+20)
+        title_label.position = CGPointMake(self.frame.midX,self.frame.midY+40)
         self.addChild(title_label)
         
         //リスタートのテキスト設定
@@ -80,13 +80,13 @@ class GameScene: SKScene, SRWebSocketDelegate{
         for touch: AnyObject in touches {
             let location = touch.locationInNode(self)
             let touchNode = self.nodeAtPoint(location)
-            //var t: UITouch = touch as! UITouch
             if title_label.text != "" {
                 if touchNode.name == "NEXT"{
                     //リスタートの処理
                     initialize()
                     title_label.text = "ふるふるボール"
                     start_label.text = "START"
+                    start_label.name = "START"
                     help.hidden = false
                     join_label.text = "join:"
                     webSocketConnect()
@@ -114,12 +114,14 @@ class GameScene: SKScene, SRWebSocketDelegate{
         count=0
         timer?.invalidate()
         next_label.text = ""
+        next_label.name = ""
         time_label.text = ""
         title_label.text = ""
         ballout_flag = true
         through_flag = false
         time = "0'00"
         start_label.text = ""
+        start_label.name = ""
         help.hidden = true
     }
     
@@ -202,6 +204,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
             if("over"==object["game"].asString){
                 self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
                 next_label.text = "NEXT"
+                next_label.name = "NEXT"
                 join_label.text = ""
                 //センサーの停止
                 self.myMotionManager?.stopDeviceMotionUpdates()
