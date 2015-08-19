@@ -28,12 +28,12 @@ class GameScene: SKScene, SRWebSocketDelegate{
     
     override func didMoveToView(view: SKView) {
         let margin:CGFloat = 30.0
+        
         join_label.text = "join:1"
         join_label.fontSize = 30
         join_label.position = CGPointMake(self.frame.maxX-50.0, self.frame.maxY-margin)
         self.addChild(join_label)
-        
-        
+        //helpのアイコンの設定
         help.position = CGPointMake(self.frame.minX+margin, self.frame.maxY-margin)
         self.addChild(help)
         
