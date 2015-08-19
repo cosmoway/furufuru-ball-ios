@@ -145,7 +145,6 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 ]
                 let json = JSON(obj).toString(pretty: true)
                 self.webSocketClient?.send(json)
-                //サーバーに伝達
             }
         }
     }
@@ -190,11 +189,12 @@ class GameScene: SKScene, SRWebSocketDelegate{
             if ("in" == object["move"].asString) {
                 motion(40.0)
             }
+                  //文字を消す
                 if ("start" == object["game"].asString){
                     
                     start_label.text = ""
                     help_label.text = ""
-                     gameover_label.text = ""                    
+                     gameover_label.text = ""
                     
                     
                     
