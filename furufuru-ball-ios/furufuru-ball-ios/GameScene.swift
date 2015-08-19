@@ -16,11 +16,49 @@ class GameScene: SKScene, SRWebSocketDelegate{
     var Circle: SKShapeNode?
     private var webSocketClient: SRWebSocket?
     var ballout_flag = true
-    let myLabel = SKLabelNode(fontNamed:"Chalkduster")
-    var timeLabel = "0.00"
+    let title_label = SKLabelNode(fontNamed:"AppleSDGothicNeo")
+    let time_label = SKLabelNode(fontNamed: "AppleSDGothicNeo")
+    var next_label = SKLabelNode(fontNamed:"AppleSDGothicNeo")
+    let start_label = SKLabelNode(fontNamed: "AppleSDGothicNeo")
+    let join_label = SKLabelNode(fontNamed: "AppleSDGothicNeo")
+    var time = "0'00"
+    let help = SKSpriteNode(imageNamed: "Help")
+
     
     override func didMoveToView(view: SKView) {
-        webSocketConnect()
+        let margin:CGFloat = 30.0
+        
+        join_label.text = "join:1"
+        join_label.fontSize = 30
+        join_label.position = CGPointMake(self.frame.maxX-50.0, self.frame.maxY-margin)
+        self.addChild(join_label)
+        //helpのアイコンの設定
+        help.position = CGPointMake(self.frame.minX+margin, self.frame.maxY-margin)
+        self.addChild(help)
+        
+        //テキストスタート
+        start_label.text = "START"
+        start_label.name = "START"
+        start_label.fontSize = 40
+        start_label.position = CGPointMake(self.frame.midX, self.frame.midY-50.0)
+        self.addChild(start_label)
+        
+        //ふるふるボールのテキスト
+        title_label.text = "ふるふるボール"
+        title_label.fontSize = 40
+        title_label.position = CGPointMake(self.frame.midX,self.frame.midY+20)
+        self.addChild(title_label)
+        
+        //リスタートのテキスト設定
+        next_label.fontSize = 40
+        next_label.name="NEXT"
+        next_label.position = CGPoint(x: self.frame.midX,y: self.frame.midY-100)
+        self.addChild(next_label)
+        
+        time_label.position = CGPointMake(self.frame.midX, self.frame.midY-50.0)
+        time_label.fontSize = 35
+        self.addChild(time_label)
+        
         var radius = 40 as CGFloat
         //Circleの作成
         Circle = SKShapeNode(circleOfRadius: radius)
@@ -28,25 +66,70 @@ class GameScene: SKScene, SRWebSocketDelegate{
         Circle!.physicsBody = SKPhysicsBody(circleOfRadius: radius)
         //重力はfalseにしてあります。
         Circle!.physicsBody?.affectedByGravity = false
-        Circle!.position = CGPointMake(self.frame.midX, self.frame.maxY+40.0)
-        
-        myLabel.fontSize = 40
-        myLabel.position = CGPoint(x: self.frame.midX,y: self.frame.midY)
-        self.addChild(myLabel)
+        Circle!.position = CGPointMake(self.frame.midX, self.frame.maxY+50.0)
         
         // ShapeNodeの塗りつぶしの色を指定.
         Circle!.fillColor = UIColor.greenColor()
         self.addChild(Circle!)
         self.backgroundColor = UIColor.blackColor()
-        
+        webSocketConnect()
     }
+    //リスタートのボタン
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        for touch: AnyObject in touches {
+            let location = touch.locationInNode(self)
+            let touchNode = self.nodeAtPoint(location)
+            //var t: UITouch = touch as! UITouch
+            if title_label.text != "" {
+                if touchNode.name == "NEXT"{
+                    //リスタートの処理
+                    initialize()
+                    title_label.text = "ふるふるボール"
+                    start_label.text = "START"
+                    help.hidden = false
+                    webSocketConnect()
+                }
+            }
+            //スタートをタッチでサーバーに伝達
+            if touchNode.name == "START"{
+                //リスタートの処理
+                initialize()
+                if (self.isOpen()) {
+                    //サーバーにメッセージをjson形式で送る処理
+                    let obj: [String:AnyObject] = [
+                        "game" : "start"
+                    ]
+                    let json = JSON(obj).toString(pretty: true)
+                    self.webSocketClient?.send(json)
+                }
+            }
+        }
+    }
+    //初期化
+    func initialize(){
+        self.physicsBody = nil
+        Circle!.position = CGPointMake(self.frame.midX, self.frame.maxY+50.0)
+        Circle!.physicsBody?.affectedByGravity = false
+        Circle!.fillColor = UIColor.greenColor()
+        count=0
+        timer?.invalidate()
+        next_label.text = ""
+        time_label.text = ""
+        title_label.text = ""
+        ballout_flag = true
+        time = "0'00"
+        join_label.text = "join:1"
+        start_label.text = ""
+        help.hidden = true
+    }
+    
     //0.01秒ごと呼ばれる関数
     func update(){
         println(count++)
         //ミリ秒まで表示
         let ms = count % 100
         let s = (count - ms)/100
-        timeLabel=String(format:"%01d.%02d",s,ms)
+        time=String(format:"%01d'%02d",s,ms)
         //10秒たったか判定
         if s >= 10 {
             //センサー、タイマーを止めるボールを灰色にするGAME OVERと表示させる
@@ -54,7 +137,10 @@ class GameScene: SKScene, SRWebSocketDelegate{
             Circle?.physicsBody?.affectedByGravity = true
             Circle?.fillColor = UIColor.grayColor()
             timer?.invalidate()
-            myLabel.text = "GAME OVER"
+            title_label.fontSize = 40
+            title_label.text = "GAME OVER"
+            time_label.text = "Time ---"
+            
             if self.isOpen() {
                 //サーバーにメッセージをjson形式で送る処理
                 let obj: [String:AnyObject] = [
@@ -106,19 +192,26 @@ class GameScene: SKScene, SRWebSocketDelegate{
             if "in" == object["move"].asString {
                 motion(40.0)
             }
-            if "over"==object["game"].asString {
+            //文字を消す
+            if "start" == object["game"].asString {
+                start_label.text = ""
+                title_label.text = ""
+            }
+            if "over" == object["game"].asString {
+                self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
+                next_label.text = "NEXT"
+                join_label.text = ""
                 //センサーの停止
                 self.myMotionManager?.stopDeviceMotionUpdates()
-                //ボールが出た時タイマーを削除
-                timer?.invalidate()
+                if(title_label.text==""){
+                        //ゲームオーバー時にカウントを表示
+                        time_label.fontSize = 35
+                        time_label.text="Time "+time
+                        title_label.text = "RESULT"
+                }
                 if isOpen() {
                     //websocketの通信をとめる
                    webSocketClient?.closeWithCode(1000, reason: "user closed.")
-                }
-                if myLabel.text.isEmpty {
-                    //ゲームオーバー時にカウントを表示
-                    myLabel.fontSize = 20
-                    myLabel.text="あなたの記録は"+timeLabel+"秒でした。"
                 }
             }
         }
@@ -153,7 +246,6 @@ class GameScene: SKScene, SRWebSocketDelegate{
         myMotionManager?.deviceMotionUpdateInterval = interval
         var vp_x = 0.0
         var vp_y = 0.0
-
         // 加速度の取得を開始.
         myMotionManager!.startDeviceMotionUpdatesToQueue(NSOperationQueue.mainQueue(), withHandler: {(data: CMDeviceMotion!, error:NSError!) -> Void in
             //ユーザが動いた時の加速度が小さい為10倍する
@@ -180,18 +272,22 @@ class GameScene: SKScene, SRWebSocketDelegate{
                     if self.Circle?.position.x<self.frame.minX+radius {
                         vp_x = 1000
                         self.Circle!.position.x += CGFloat(v_x*interval)
-                    }else if self.Circle?.position.x>self.frame.maxX-radius{
-                        vp_x = -1000
-                        self.Circle?.position.x += CGFloat(v_x*interval)
-                    }
-                    //ボールが中に入ったら壁を作る.
-                    if self.Circle!.position.x < self.frame.maxX-radius && self.Circle!.position.x > self.frame.minX+radius {
-                        self.ballout_flag=false
-                        self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
                         //timerが他にセットされていれば削除する
                         self.timer?.invalidate()
                         //ボールが入ってきた時タイマーに値を入れる
                         self.timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "update", userInfo: nil, repeats: true)
+                    }else if self.Circle?.position.x>self.frame.maxX-radius{
+                        vp_x = -1000
+                        self.Circle?.position.x += CGFloat(v_x*interval)
+                        //timerが他にセットされていれば削除する
+                        self.timer?.invalidate()
+                        //ボールが入ってきた時タイマーに値を入れる
+                        self.timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "update", userInfo: nil, repeats: true)
+                    }
+                    //ボールが中に入ったら壁を作る.
+                    if self.Circle!.position.x < self.frame.maxX && self.Circle!.position.x > self.frame.minX {
+                        self.ballout_flag=false
+                        self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
                         println("in")
                     }
                 } else {
@@ -223,18 +319,24 @@ class GameScene: SKScene, SRWebSocketDelegate{
                     if self.Circle?.position.y<self.frame.minY+radius {
                         vp_y = 1000
                         self.Circle?.position.y += CGFloat(v_y*interval)
-                    } else if self.Circle?.position.y > self.frame.maxY-radius {
-                        vp_y = -1000
-                        self.Circle?.position.y += CGFloat(v_y*interval)
-                    }
-                    //ボールが中に入ったら壁を作る.
-                    if self.Circle!.position.y < self.frame.maxY-radius && self.Circle!.position.y > self.frame.minY+radius {
-                        self.ballout_flag=false
-                        self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
                         //timerが他にセットされていれば削除する
                         self.timer?.invalidate()
                         //ボールが入ってきた時タイマーに値を入れる
                         self.timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "update", userInfo: nil, repeats: true)
+                        
+                    }else if self.Circle?.position.y > self.frame.maxY-radius {
+                        vp_y = -1000
+                        self.Circle?.position.y += CGFloat(v_y*interval)
+                        //timerが他にセットされていれば削除する
+                        self.timer?.invalidate()
+                        //ボールが入ってきた時タイマーに値を入れる
+                        self.timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "update", userInfo: nil, repeats: true)
+                    }
+                    //ボールが中に入ったら壁を作る.
+                    if self.Circle!.position.y < self.frame.maxY && self.Circle!.position.y > self.frame.minY {
+                        self.ballout_flag=false
+                        self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
+                        println("in")
                     }
                 } else {
                     if v_y * v_y <= v * v {
