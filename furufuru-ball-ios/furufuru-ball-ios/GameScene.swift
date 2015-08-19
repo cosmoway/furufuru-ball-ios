@@ -21,7 +21,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
     var time_label = "0.00"
     var restart_label = SKLabelNode(fontNamed:"Chalkduster")
     let start_label = SKLabelNode(fontNamed: "AppleSDGothicNeo")
-    
+    let help_label = SKLabelNode(fontNamed: "AppleSDGothicNeo")
     
     
     override func didMoveToView(view: SKView) {
@@ -32,7 +32,6 @@ class GameScene: SKScene, SRWebSocketDelegate{
         join_label.position = CGPointMake(self.frame.maxX-margin, self.frame.maxY-margin)
         self.addChild(join_label)
         //ヘルプ
-        let help_label = SKLabelNode(fontNamed: "AppleSDGothicNeo")
         help_label.text = "?"
         help_label.fontSize = 30
         help_label.position = CGPointMake(self.frame.minX+margin, self.frame.maxY-margin)
@@ -192,8 +191,13 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 motion(40.0)
             }
                 if ("start" == object["game"].asString){
-                    motion(40)
-                    //ゲームスタートでボールを出す
+                    
+                    start_label.text = ""
+                    help_label.text = ""
+                    
+                    
+                    
+                    
             }
             if("over"==object["game"].asString){
                 self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
