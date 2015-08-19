@@ -22,7 +22,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
     var next_label = SKLabelNode(fontNamed:"AppleSDGothicNeo")
     let start_label = SKLabelNode(fontNamed: "AppleSDGothicNeo")
     let join_label = SKLabelNode(fontNamed: "AppleSDGothicNeo")
-    var time = "0.00"
+    var time = "0'00"
     let help = SKSpriteNode(imageNamed: "Help")
 
     
@@ -116,7 +116,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
         title_label.text = ""
         ballout_flag = true
         through_flag = false
-        time = "0.00"
+        time = "0'00"
         join_label.text = "join:1"
         start_label.text = ""
         help.hidden = true
@@ -128,7 +128,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
         //ミリ秒まで表示
         let ms = count % 100
         let s = (count - ms)/100
-        time=String(format:"%01d.%02d",s,ms)
+        time=String(format:"%01d'%02d",s,ms)
         //10秒たったか判定
         if (s >= 10){
             //センサー、タイマーを止めるボールを灰色にするGAME OVERと表示させる
