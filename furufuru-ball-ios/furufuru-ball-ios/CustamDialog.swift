@@ -52,15 +52,21 @@ class CustomDialog : UIView{
             var error:NSError?
             let userPolicy = String(contentsOfFile: filePath, encoding: NSUTF8StringEncoding, error: &error)
             if userPolicy != nil && userPolicy!.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) > 0{
-            
         
+                
         // ラベルを追加.
-        let textView = UILabel(frame: CGRectMake(0, 0, 200,50))
-        textView.text = userPolicy
+        let textView = UILabel(frame: CGRectMake(0, 0, 250,0))
+                textView.text = userPolicy
+                textView.numberOfLines = 0
+                textView.sizeToFit()
         textView.textAlignment = NSTextAlignment.Center
         textView.layer.position = backGroundView.center
         textView.backgroundColor = UIColor.clearColor()
         textView.textColor = UIColor.blackColor()
+        textView.numberOfLines = 0
+                textView.font = UIFont.boldSystemFontOfSize(14.0)
+        
+            
         self.addSubview(textView)
             }
         }

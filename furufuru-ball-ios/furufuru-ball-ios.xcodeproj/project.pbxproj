@@ -104,7 +104,6 @@
 				599CEBBC1B4BB5EA003B6B6D /* AppDelegate.swift */,
 				599CEBBE1B4BB5EA003B6B6D /* GameScene.sks */,
 				599CEBC01B4BB5EA003B6B6D /* GameScene.swift */,
-				AC95A8641B846D00009D2658 /* help.txt */,
 				599CEBC21B4BB5EA003B6B6D /* GameViewController.swift */,
 				599CEBC41B4BB5EA003B6B6D /* Main.storyboard */,
 				599CEBC71B4BB5EA003B6B6D /* Images.xcassets */,
@@ -113,6 +112,7 @@
 				5948C6E11B4FA62900E754A5 /* Bridging-Header.h */,
 				59E00F061B5E06B9000ACD21 /* JSON.swift */,
 				AC95A8601B846018009D2658 /* CustamDialog.swift */,
+				AC95A8641B846D00009D2658 /* help.txt */,
 			);
 			path = "furufuru-ball-ios";
 			sourceTree = "<group>";
