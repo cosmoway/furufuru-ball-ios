@@ -71,6 +71,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
         Circle!.fillColor = UIColor.greenColor()
         self.addChild(Circle!)
         self.backgroundColor = UIColor.blackColor()
+        webSocketConnect()
     }
     //リスタートのボタン
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
@@ -85,12 +86,20 @@ class GameScene: SKScene, SRWebSocketDelegate{
                     gameover_label.text = "ふるふるボール"
                     start_label.text = "start"
                     help.hidden = false
+                    webSocketConnect()
                 }
             }
             if touchNode.name == "START"{
                 //リスタートの処理
                 initialize()
-                webSocketConnect()
+                if (self.isOpen()) {
+                    //サーバーにメッセージをjson形式で送る処理
+                    let obj: [String:AnyObject] = [
+                        "game" : "start"
+                    ]
+                    let json = JSON(obj).toString(pretty: true)
+                    self.webSocketClient?.send(json)
+                }
             }
         }
     }
