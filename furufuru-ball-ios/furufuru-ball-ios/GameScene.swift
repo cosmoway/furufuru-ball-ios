@@ -194,7 +194,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                     
                     start_label.text = ""
                     help_label.text = ""
-                    
+                     gameover_label.text = ""                    
                     
                     
                     
