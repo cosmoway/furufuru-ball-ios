@@ -19,6 +19,7 @@
 		59E00F071B5E06B9000ACD21 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E00F061B5E06B9000ACD21 /* JSON.swift */; };
 		9DD840F8B56A529CB6CF03FA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 334C9367631844C3E26859A7 /* libPods.a */; };
 		AC95A8611B846018009D2658 /* CustamDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC95A8601B846018009D2658 /* CustamDialog.swift */; };
+		AC95A8651B846D00009D2658 /* help.txt in Resources */ = {isa = PBXBuildFile; fileRef = AC95A8641B846D00009D2658 /* help.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		59E00F061B5E06B9000ACD21 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		9448D7100CBE782D4E985F7C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		AC95A8601B846018009D2658 /* CustamDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustamDialog.swift; sourceTree = "<group>"; };
+		AC95A8641B846D00009D2658 /* help.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = help.txt; sourceTree = "<group>"; };
 		D15F2ED662395F08C71E6AEE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,6 +104,7 @@
 				599CEBBC1B4BB5EA003B6B6D /* AppDelegate.swift */,
 				599CEBBE1B4BB5EA003B6B6D /* GameScene.sks */,
 				599CEBC01B4BB5EA003B6B6D /* GameScene.swift */,
+				AC95A8641B846D00009D2658 /* help.txt */,
 				599CEBC21B4BB5EA003B6B6D /* GameViewController.swift */,
 				599CEBC41B4BB5EA003B6B6D /* Main.storyboard */,
 				599CEBC71B4BB5EA003B6B6D /* Images.xcassets */,
@@ -243,6 +246,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5948C6E01B4FA59000E754A5 /* Podfile in Resources */,
+				AC95A8651B846D00009D2658 /* help.txt in Resources */,
 				599CEBCB1B4BB5EA003B6B6D /* LaunchScreen.xib in Resources */,
 				599CEBC81B4BB5EA003B6B6D /* Images.xcassets in Resources */,
 				599CEBBF1B4BB5EA003B6B6D /* GameScene.sks in Resources */,

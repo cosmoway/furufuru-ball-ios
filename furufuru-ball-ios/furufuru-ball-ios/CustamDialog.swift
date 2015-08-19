@@ -46,15 +46,24 @@ class CustomDialog : UIView{
         board.layer.cornerRadius = 20.0
         board.layer.borderColor = UIColor.blackColor().CGColor
         self.addSubview(board)
-
+        
+        //ヘルプテキスト
+        if let filePath = NSBundle.mainBundle().pathForResource("help", ofType: "txt"){
+            var error:NSError?
+            let userPolicy = String(contentsOfFile: filePath, encoding: NSUTF8StringEncoding, error: &error)
+            if userPolicy != nil && userPolicy!.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) > 0{
+            
+        
         // ラベルを追加.
         let textView = UILabel(frame: CGRectMake(0, 0, 200,50))
-        textView.text = "hogehoge"
+        textView.text = userPolicy
         textView.textAlignment = NSTextAlignment.Center
         textView.layer.position = backGroundView.center
         textView.backgroundColor = UIColor.clearColor()
         textView.textColor = UIColor.blackColor()
         self.addSubview(textView)
+            }
+        }
         
         // 閉じるボタンを追加.
         let myWindowExitButton = UIButton.buttonWithType(UIButtonType.ContactAdd) as! UIButton
