@@ -30,6 +30,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
     override func didMoveToView(view: SKView) {
         let margin:CGFloat = 30.0
         
+        join_label.text = "join:"
         join_label.fontSize = 30
         join_label.position = CGPointMake(self.frame.maxX-50.0, self.frame.maxY-margin)
         self.addChild(join_label)
@@ -87,6 +88,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                     title_label.text = "ふるふるボール"
                     start_label.text = "START"
                     help.hidden = false
+                    join_label.text = "join:"
                     webSocketConnect()
                 }
             }
@@ -128,8 +130,15 @@ class GameScene: SKScene, SRWebSocketDelegate{
         let ms = count % 100
         let s = (count - ms)/100
         time=String(format:"%01d'%02d",s,ms)
-        //10秒たったか判定
-        if (s >= 10){
+        //join数によってgameoverのtimeを変える
+        var x = 21
+        if (x-join! >= 10){
+            x = x - join!
+        }else{
+            x = 10
+        }
+        //x秒たったか判定
+        if (s >= x){
             //センサー、タイマーを止めるボールを灰色にするGAME OVERと表示させる
             myMotionManager?.stopDeviceMotionUpdates()
             Circle?.physicsBody?.affectedByGravity = true
