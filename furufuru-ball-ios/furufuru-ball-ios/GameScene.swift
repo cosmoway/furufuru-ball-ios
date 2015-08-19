@@ -51,8 +51,10 @@ class GameScene: SKScene, SRWebSocketDelegate{
         
         //リスタートのテキスト設定
         next_label.fontSize = 40
+        next_label.text = "NEXT"
         next_label.name="NEXT"
         next_label.position = CGPoint(x: self.frame.midX,y: self.frame.midY-100)
+        next_label.hidden = true
         self.addChild(next_label)
         
         time_label.position = CGPointMake(self.frame.midX, self.frame.midY-50.0)
@@ -85,10 +87,10 @@ class GameScene: SKScene, SRWebSocketDelegate{
                     //リスタートの処理
                     initialize()
                     title_label.text = "ふるふるボール"
-                    start_label.text = "START"
+                    start_label.hidden = false
                     start_label.name = "START"
                     help.hidden = false
-                    join_label.text = "join:"
+                    join_label.hidden = false
                     webSocketConnect()
                 }
             }
@@ -113,14 +115,14 @@ class GameScene: SKScene, SRWebSocketDelegate{
         Circle!.fillColor = UIColor.greenColor()
         count=0
         timer?.invalidate()
-        next_label.text = ""
+        next_label.hidden = true
         next_label.name = ""
         time_label.text = ""
         title_label.text = ""
         ballout_flag = true
         through_flag = false
         time = "0'00"
-        start_label.text = ""
+        start_label.hidden = true
         start_label.name = ""
         help.hidden = true
     }
@@ -203,9 +205,9 @@ class GameScene: SKScene, SRWebSocketDelegate{
             }
             if("over"==object["game"].asString){
                 self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
-                next_label.text = "NEXT"
+                next_label.hidden = false
                 next_label.name = "NEXT"
-                join_label.text = ""
+                join_label.hidden = true
                 //センサーの停止
                 self.myMotionManager?.stopDeviceMotionUpdates()
                 if(title_label.text==""){
