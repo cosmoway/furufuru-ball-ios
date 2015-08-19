@@ -24,12 +24,12 @@ class GameScene: SKScene, SRWebSocketDelegate{
     let join_label = SKLabelNode(fontNamed: "AppleSDGothicNeo")
     var time = "0'00"
     let help = SKSpriteNode(imageNamed: "Help")
+    var join:Int?
 
     
     override func didMoveToView(view: SKView) {
         let margin:CGFloat = 30.0
         
-        join_label.text = "join:1"
         join_label.fontSize = 30
         join_label.position = CGPointMake(self.frame.maxX-50.0, self.frame.maxY-margin)
         self.addChild(join_label)
@@ -117,7 +117,6 @@ class GameScene: SKScene, SRWebSocketDelegate{
         ballout_flag = true
         through_flag = false
         time = "0'00"
-        join_label.text = "join:1"
         start_label.text = ""
         help.hidden = true
     }
@@ -209,6 +208,11 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 }
                 
                 
+            }
+            //playerのjoin数が変わる度に表示を更新する
+            if "change" == object["player"].asString {
+                join = object["count"].asInt
+                join_label.text = "join:\(join!)"
             }
         }
     }
