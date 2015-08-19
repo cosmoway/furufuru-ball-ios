@@ -198,17 +198,10 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 //センサーの停止
                 self.myMotionManager?.stopDeviceMotionUpdates()
                 if(gameover_label.text==""){
-                    if (UIScreen.mainScreen().bounds.maxX<=500) {
                         //ゲームオーバー時にカウントを表示
-                        time_label.fontSize = 20
-                        time_label.text="Time "+time
-                        gameover_label.text="RESULT"
-                    }else{
-                        //ゲームオーバー時にカウントを表示
-                        time_label.fontSize = 40
+                        time_label.fontSize = 35
                         time_label.text="Time "+time
                         gameover_label.text = "RESULT"
-                    }
                 }
                 if (isOpen()) {
                     //websocketの通信をとめる
