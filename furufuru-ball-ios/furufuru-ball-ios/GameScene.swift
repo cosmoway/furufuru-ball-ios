@@ -208,8 +208,8 @@ class GameScene: SKScene, SRWebSocketDelegate{
             }
             //文字を消す
             if ("start" == object["game"].asString){
-                start_label.text = ""
-                title_label.text = ""
+                //初期化処理
+                initialize()
             }
             if ("over" == object["game"].asString) {
                 self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
