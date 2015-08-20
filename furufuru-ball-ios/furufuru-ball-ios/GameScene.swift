@@ -34,6 +34,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
         join_label.position = CGPointMake(self.frame.maxX-50.0, self.frame.maxY-margin)
         self.addChild(join_label)
         //helpのアイコンの設定
+        help.name = "Help"
         help.position = CGPointMake(self.frame.minX+margin, self.frame.maxY-margin)
         self.addChild(help)
         
@@ -94,6 +95,11 @@ class GameScene: SKScene, SRWebSocketDelegate{
                     webSocketConnect()
                 }
             }
+            if touchNode.name == "Help"{
+                let dialog = CustomDialog(scene: self, frame:CGRectMake(0, 0,300, 400))
+                self.view!.addSubview(dialog)
+            }
+            
             //スタートをタッチでサーバーに伝達
             if touchNode.name == "START"{
                 //リスタートの処理

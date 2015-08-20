@@ -18,6 +18,8 @@
 		599CEBD71B4BB5EA003B6B6D /* furufuru_ball_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599CEBD61B4BB5EA003B6B6D /* furufuru_ball_iosTests.swift */; };
 		59E00F071B5E06B9000ACD21 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E00F061B5E06B9000ACD21 /* JSON.swift */; };
 		9DD840F8B56A529CB6CF03FA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 334C9367631844C3E26859A7 /* libPods.a */; };
+		AC95A8611B846018009D2658 /* CustamDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC95A8601B846018009D2658 /* CustamDialog.swift */; };
+		AC95A8651B846D00009D2658 /* help.txt in Resources */ = {isa = PBXBuildFile; fileRef = AC95A8641B846D00009D2658 /* help.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +39,7 @@
 		5948C6E21B4FAF0A00E754A5 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		5948C6E41B4FAF1100E754A5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5948C6E61B4FAF1B00E754A5 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		599CEBB71B4BB5EA003B6B6D /* furufuruball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = furufuruball.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		599CEBB71B4BB5EA003B6B6D /* furufuru-ball-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "furufuru-ball-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		599CEBBB1B4BB5EA003B6B6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		599CEBBC1B4BB5EA003B6B6D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		599CEBBE1B4BB5EA003B6B6D /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -51,6 +53,8 @@
 		599CEBD61B4BB5EA003B6B6D /* furufuru_ball_iosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = furufuru_ball_iosTests.swift; sourceTree = "<group>"; };
 		59E00F061B5E06B9000ACD21 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		9448D7100CBE782D4E985F7C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		AC95A8601B846018009D2658 /* CustamDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustamDialog.swift; sourceTree = "<group>"; };
+		AC95A8641B846D00009D2658 /* help.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = help.txt; sourceTree = "<group>"; };
 		D15F2ED662395F08C71E6AEE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -88,7 +92,7 @@
 		599CEBB81B4BB5EA003B6B6D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				599CEBB71B4BB5EA003B6B6D /* furufuruball.app */,
+				599CEBB71B4BB5EA003B6B6D /* furufuru-ball-ios.app */,
 				599CEBD01B4BB5EA003B6B6D /* furufuru-ball-iosTests.xctest */,
 			);
 			name = Products;
@@ -107,6 +111,8 @@
 				599CEBBA1B4BB5EA003B6B6D /* Supporting Files */,
 				5948C6E11B4FA62900E754A5 /* Bridging-Header.h */,
 				59E00F061B5E06B9000ACD21 /* JSON.swift */,
+				AC95A8601B846018009D2658 /* CustamDialog.swift */,
+				AC95A8641B846D00009D2658 /* help.txt */,
 			);
 			path = "furufuru-ball-ios";
 			sourceTree = "<group>";
@@ -175,7 +181,7 @@
 			);
 			name = "furufuru-ball-ios";
 			productName = "furufuru-ball-ios";
-			productReference = 599CEBB71B4BB5EA003B6B6D /* furufuruball.app */;
+			productReference = 599CEBB71B4BB5EA003B6B6D /* furufuru-ball-ios.app */;
 			productType = "com.apple.product-type.application";
 		};
 		599CEBCF1B4BB5EA003B6B6D /* furufuru-ball-iosTests */ = {
@@ -240,6 +246,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5948C6E01B4FA59000E754A5 /* Podfile in Resources */,
+				AC95A8651B846D00009D2658 /* help.txt in Resources */,
 				599CEBCB1B4BB5EA003B6B6D /* LaunchScreen.xib in Resources */,
 				599CEBC81B4BB5EA003B6B6D /* Images.xcassets in Resources */,
 				599CEBBF1B4BB5EA003B6B6D /* GameScene.sks in Resources */,
@@ -298,6 +305,7 @@
 				599CEBC31B4BB5EA003B6B6D /* GameViewController.swift in Sources */,
 				599CEBBD1B4BB5EA003B6B6D /* AppDelegate.swift in Sources */,
 				59E00F071B5E06B9000ACD21 /* JSON.swift in Sources */,
+				AC95A8611B846018009D2658 /* CustamDialog.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,9 +436,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "furufuru-ball-ios/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_MAP_FILE_PATH = "$(TARGET_TEMP_DIR)/$(PRODUCT_NAME)-LinkMap-$(CURRENT_VARIANT)-$(CURRENT_ARCH).txt";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = furufuruball;
+				PRODUCT_NAME = "furufuru-ball-ios";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PROJECT)/Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -446,8 +455,9 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "furufuru-ball-ios/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = furufuruball;
+				PRODUCT_NAME = "furufuru-ball-ios";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PROJECT)/Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
