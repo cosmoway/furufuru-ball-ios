@@ -222,17 +222,17 @@ class GameScene: SKScene, SRWebSocketDelegate{
             vp_x = v_x
             vp_y = v_y
             let x = self.moveCircle(v_x, interval: interval, circlePosition: self.Circle!.position.x, radius: radius,resilience:resilience,speedV:vp_x,max:self.frame.maxX,min:self.frame.minX)
-            vp_x = x.speedV
             self.Circle?.position.x = x.circlePositon
+            vp_x = x.speedV
             let y = self.moveCircle(v_y, interval: interval, circlePosition: self.Circle!.position.y, radius: radius,resilience:resilience,speedV:vp_y,max:self.frame.maxY,min:self.frame.minY)
-            vp_y = y.speedV
             self.Circle?.position.y = y.circlePositon
+            vp_y = y.speedV
         })
     }
     func moveCircle(speed:Double,interval:Double,circlePosition:CGFloat,radius:CGFloat,resilience:Double,speedV:Double,max:CGFloat,min:CGFloat)->(speedV:Double,circlePositon:CGFloat){
         if ((circlePosition + CGFloat(speed*interval)) <= max-radius && (circlePosition + CGFloat(speed * interval)) >= min+radius || self.through_flag) {
             self.ballout(circlePosition,max: max,min: min,radius: radius)
-            return (speed,circlePosition + CGFloat(speed*interval))
+            return (speedV,circlePosition + CGFloat(speed*interval))
         } else {
             //ボールが壁の外にあるか
             if (self.ballout_flag) {
@@ -249,11 +249,10 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 self.speedOver(speed)
                 //壁に当たった時の反発
                 if ((circlePosition + CGFloat(speed * interval)) >= min + radius) {
-                    return (speedV,max - radius)
+                    return (-speedV * resilience,max - radius)
                 } else {
-                    return (speedV,min + radius)
+                    return (-speedV * resilience,min + radius)
                 }
-                return (-speedV * resilience,circlePosition)
             }
         }
         return (speedV,circlePosition)
