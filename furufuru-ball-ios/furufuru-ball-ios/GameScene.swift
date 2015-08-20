@@ -287,7 +287,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
             vp_y = y.speedV
         })
     }
-    
+    //ボールを動かすメソッド
     func moveCircle(speed:Double,interval:Double,circlePosition:CGFloat,radius:CGFloat,resilience:Double,speedV:Double,max:CGFloat,min:CGFloat)->(speedV:Double,circlePositon:CGFloat){
         let v = 3000.0
         if ((circlePosition + CGFloat(speed*interval)) <= max-radius && (circlePosition + CGFloat(speed * interval)) >= min+radius) {
