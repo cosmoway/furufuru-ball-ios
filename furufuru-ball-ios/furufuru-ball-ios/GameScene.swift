@@ -93,7 +93,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 }
             }
             if touchNode.name == "Help"{
-                let dialog = CustomDialog(scene: self, frame:CGRectMake(0, 0, self.view!.bounds.maxX - 50, 400))
+                let dialog = CustomDialog(scene: self, frame:CGRectMake(0, 0,300, 400))
                 self.view!.addSubview(dialog)
             }
             
