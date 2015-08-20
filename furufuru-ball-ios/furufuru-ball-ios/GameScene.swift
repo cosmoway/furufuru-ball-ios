@@ -131,14 +131,21 @@ class GameScene: SKScene, SRWebSocketDelegate{
         webSocketClient = SRWebSocket(URLRequest: request)
         webSocketClient?.delegate = self
         webSocketClient?.open()
+            
         }
     }
     
     func webSocketDidOpen(webSocket:SRWebSocket){
+        let obj: [String:AnyObject] = [
+            "game" : "start"
+        ]
+        let json = JSON(obj).toString(pretty: true)
+        self.webSocketClient?.send(json)
     }
     
     func webSocket(webSocket: SRWebSocket!, didReceiveMessage message: AnyObject!){
         println(message)
+        
         //messageをjsonに変えてその中身がinならスタート
         if let string = message as? String {
             let object = JSON.parse(string)
@@ -214,66 +221,42 @@ class GameScene: SKScene, SRWebSocketDelegate{
             
             vp_x = v_x
             vp_y = v_y
-            //壁に当たったか判定
-            if ((self.Circle!.position.x + CGFloat(v_x*interval)) <= self.frame.maxX-radius && (self.Circle!.position.x + CGFloat(v_x*interval)) >= self.frame.minX+radius || self.through_flag) {
-                self.Circle!.position.x = self.Circle!.position.x + CGFloat(v_x*interval)
-               self.ballout(self.Circle!.position.x,max: self.frame.maxX,min: self.frame.minX,radius: radius)
-            } else {
-                //ボールが壁の外にあるか
-                if (self.ballout_flag) {
-                    //ボールが外にあれば中に戻す
-                    if (self.Circle?.position.x<self.frame.minX+radius){
-                        vp_x = 1000
-                        self.Circle!.position.x += CGFloat(v_x*interval)
-                        self.timerSet()
-                    }else if(self.Circle?.position.x>self.frame.maxX-radius){
-                        vp_x = -1000
-                        self.Circle?.position.x += CGFloat(v_x*interval)
-                        self.timerSet()
-                    }
-                   self.makeWall(self.Circle!.position.x,max: self.frame.maxX,min: self.frame.minX)
-                }else{
-                    self.speedOver(v_x)
-                    //壁に当たった時の反発
-                    if ((self.Circle!.position.x + CGFloat(v_x * interval)) >= self.frame.minX + radius) {
-                        self.Circle!.position.x = self.frame.maxX - radius
-                    } else {
-                        self.Circle!.position.x = self.frame.minX + radius
-                    }
-                    vp_x = -vp_x * resilience
-                }
-            }
-            self.moveCircle(v_y, interval: interval, circlePosition: self.Circle!.position.y, radius: radius)
+            let x = self.moveCircle(v_x, interval: interval, circlePosition: self.Circle!.position.x, radius: radius,resilience:resilience,speedV:vp_x,max:self.frame.maxX,min:self.frame.minX)
+            vp_x = x.speedV
+            self.Circle?.position.x = x.circlePositon
+            let y = self.moveCircle(v_y, interval: interval, circlePosition: self.Circle!.position.y, radius: radius,resilience:resilience,speedV:vp_y,max:self.frame.maxY,min:self.frame.minY)
+            vp_y = y.speedV
+            self.Circle?.position.y = y.circlePositon
         })
     }
-    func moveCircle(speed:Double,interval:Double,circlePosition:CGFloat,radius:CGFloat)->(speedV:Double,circlePositon:CGFloat,resilience:Double,speedV:Double){
-        if ((circlePosition + CGFloat(speed*interval)) <= self.frame.maxY-radius && (circlePosition + CGFloat(speed * interval)) >= self.frame.minY+radius || self.through_flag) {
+    func moveCircle(speed:Double,interval:Double,circlePosition:CGFloat,radius:CGFloat,resilience:Double,speedV:Double,max:CGFloat,min:CGFloat)->(speedV:Double,circlePositon:CGFloat){
+        if ((circlePosition + CGFloat(speed*interval)) <= max-radius && (circlePosition + CGFloat(speed * interval)) >= min+radius || self.through_flag) {
+            self.ballout(circlePosition,max: max,min: min,radius: radius)
             return (speed,circlePosition + CGFloat(speed*interval))
-            self.ballout(self.Circle!.position.y,max: self.frame.maxY,min: self.frame.minY,radius: radius)
         } else {
             //ボールが壁の外にあるか
             if (self.ballout_flag) {
                 //ボールが外にあれば中に戻す
-                if (circlePosition<self.frame.minY+radius){
+                if (circlePosition<min+radius){
+                    self.timerSet()
                     return (1000,circlePosition + CGFloat(speed*interval))
+                }else if(circlePosition > max-radius){
                     self.timerSet()
-                    
-                }else if(self.Circle?.position.y > self.frame.maxY-radius){
                     return (-1000,circlePosition + CGFloat(speed*interval))
-                    self.timerSet()
                 }
-                self.makeWall(self.Circle!.position.y,max: self.frame.maxY,min: self.frame.minY)
+                self.makeWall(circlePosition,max: max,min: min)
             }else{
                 self.speedOver(speed)
                 //壁に当たった時の反発
-                if ((circlePosition + CGFloat(speed * interval)) >= self.frame.minY + radius) {
-                    return (speed,self.frame.maxY - radius)
+                if ((circlePosition + CGFloat(speed * interval)) >= min + radius) {
+                    return (speedV,max - radius)
                 } else {
-                    return (speed,self.frame.minY + radius)
+                    return (speedV,min + radius)
                 }
                 return (-speedV * resilience,circlePosition)
             }
         }
+        return (speedV,circlePosition)
     }
     func timerSet(){
         //timerが他にセットされていれば削除する
