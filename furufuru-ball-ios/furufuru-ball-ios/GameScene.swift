@@ -91,6 +91,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                     start_label.hidden = false
                     start_label.name = "START"
                     help.hidden = false
+                    help.name = "Help"
                     join_label.hidden = false
                     webSocketConnect()
                 }
@@ -98,6 +99,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
             if touchNode.name == "Help"{
                 let dialog = CustomDialog(scene: self, frame:CGRectMake(0, 0,300, 400))
                 self.view!.addSubview(dialog)
+    
             }
             
             //スタートをタッチでサーバーに伝達
@@ -132,6 +134,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
         start_label.hidden = true
         start_label.name = ""
         help.hidden = true
+        help.name = ""
     }
     
     //0.01秒ごと呼ばれる関数
