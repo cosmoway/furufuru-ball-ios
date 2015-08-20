@@ -55,18 +55,17 @@ class CustomDialog : UIView{
         
                 
         // ラベルを追加.
+         
         let textView = UILabel(frame: CGRectMake(0, 0, 250,400))
-        textView.textAlignment = NSTextAlignment.Left
-                textView.text = userPolicy
+             
+        textView.text = userPolicy
         textView.numberOfLines = 0
-        textView.textAlignment = NSTextAlignment.Center
         textView.layer.position = backGroundView.center
         textView.backgroundColor = UIColor.clearColor()
         textView.textColor = UIColor.blackColor()
         textView.numberOfLines = 0
-                textView.font = UIFont.boldSystemFontOfSize(14.0)
-        
-            
+        textView.font = UIFont.boldSystemFontOfSize(14.0)
+        textView.textAlignment = NSTextAlignment.Left
         self.addSubview(textView)
             }
         }
