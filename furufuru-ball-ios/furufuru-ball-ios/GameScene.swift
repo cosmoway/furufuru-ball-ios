@@ -24,7 +24,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
     let join_label = SKLabelNode(fontNamed: "AppleSDGothicNeo")
     var time = "0'00"
     let help = SKSpriteNode(imageNamed: "Help")
-    var join:Int?
+    var join = 1
 
     
     override func didMoveToView(view: SKView) {
@@ -139,8 +139,8 @@ class GameScene: SKScene, SRWebSocketDelegate{
         time=String(format:"%01d'%02d",s,ms)
         //join数によってgameoverのtimeを変える
         var x = 21
-        if (x-join! >= 10){
-            x = x - join!
+        if (x-join >= 10){
+            x = x - join
         }else{
             x = 10
         }
@@ -231,8 +231,8 @@ class GameScene: SKScene, SRWebSocketDelegate{
             }
             //playerのjoin数が変わる度に表示を更新する
             if "change" == object["player"].asString {
-                join = object["count"].asInt
-                join_label.text = "join:\(join!)"
+                join = object["count"].asInt ?? 1
+                join_label.text = "join:\(join)"
             }
         }
     }
