@@ -18,6 +18,7 @@
 		599CEBD71B4BB5EA003B6B6D /* furufuru_ball_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599CEBD61B4BB5EA003B6B6D /* furufuru_ball_iosTests.swift */; };
 		59E00F071B5E06B9000ACD21 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E00F061B5E06B9000ACD21 /* JSON.swift */; };
 		9DD840F8B56A529CB6CF03FA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 334C9367631844C3E26859A7 /* libPods.a */; };
+		AC53A8DF1B85B65A00ED6D6B /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC53A8DE1B85B65A00ED6D6B /* Images-2.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		599CEBD61B4BB5EA003B6B6D /* furufuru_ball_iosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = furufuru_ball_iosTests.swift; sourceTree = "<group>"; };
 		59E00F061B5E06B9000ACD21 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		9448D7100CBE782D4E985F7C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		AC53A8DE1B85B65A00ED6D6B /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-2.xcassets"; sourceTree = "<group>"; };
 		D15F2ED662395F08C71E6AEE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,6 +109,7 @@
 				599CEBBA1B4BB5EA003B6B6D /* Supporting Files */,
 				5948C6E11B4FA62900E754A5 /* Bridging-Header.h */,
 				59E00F061B5E06B9000ACD21 /* JSON.swift */,
+				AC53A8DE1B85B65A00ED6D6B /* Images-2.xcassets */,
 			);
 			path = "furufuru-ball-ios";
 			sourceTree = "<group>";
@@ -239,6 +242,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC53A8DF1B85B65A00ED6D6B /* Images-2.xcassets in Resources */,
 				5948C6E01B4FA59000E754A5 /* Podfile in Resources */,
 				599CEBCB1B4BB5EA003B6B6D /* LaunchScreen.xib in Resources */,
 				599CEBC81B4BB5EA003B6B6D /* Images.xcassets in Resources */,
@@ -425,9 +429,11 @@
 			baseConfigurationReference = D15F2ED662395F08C71E6AEE /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "furufuru-ball-ios/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_MAP_FILE_PATH = "$(TARGET_TEMP_DIR)/$(PRODUCT_NAME)-LinkMap-$(CURRENT_VARIANT)-$(CURRENT_ARCH).txt";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = furufuruball;
@@ -443,9 +449,11 @@
 			baseConfigurationReference = 9448D7100CBE782D4E985F7C /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "furufuru-ball-ios/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = furufuruball;
 				PROVISIONING_PROFILE = "";
@@ -470,7 +478,7 @@
 				INFOPLIST_FILE = "furufuru-ball-iosTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/furufuru-ball-ios.app/furufuru-ball-ios";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/furufuruball.app/furufuruball";
 			};
 			name = Debug;
 		};
@@ -485,7 +493,7 @@
 				INFOPLIST_FILE = "furufuru-ball-iosTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/furufuru-ball-ios.app/furufuru-ball-ios";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/furufuruball.app/furufuruball";
 			};
 			name = Release;
 		};
