@@ -22,7 +22,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
     let start_label = SKLabelNode(fontNamed: "AppleSDGothicNeo")
     let join_label = SKLabelNode(fontNamed: "AppleSDGothicNeo")
     var time = "0'00"
-    let help = SKSpriteNode(imageNamed: "Help")
+    let help = SKSpriteNode(imageNamed: "info_mark")
     var join = 1
 
     
@@ -75,7 +75,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
         // ShapeNodeの塗りつぶしの色を指定.
         Circle!.fillColor = UIColor.greenColor()
         self.addChild(Circle!)
-        self.backgroundColor = UIColor.rgb(r: 255, g: 255, b: 255, alpha: 1);
+        self.backgroundColor = UIColor.rgb(r: 0, g: 0, b: 0, alpha: 1);
         webSocketConnect()
     }
     //リスタートのボタン
