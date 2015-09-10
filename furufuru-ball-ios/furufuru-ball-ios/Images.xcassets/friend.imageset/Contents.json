@@ -3,17 +3,15 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "Help Filled-32.png"
+      "filename" : "friend.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "Help Filled-64.png"
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x",
-      "filename" : "Help Filled-100.png"
+      "scale" : "3x"
     }
   ],
   "info" : {
