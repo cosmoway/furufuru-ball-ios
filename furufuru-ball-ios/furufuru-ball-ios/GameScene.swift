@@ -75,7 +75,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
         // ShapeNodeの塗りつぶしの色を指定.
         Circle!.fillColor = UIColor.greenColor()
         self.addChild(Circle!)
-        self.backgroundColor = UIColor.blackColor()
+        self.backgroundColor = UIColor.rgb(r: 255, g: 255, b: 255, alpha: 1);
         webSocketConnect()
     }
     //リスタートのボタン
@@ -386,5 +386,10 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 }
             }
         })
+    }
+}
+extension UIColor {
+    class func rgb(#r: Int, g: Int, b: Int, alpha: CGFloat) -> UIColor{
+        return UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: alpha)
     }
 }
