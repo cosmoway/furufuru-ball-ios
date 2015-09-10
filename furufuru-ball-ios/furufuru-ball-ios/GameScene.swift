@@ -16,11 +16,12 @@ class GameScene: SKScene, SRWebSocketDelegate{
     var Circle: SKShapeNode?
     private var webSocketClient: SRWebSocket?
     var ballout_flag = true
-    let title_label = SKLabelNode(fontNamed:"AppleSDGothicNeo")
+    let title_img = SKSpriteNode(imageNamed: "title")
+    let title_ball = SKSpriteNode(imageNamed: "ball_top")
     let time_label = SKLabelNode(fontNamed: "AppleSDGothicNeo")
     var next_label = SKLabelNode(fontNamed:"AppleSDGothicNeo")
-    let start_label = SKLabelNode(fontNamed: "AppleSDGothicNeo")
-    let join_label = SKLabelNode(fontNamed: "AppleSDGothicNeo")
+    let start_img = SKSpriteNode(imageNamed: "start_mark")
+    let join_img = SKSpriteNode(imageNamed: "join_icon")
     var time = "0'00"
     let help = SKSpriteNode(imageNamed: "info_mark")
     var join = 1
@@ -29,33 +30,41 @@ class GameScene: SKScene, SRWebSocketDelegate{
     override func didMoveToView(view: SKView) {
         let margin:CGFloat = 30.0
         
-        join_label.text = "join:"
-        join_label.fontSize = 30
-        join_label.position = CGPointMake(self.frame.maxX-50.0, self.frame.maxY-margin)
-        self.addChild(join_label)
+        join_img.xScale = 0.3
+        join_img.yScale = 0.3
+        join_img.position = CGPointMake(self.frame.maxX-margin, self.frame.maxY-margin)
+        self.addChild(join_img)
         //helpのアイコンの設定
+        help.xScale = 0.3;
+        help.yScale = 0.3;
         help.name = "Help"
         help.position = CGPointMake(self.frame.minX+margin, self.frame.maxY-margin)
         self.addChild(help)
         
-        //テキストスタート
-        start_label.text = "START"
-        start_label.name = "START"
-        start_label.fontSize = 40
-        start_label.position = CGPointMake(self.frame.midX, self.frame.midY-30.0)
-        self.addChild(start_label)
+        //title_ball
+        title_ball.xScale = 0.2
+        title_ball.yScale = 0.2
+        title_ball.position = CGPointMake(self.frame.midX, self.frame.midY-60)
+        self.addChild(title_ball)
         
-        //ふるふるボールのテキスト
-        title_label.text = "ふるふるボール"
-        title_label.fontSize = 40
-        title_label.position = CGPointMake(self.frame.midX,self.frame.midY+40)
-        self.addChild(title_label)
+        //スタート
+        start_img.xScale = 0.2
+        start_img.yScale = 0.2
+        start_img.name = "START"
+        start_img.position = CGPointMake(self.frame.midX, self.frame.minY+100.0)
+        self.addChild(start_img)
+        
+        //ふるふるボールのtitle
+        title_img.yScale = 0.2;
+        title_img.xScale = 0.2;
+        title_img.position = CGPointMake(self.frame.midX,self.frame.maxY-150)
+        self.addChild(title_img)
         
         //リスタートのテキスト設定
         next_label.fontSize = 40
         next_label.text = "NEXT"
         next_label.name="NEXT"
-        next_label.position = CGPoint(x: self.frame.midX,y: self.frame.midY-100)
+        next_label.position = CGPoint(x: self.frame.midX,y: self.frame.midY-150)
         next_label.hidden = true
         self.addChild(next_label)
         
@@ -75,7 +84,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
         // ShapeNodeの塗りつぶしの色を指定.
         Circle!.fillColor = UIColor.greenColor()
         self.addChild(Circle!)
-        self.backgroundColor = UIColor.rgb(r: 0, g: 0, b: 0, alpha: 1);
+        self.backgroundColor = UIColor.rgb(r: 240, g: 240, b: 235, alpha: 1);
         webSocketConnect()
     }
     //リスタートのボタン
@@ -83,16 +92,16 @@ class GameScene: SKScene, SRWebSocketDelegate{
         for touch: AnyObject in touches {
             let location = touch.locationInNode(self)
             let touchNode = self.nodeAtPoint(location)
-            if title_label.text != "" {
+            if !title_img.hidden {
                 if touchNode.name == "NEXT"{
                     //リスタートの処理
                     initialize()
-                    title_label.text = "ふるふるボール"
-                    start_label.hidden = false
-                    start_label.name = "START"
+                    title_img.hidden = false
+                    start_img.hidden = false
+                    start_img.name = "START"
                     help.hidden = false
                     help.name = "Help"
-                    join_label.hidden = false
+                    join_img.hidden = false
                     webSocketConnect()
                 }
             }
@@ -128,11 +137,11 @@ class GameScene: SKScene, SRWebSocketDelegate{
         next_label.hidden = true
         next_label.name = ""
         time_label.text = ""
-        title_label.text = ""
+        title_img.hidden = true
         ballout_flag = true
         time = "0'00"
-        start_label.hidden = true
-        start_label.name = ""
+        start_img.hidden = true
+        start_img.name = ""
         help.hidden = true
         help.name = ""
     }
@@ -158,8 +167,10 @@ class GameScene: SKScene, SRWebSocketDelegate{
             Circle?.physicsBody?.affectedByGravity = true
             Circle?.fillColor = UIColor.grayColor()
             timer?.invalidate()
+            /*
             title_label.fontSize = 40
             title_label.text = "GAME OVER"
+            */
             time_label.text = "Time ---"
             
             if self.isOpen() {
@@ -222,14 +233,14 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
                 next_label.hidden = false
                 next_label.name = "NEXT"
-                join_label.hidden = true
+                join_img.hidden = true
                 //センサーの停止
                 self.myMotionManager?.stopDeviceMotionUpdates()
-                if(title_label.text==""){
+                if(title_img.hidden){
                         //ゲームオーバー時にカウントを表示
                         time_label.fontSize = 35
                         time_label.text="Time "+time
-                        title_label.text = "RESULT"
+                        //title_label.text = "RESULT"
                 }
                 if isOpen() {
                     //websocketの通信をとめる
@@ -239,7 +250,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
             //playerのjoin数が変わる度に表示を更新する
             if "change" == object["player"].asString {
                 join = object["count"].asInt ?? 1
-                join_label.text = "join:\(join)"
+                //join_label.text = "join:\(join)"
             }
         }
     }
