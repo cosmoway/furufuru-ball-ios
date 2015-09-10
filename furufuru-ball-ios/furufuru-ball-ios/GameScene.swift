@@ -17,6 +17,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
     private var webSocketClient: SRWebSocket?
     var ballout_flag = true
     let title_img = SKSpriteNode(imageNamed: "title")
+    let bg_img:[SKSpriteNode] = [SKSpriteNode(imageNamed: "back1"),SKSpriteNode(imageNamed: "back2"),SKSpriteNode(imageNamed: "back3"),SKSpriteNode(imageNamed: "back4")]
     let title_ball = SKSpriteNode(imageNamed: "ball_top")
     let time_label = SKLabelNode(fontNamed: "AppleSDGothicNeo")
     var next_label = SKLabelNode(fontNamed:"AppleSDGothicNeo")
@@ -30,7 +31,13 @@ class GameScene: SKScene, SRWebSocketDelegate{
     
     override func didMoveToView(view: SKView) {
         let margin:CGFloat = 30.0
-        
+        for (var i=0;i<bg_img.count;i++) {
+            bg_img[i].xScale = 0.3
+            bg_img[i].yScale = 0.3
+            bg_img[i].position = CGPointMake(self.frame.midX, self.frame.midY)
+            self.addChild(bg_img[i])
+            bg_img[i].hidden = true
+        }
         
         //helpのアイコンの設定
         help.xScale = 0.3;
@@ -235,6 +242,8 @@ class GameScene: SKScene, SRWebSocketDelegate{
             if ("start" == object["game"].asString){
                 //初期化処理
                 initialize()
+                let ran = (Int)(arc4random_uniform(3));
+                bg_img[ran].hidden = false
             }
             if "over" == object["game"].asString {
                 self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
