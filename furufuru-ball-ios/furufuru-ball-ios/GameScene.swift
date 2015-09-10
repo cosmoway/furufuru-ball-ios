@@ -21,19 +21,17 @@ class GameScene: SKScene, SRWebSocketDelegate{
     let time_label = SKLabelNode(fontNamed: "AppleSDGothicNeo")
     var next_label = SKLabelNode(fontNamed:"AppleSDGothicNeo")
     let start_img = SKSpriteNode(imageNamed: "start_mark")
-    let join_img = SKSpriteNode(imageNamed: "join_icon")
+    var join_img :[SKSpriteNode] = [SKSpriteNode(imageNamed: "join_icon")]
+    let underbar = SKSpriteNode(imageNamed: "underbar")
     var time = "0'00"
     let help = SKSpriteNode(imageNamed: "info_mark")
-    var join = 1
+    var join = 0
 
     
     override func didMoveToView(view: SKView) {
         let margin:CGFloat = 30.0
         
-        join_img.xScale = 0.3
-        join_img.yScale = 0.3
-        join_img.position = CGPointMake(self.frame.maxX-margin, self.frame.maxY-margin)
-        self.addChild(join_img)
+        
         //helpのアイコンの設定
         help.xScale = 0.3;
         help.yScale = 0.3;
@@ -60,6 +58,11 @@ class GameScene: SKScene, SRWebSocketDelegate{
         title_img.position = CGPointMake(self.frame.midX,self.frame.maxY-150)
         self.addChild(title_img)
         
+        underbar.xScale = 0.3
+        underbar.yScale = 0.3
+        underbar.position = CGPointMake(self.frame.midX, self.frame.minY+10)
+        self.addChild(underbar)
+        
         //リスタートのテキスト設定
         next_label.fontSize = 40
         next_label.text = "NEXT"
@@ -82,7 +85,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
         Circle!.position = CGPointMake(self.frame.midX, self.frame.maxY+50.0)
         
         // ShapeNodeの塗りつぶしの色を指定.
-        Circle!.fillColor = UIColor.greenColor()
+        Circle!.fillColor = UIColor.rgb(r: 57, g: 57, b: 57, alpha: 1)
         self.addChild(Circle!)
         self.backgroundColor = UIColor.rgb(r: 240, g: 240, b: 235, alpha: 1);
         webSocketConnect()
@@ -101,7 +104,9 @@ class GameScene: SKScene, SRWebSocketDelegate{
                     start_img.name = "START"
                     help.hidden = false
                     help.name = "Help"
-                    join_img.hidden = false
+                    for (var i = 1;i<join_img.count;i++) {
+                        join_img[i].hidden = false
+                    }
                     webSocketConnect()
                 }
             }
@@ -131,7 +136,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
         self.physicsBody = nil
         Circle!.position = CGPointMake(self.frame.midX, self.frame.maxY+50.0)
         Circle!.physicsBody?.affectedByGravity = false
-        Circle!.fillColor = UIColor.greenColor()
+        Circle!.fillColor = UIColor.rgb(r: 57, g: 57, b: 57, alpha: 1)
         count=0
         timer?.invalidate()
         next_label.hidden = true
@@ -144,6 +149,8 @@ class GameScene: SKScene, SRWebSocketDelegate{
         start_img.name = ""
         help.hidden = true
         help.name = ""
+        underbar.hidden = true
+        title_ball.hidden = true
     }
     
     //0.01秒ごと呼ばれる関数
@@ -165,7 +172,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
             //センサー、タイマーを止めるボールを灰色にするGAME OVERと表示させる
             myMotionManager?.stopDeviceMotionUpdates()
             Circle?.physicsBody?.affectedByGravity = true
-            Circle?.fillColor = UIColor.grayColor()
+            Circle?.fillColor = UIColor.rgb(r: 252, g: 238, b: 33, alpha: 1)
             timer?.invalidate()
             /*
             title_label.fontSize = 40
@@ -233,7 +240,9 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
                 next_label.hidden = false
                 next_label.name = "NEXT"
-                join_img.hidden = true
+                for (var i = 1;i<join_img.count;i++) {
+                    join_img[i].hidden = true
+                }
                 //センサーの停止
                 self.myMotionManager?.stopDeviceMotionUpdates()
                 if(title_img.hidden){
@@ -249,8 +258,28 @@ class GameScene: SKScene, SRWebSocketDelegate{
             }
             //playerのjoin数が変わる度に表示を更新する
             if "change" == object["player"].asString {
-                join = object["count"].asInt ?? 1
+                var joinCurrent = object["count"].asInt ?? 1
                 //join_label.text = "join:\(join)"
+                println(joinCurrent);
+                if (join > joinCurrent) {
+                    self.removeChildrenInArray([join_img[join]])
+                    join_img.removeLast()
+                }else if (join+1 < joinCurrent) {
+                    for (var i=1;i<joinCurrent+1;i++) {
+                        join_img.append(SKSpriteNode(imageNamed: "join_icon"))
+                        join_img[i].xScale = 0.3
+                        join_img[i].yScale = 0.3
+                        join_img[i].position = CGPointMake(self.frame.maxX-CGFloat(30*i), self.frame.maxY-30)
+                        self.addChild(join_img[i])
+                    }
+                } else {
+                    join_img.append(SKSpriteNode(imageNamed: "join_icon"))
+                    join_img[joinCurrent].xScale = 0.3
+                    join_img[joinCurrent].yScale = 0.3
+                    join_img[joinCurrent].position = CGPointMake(self.frame.maxX-CGFloat(30*joinCurrent), self.frame.maxY-30)
+                    self.addChild(join_img[joinCurrent])
+                }
+                join = joinCurrent
             }
         }
     }
