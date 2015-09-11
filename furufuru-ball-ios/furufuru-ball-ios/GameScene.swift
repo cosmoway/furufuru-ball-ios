@@ -168,6 +168,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
         
         // ShapeNodeの塗りつぶしの色を指定.
         Circle!.fillColor = UIColor.rgb(r: 57, g: 57, b: 57, alpha: 1)
+        Circle!.strokeColor = UIColor.rgb(r: 57, g: 57, b: 57, alpha: 1)
         Circle!.zPosition = 1
         self.addChild(Circle!)
         self.backgroundColor = UIColor.rgb(r: 240, g: 240, b: 235, alpha: 1);
@@ -227,6 +228,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
         Circle!.position = CGPointMake(self.frame.midX, self.frame.maxY+50.0)
         Circle!.physicsBody?.affectedByGravity = false
         Circle!.fillColor = UIColor.rgb(r: 57, g: 57, b: 57, alpha: 1)
+        Circle!.strokeColor = UIColor.rgb(r: 57, g: 57, b: 57, alpha: 1)
         count=0
         timer?.invalidate()
         next_img.hidden = true
@@ -324,11 +326,6 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 time_label.text = time
                 time_label.hidden = false
             }
-            if self.isOpen() {
-                //websocketの通信をとめる
-                webSocketClient?.closeWithCode(1000, reason: "user closed.")
-                
-            }
             gameover_timer?.invalidate()
         }
     }
@@ -355,6 +352,11 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 Circle?.physicsBody?.affectedByGravity = true
                 self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
                 gameover_timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "gameover", userInfo: nil, repeats: true)
+                if self.isOpen() {
+                    //websocketの通信をとめる
+                    webSocketClient?.closeWithCode(1000, reason: "user closed.")
+                    
+                }
             }
             //playerのjoin数が変わる度に表示を更新する
             if "change" == object["player"].asString {
