@@ -148,9 +148,9 @@ class GameScene: SKScene, SRWebSocketDelegate{
         self.addChild(time_img)
         
         if (mobile == "iphone") {
-            time_label.position = CGPointMake(self.frame.midX+40, self.frame.midY-20)
+            time_label.position = CGPointMake(self.frame.midX+50, self.frame.midY-23)
         } else {
-           time_label.position = CGPointMake(self.frame.midX+40, self.frame.midY+50)
+           time_label.position = CGPointMake(self.frame.midX+45, self.frame.midY+53)
         }
         time_label.text = time
         time_label.hidden = true
