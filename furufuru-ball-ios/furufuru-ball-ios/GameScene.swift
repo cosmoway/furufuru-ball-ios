@@ -309,7 +309,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
     }
     
     func gameover() {
-        if (Circle?.position.y<=self.frame.minY+50) {
+        if (Circle?.position.y<=self.frame.minY+45) {
             for (var i=0;i<bg_img.count;i++) {
                 bg_img[i].hidden = true
             }
