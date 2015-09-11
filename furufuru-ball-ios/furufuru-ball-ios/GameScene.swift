@@ -63,8 +63,8 @@ class GameScene: SKScene, SRWebSocketDelegate{
             title_ball.xScale = 0.2
             title_ball.yScale = 0.2
         } else {
-            title_ball.xScale = 0.4
-            title_ball.yScale = 0.4
+            title_ball.xScale = 0.35
+            title_ball.yScale = 0.35
         }
         title_ball.position = CGPointMake(self.frame.midX, self.frame.midY-60)
         self.addChild(title_ball)
@@ -74,39 +74,45 @@ class GameScene: SKScene, SRWebSocketDelegate{
         if (mobile == "iphone") {
             start_img.xScale = 0.2
             start_img.yScale = 0.2
+            start_img.position = CGPointMake(self.frame.midX, self.frame.minY+100.0)
         } else {
-            start_img.xScale = 0.3
-            start_img.yScale = 0.3
+            start_img.xScale = 0.35
+            start_img.yScale = 0.35
+            start_img.position = CGPointMake(self.frame.midX, self.frame.minY+200.0)
         }
         start_img.name = "START"
-        start_img.position = CGPointMake(self.frame.midX, self.frame.minY+100.0)
         self.addChild(start_img)
         
         //ふるふるボールのtitle
         if (mobile == "iphone") {
             title_img.yScale = 0.2
             title_img.xScale = 0.2
+            title_img.position = CGPointMake(self.frame.midX,self.frame.maxY-150)
         } else {
-            title_img.yScale = 0.3
-            title_img.xScale = 0.3
+            title_img.yScale = 0.35
+            title_img.xScale = 0.35
+            title_img.position = CGPointMake(self.frame.midX,self.frame.maxY-250)
         }
-        title_img.position = CGPointMake(self.frame.midX,self.frame.maxY-150)
         self.addChild(title_img)
         
         //ふるふるボールのgameover
         if (mobile == "iphone") {
-        gameover_img.xScale = 0.8
-        gameover_img.yScale = 0.8
+            gameover_img.xScale = 0.8
+            gameover_img.yScale = 0.8
+            gameover_img.position = CGPointMake(self.frame.midX,self.frame.midY+30)
+        } else {
+            gameover_img.position = CGPointMake(self.frame.midX,self.frame.midY+100)
         }
-        gameover_img.position = CGPointMake(self.frame.midX,self.frame.midY+30)
         gameover_img.hidden = true
         self.addChild(gameover_img)
         
         if (mobile == "iphone") {
-        mark.xScale = 0.8
-        mark.yScale = 0.8
+            mark.xScale = 0.8
+            mark.yScale = 0.8
+            mark.position = CGPointMake(self.frame.midX,self.frame.midY+180)
+        } else {
+            mark.position = CGPointMake(self.frame.midX,self.frame.midY+180)
         }
-        mark.position = CGPointMake(self.frame.midX,self.frame.midY+80)
         mark.hidden = true
         self.addChild(mark)
         
@@ -114,7 +120,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
             underbar.xScale = 0.3
             underbar.yScale = 0.3
         } else {
-            underbar.xScale = 0.4
+            underbar.xScale = 0.5
             underbar.yScale = 0.4
         }
         underbar.position = CGPointMake(self.frame.midX, self.frame.minY+10)
@@ -122,19 +128,29 @@ class GameScene: SKScene, SRWebSocketDelegate{
         
         //リスタートのテキスト設定
         if (mobile == "iphone") {
-        next_img.xScale = 0.7
-        next_img.yScale = 0.7
+            next_img.xScale = 0.7
+            next_img.yScale = 0.7
+            next_img.position = CGPoint(x: self.frame.midX,y: self.frame.midY-100)
+        } else {
+            next_img.position = CGPoint(x: self.frame.midX,y: self.frame.midY-180)
         }
         next_img.name="NEXT"
-        next_img.position = CGPoint(x: self.frame.midX,y: self.frame.midY-100)
         next_img.hidden = true
         self.addChild(next_img)
         
-        time_img.position = CGPointMake(self.frame.midX-30, self.frame.midY-10)
+        if (mobile == "iphone") {
+            time_img.position = CGPointMake(self.frame.midX-30, self.frame.midY-10)
+        } else {
+            time_img.position = CGPointMake(self.frame.midX-30, self.frame.midY+60)
+        }
         time_img.hidden = true
         self.addChild(time_img)
         
-        time_label.position = CGPointMake(self.frame.midX+40, self.frame.midY-20)
+        if (mobile == "iphone") {
+            time_label.position = CGPointMake(self.frame.midX+40, self.frame.midY-20)
+        } else {
+           time_label.position = CGPointMake(self.frame.midX+40, self.frame.midY+50)
+        }
         time_label.hidden = true
         time_label.fontColor = UIColor.blackColor()
         self.addChild(time_label)
