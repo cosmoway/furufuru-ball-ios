@@ -13,6 +13,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
     var myMotionManager: CMMotionManager?
     var count = 0
     var timer: NSTimer?
+    var gameover_timer: NSTimer?
     var Circle: SKShapeNode?
     private var webSocketClient: SRWebSocket?
     var ballout_flag = true
@@ -109,7 +110,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
         if (mobile == "iphone") {
             mark.xScale = 0.8
             mark.yScale = 0.8
-            mark.position = CGPointMake(self.frame.midX,self.frame.midY+180)
+            mark.position = CGPointMake(self.frame.midX,self.frame.midY+80)
         } else {
             mark.position = CGPointMake(self.frame.midX,self.frame.midY+180)
         }
@@ -151,6 +152,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
         } else {
            time_label.position = CGPointMake(self.frame.midX+40, self.frame.midY+50)
         }
+        time_label.text = time
         time_label.hidden = true
         time_label.fontColor = UIColor.blackColor()
         self.addChild(time_label)
@@ -306,6 +308,31 @@ class GameScene: SKScene, SRWebSocketDelegate{
     func webSocketDidOpen(webSocket:SRWebSocket){
     }
     
+    func gameover() {
+        if (Circle?.position.y<=self.frame.minY+50) {
+            for (var i=0;i<bg_img.count;i++) {
+                bg_img[i].hidden = true
+            }
+            bg_img[3].hidden = false
+            gameover_img.hidden = false
+            mark.hidden = false
+            next_img.hidden = false
+            next_img.name = "NEXT"
+            if(title_img.hidden){
+                //ゲームオーバー時にカウントを表示
+                time_img.hidden = false
+                time_label.text = time
+                time_label.hidden = false
+            }
+            if self.isOpen() {
+                //websocketの通信をとめる
+                webSocketClient?.closeWithCode(1000, reason: "user closed.")
+                
+            }
+            gameover_timer?.invalidate()
+        }
+    }
+    
     func webSocket(webSocket: SRWebSocket!, didReceiveMessage message: AnyObject!){
         println(message)
         //messageをjsonに変えてその中身がinならスタート
@@ -322,31 +349,12 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 bg_img[ran].hidden = false
             }
             if "over" == object["game"].asString {
-                self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
-                for (var i=0;i<bg_img.count;i++) {
-                    bg_img[i].hidden = true
-                }
-                bg_img[3].hidden = false
-                gameover_img.hidden = false
-                mark.hidden = false
-                next_img.hidden = false
-                next_img.name = "NEXT"
-                Circle?.physicsBody?.affectedByGravity = true
-                Circle?.fillColor = UIColor.rgb(r: 252, g: 238, b: 33, alpha: 1)
                 //センサーの停止
                 self.myMotionManager?.stopDeviceMotionUpdates()
-                if(title_img.hidden){
-                        //ゲームオーバー時にカウントを表示
-                    
-                    time_img.hidden = false
-                    time_label.text = time
-                    time_label.hidden = false
-                    
-                }
-                if isOpen() {
-                    //websocketの通信をとめる
-                   webSocketClient?.closeWithCode(1000, reason: "user closed.")
-                }
+                Circle?.fillColor = UIColor.rgb(r: 252, g: 238, b: 33, alpha: 1)
+                Circle?.physicsBody?.affectedByGravity = true
+                self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
+                gameover_timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "gameover", userInfo: nil, repeats: true)
             }
             //playerのjoin数が変わる度に表示を更新する
             if "change" == object["player"].asString {
