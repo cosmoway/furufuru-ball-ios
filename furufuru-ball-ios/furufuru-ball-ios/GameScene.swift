@@ -150,7 +150,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
         if (mobile == "iphone") {
             time_label.position = CGPointMake(self.frame.midX+50, self.frame.midY-23)
         } else {
-           time_label.position = CGPointMake(self.frame.midX+45, self.frame.midY+53)
+           time_label.position = CGPointMake(self.frame.midX+45, self.frame.midY+48)
         }
         time_label.text = time
         time_label.hidden = true
