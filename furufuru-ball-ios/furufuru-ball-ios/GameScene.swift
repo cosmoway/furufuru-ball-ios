@@ -20,21 +20,32 @@ class GameScene: SKScene, SRWebSocketDelegate{
     let bg_img:[SKSpriteNode] = [SKSpriteNode(imageNamed: "back1"),SKSpriteNode(imageNamed: "back2"),SKSpriteNode(imageNamed: "back3"),SKSpriteNode(imageNamed: "back4")]
     let title_ball = SKSpriteNode(imageNamed: "ball_top")
     let gameover_img = SKSpriteNode(imageNamed: "gameover")
+    let mark = SKSpriteNode(imageNamed: "mark")
     let time_img = SKSpriteNode(imageNamed: "time")
     var next_img = SKSpriteNode(imageNamed: "restart")
     let start_img = SKSpriteNode(imageNamed: "start_mark")
     var join_img :[SKSpriteNode] = [SKSpriteNode(imageNamed: "join_icon")]
     let underbar = SKSpriteNode(imageNamed: "underbar")
+    let time_label = SKLabelNode(fontNamed: "AppleSDGothicNeo")
     var time = "00:00"
     let help = SKSpriteNode(imageNamed: "info_mark")
     var join = 0
 
     
     override func didMoveToView(view: SKView) {
+        var mobile = "iphone"
+        if (self.frame.height >= 1000) {
+            mobile = "ipad"
+        }
         let margin:CGFloat = 30.0
         for (var i=0;i<bg_img.count;i++) {
-            bg_img[i].xScale = 0.3
-            bg_img[i].yScale = 0.21
+            if (mobile == "iphone") {
+                bg_img[i].xScale = 0.3
+                bg_img[i].yScale = 0.21
+            } else {
+                bg_img[i].xScale = 0.4
+                bg_img[i].yScale = 0.4
+            }
             bg_img[i].position = CGPointMake(self.frame.midX, self.frame.midY)
             bg_img[i].hidden = true
             self.addChild(bg_img[i])
@@ -48,46 +59,85 @@ class GameScene: SKScene, SRWebSocketDelegate{
         self.addChild(help)
         
         //title_ball
-        title_ball.xScale = 0.2
-        title_ball.yScale = 0.2
+        if (mobile == "iphone") {
+            title_ball.xScale = 0.2
+            title_ball.yScale = 0.2
+        } else {
+            title_ball.xScale = 0.4
+            title_ball.yScale = 0.4
+        }
         title_ball.position = CGPointMake(self.frame.midX, self.frame.midY-60)
         self.addChild(title_ball)
         
         
         //スタート
-        start_img.xScale = 0.2
-        start_img.yScale = 0.2
+        if (mobile == "iphone") {
+            start_img.xScale = 0.2
+            start_img.yScale = 0.2
+        } else {
+            start_img.xScale = 0.3
+            start_img.yScale = 0.3
+        }
         start_img.name = "START"
         start_img.position = CGPointMake(self.frame.midX, self.frame.minY+100.0)
         self.addChild(start_img)
         
         //ふるふるボールのtitle
-        title_img.yScale = 0.2;
-        title_img.xScale = 0.2;
+        if (mobile == "iphone") {
+            title_img.yScale = 0.2
+            title_img.xScale = 0.2
+        } else {
+            title_img.yScale = 0.3
+            title_img.xScale = 0.3
+        }
         title_img.position = CGPointMake(self.frame.midX,self.frame.maxY-150)
         self.addChild(title_img)
         
-        //ふるふるボールのtitle
-        gameover_img.position = CGPointMake(self.frame.midX,self.frame.maxY-150)
+        //ふるふるボールのgameover
+        if (mobile == "iphone") {
+        gameover_img.xScale = 0.8
+        gameover_img.yScale = 0.8
+        }
+        gameover_img.position = CGPointMake(self.frame.midX,self.frame.midY+30)
         gameover_img.hidden = true
         self.addChild(gameover_img)
         
-        underbar.xScale = 0.3
-        underbar.yScale = 0.3
+        if (mobile == "iphone") {
+        mark.xScale = 0.8
+        mark.yScale = 0.8
+        }
+        mark.position = CGPointMake(self.frame.midX,self.frame.midY+80)
+        mark.hidden = true
+        self.addChild(mark)
+        
+        if (mobile == "iphone") {
+            underbar.xScale = 0.3
+            underbar.yScale = 0.3
+        } else {
+            underbar.xScale = 0.4
+            underbar.yScale = 0.4
+        }
         underbar.position = CGPointMake(self.frame.midX, self.frame.minY+10)
         self.addChild(underbar)
         
         //リスタートのテキスト設定
+        if (mobile == "iphone") {
         next_img.xScale = 0.7
         next_img.yScale = 0.7
+        }
         next_img.name="NEXT"
-        next_img.position = CGPoint(x: self.frame.midX,y: self.frame.midY-120)
+        next_img.position = CGPoint(x: self.frame.midX,y: self.frame.midY-100)
         next_img.hidden = true
         self.addChild(next_img)
         
-        time_img.position = CGPointMake(self.frame.midX, self.frame.midY-50.0)
+        time_img.position = CGPointMake(self.frame.midX-30, self.frame.midY-10)
         time_img.hidden = true
         self.addChild(time_img)
+        
+        time_label.position = CGPointMake(self.frame.midX+40, self.frame.midY-20)
+        time_label.hidden = true
+        time_label.fontColor = UIColor.blackColor()
+        self.addChild(time_label)
         
         var radius = 40 as CGFloat
         //Circleの作成
@@ -96,10 +146,11 @@ class GameScene: SKScene, SRWebSocketDelegate{
         Circle!.physicsBody = SKPhysicsBody(circleOfRadius: radius)
         //重力はfalseにしてあります。
         Circle!.physicsBody?.affectedByGravity = false
-        Circle!.position = CGPointMake(self.frame.midX, self.frame.maxY+50.0)
+        Circle!.position = CGPointMake(self.frame.midX, self.frame.maxY+50)
         
         // ShapeNodeの塗りつぶしの色を指定.
         Circle!.fillColor = UIColor.rgb(r: 57, g: 57, b: 57, alpha: 1)
+        Circle!.zPosition = 1
         self.addChild(Circle!)
         self.backgroundColor = UIColor.rgb(r: 240, g: 240, b: 235, alpha: 1);
         webSocketConnect()
@@ -109,18 +160,24 @@ class GameScene: SKScene, SRWebSocketDelegate{
         for touch: AnyObject in touches {
             let location = touch.locationInNode(self)
             let touchNode = self.nodeAtPoint(location)
-            if !title_img.hidden {
+            if title_img.hidden {
                 if touchNode.name == "NEXT"{
                     //リスタートの処理
                     initialize()
                     title_img.hidden = false
+                    title_ball.hidden = false
+                    underbar.hidden = false
                     start_img.hidden = false
                     gameover_img.hidden = true
+                    mark.hidden = true
                     start_img.name = "START"
+                    bg_img[3].hidden = true
                     help.hidden = false
                     help.name = "Help"
+                    join = 0
                     for (var i = 1;i<join_img.count;i++) {
                         join_img[i].hidden = false
+                        self.removeChildrenInArray([join_img[i]])
                     }
                     webSocketConnect()
                 }
@@ -157,10 +214,12 @@ class GameScene: SKScene, SRWebSocketDelegate{
         next_img.hidden = true
         next_img.name = ""
         gameover_img.hidden = true
+        mark.hidden = true
         time_img.hidden = true
+        time_label.hidden = true
         title_img.hidden = true
         ballout_flag = true
-        time = "0'00"
+        time = "00:00"
         start_img.hidden = true
         start_img.name = ""
         help.hidden = true
@@ -175,7 +234,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
         //ミリ秒まで表示
         let ms = count % 100
         let s = (count - ms)/100
-        time=String(format:"%01d'%02d",s,ms)
+        time=String(format:"%01d:%02d",s,ms)
         //join数によってgameoverのtimeを変える
         var x = 21
         if x-join >= 10{
@@ -185,16 +244,8 @@ class GameScene: SKScene, SRWebSocketDelegate{
         }
         //x秒たったか判定
         if s >= x{
-            //センサー、タイマーを止めるボールを灰色にするGAME OVERと表示させる
-            myMotionManager?.stopDeviceMotionUpdates()
-            Circle?.physicsBody?.affectedByGravity = true
-            Circle?.fillColor = UIColor.rgb(r: 252, g: 238, b: 33, alpha: 1)
             timer?.invalidate()
-            /*
-            title_label.fontSize = 40
-            title_label.text = "GAME OVER"
-            */
-            time_img.hidden = false
+            time = "----"
             
             if self.isOpen() {
                 //サーバーにメッセージをjson形式で送る処理
@@ -261,18 +312,20 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 }
                 bg_img[3].hidden = false
                 gameover_img.hidden = false
+                mark.hidden = false
                 next_img.hidden = false
                 next_img.name = "NEXT"
-                for (var i = 1;i<join_img.count;i++) {
-                    join_img[i].hidden = true
-                }
+                Circle?.physicsBody?.affectedByGravity = true
+                Circle?.fillColor = UIColor.rgb(r: 252, g: 238, b: 33, alpha: 1)
                 //センサーの停止
                 self.myMotionManager?.stopDeviceMotionUpdates()
                 if(title_img.hidden){
                         //ゲームオーバー時にカウントを表示
                     
                     time_img.hidden = false
-                        //title_label.text = "RESULT"
+                    time_label.text = time
+                    time_label.hidden = false
+                    
                 }
                 if isOpen() {
                     //websocketの通信をとめる
