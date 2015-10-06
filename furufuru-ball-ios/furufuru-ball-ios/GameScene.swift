@@ -157,7 +157,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
         time_label.fontColor = UIColor.blackColor()
         self.addChild(time_label)
         
-        var radius = 40 as CGFloat
+        let radius = 40 as CGFloat
         //Circleの作成
         Circle = SKShapeNode(circleOfRadius: radius)
         //Circleに物体の設定
@@ -175,7 +175,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
         webSocketConnect()
     }
     //リスタートのボタン
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         for touch: AnyObject in touches {
             let location = touch.locationInNode(self)
             let touchNode = self.nodeAtPoint(location)
@@ -216,7 +216,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                     let obj: [String:AnyObject] = [
                         "game" : "start"
                     ]
-                    let json = JSON(obj).toString(pretty: true)
+                    let json = JSON(obj).toString(true)
                     self.webSocketClient?.send(json)
                 }
             }
@@ -250,7 +250,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
     
     //0.01秒ごと呼ばれる関数
     func update(){
-        println(count++)
+        print(count++)
         //ミリ秒まで表示
         let ms = count % 100
         let s = (count - ms)/100
@@ -272,7 +272,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 let obj: [String:AnyObject] = [
                     "game" : "over"
                 ]
-                let json = JSON(obj).toString(pretty: true)
+                let json = JSON(obj).toString(true)
                 self.webSocketClient?.send(json)
             }
         }
@@ -280,7 +280,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
     
     private func isOpen() -> Bool {
         if webSocketClient != nil {
-            if webSocketClient!.readyState.value == SR_OPEN.value {
+            if webSocketClient!.readyState.rawValue == SR_OPEN.rawValue {
                 return true
             }
         }
@@ -298,8 +298,8 @@ class GameScene: SKScene, SRWebSocketDelegate{
     
     func webSocketConnect() {
         if isClosed() {
-        var url = NSURL(string: "ws://furufuru-ball.herokuapp.com")
-        var request = NSMutableURLRequest(URL: url!)
+        let url = NSURL(string: "ws://furufuru-ball.herokuapp.com")
+        let request = NSMutableURLRequest(URL: url!)
         
         webSocketClient = SRWebSocket(URLRequest: request)
         webSocketClient?.delegate = self
@@ -331,7 +331,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
     }
     
     func webSocket(webSocket: SRWebSocket!, didReceiveMessage message: AnyObject!){
-        println(message)
+        print(message)
         //messageをjsonに変えてその中身がinならスタート
         if let string = message as? String {
             let object = JSON.parse(string)
@@ -361,9 +361,9 @@ class GameScene: SKScene, SRWebSocketDelegate{
             }
             //playerのjoin数が変わる度に表示を更新する
             if "change" == object["player"].asString {
-                var joinCurrent = object["count"].asInt ?? 1
+                let joinCurrent = object["count"].asInt ?? 1
                 //join_label.text = "join:\(join)"
-                println(joinCurrent);
+                print(joinCurrent);
                 if (join > joinCurrent) {
                     self.removeChildrenInArray([join_img[join]])
                     join_img.removeLast()
@@ -388,7 +388,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
     }
     
     func webSocket(webSocket: SRWebSocket!, didFailWithError error: NSError){
-        println(error)
+        print(error)
     }
     
     //ボールが壁をすり抜けたら呼ばれる関数
@@ -398,7 +398,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
             let obj: [String:AnyObject] = [
                 "move" : "out"
             ]
-            let json = JSON(obj).toString(pretty: true)
+            let json = JSON(obj).toString(true)
             self.webSocketClient?.send(json)
         }
         //センサーの停止
@@ -417,15 +417,15 @@ class GameScene: SKScene, SRWebSocketDelegate{
         var vp_x = 0.0
         var vp_y = 0.0
         // 加速度の取得を開始.
-        myMotionManager!.startDeviceMotionUpdatesToQueue(NSOperationQueue.mainQueue(), withHandler: {(data: CMDeviceMotion!, error:NSError!) -> Void in
+        myMotionManager!.startDeviceMotionUpdatesToQueue(NSOperationQueue.mainQueue(), withHandler: {(data, error) -> Void in
             //ユーザが動いた時の加速度が小さい為10倍する
-            var weight = 10.0
+            let weight = 10.0
             var v_x = vp_x
             var v_y = vp_y
             if self.Circle?.position.x < self.frame.maxX-radius && self.Circle?.position.x > self.frame.minY+radius && self.Circle?.position.y < self.frame.maxY-radius && self.Circle?.position.y > self.frame.minY+radius {
                 //加速の計算
-                v_x = vp_x + (data.userAcceleration.x * weight + data.gravity.x) * 1000 * interval
-                v_y = vp_y + (data.userAcceleration.y * weight + data.gravity.y) * 1000 * interval
+                v_x = vp_x + (data!.userAcceleration.x * weight + data!.gravity.x) * 1000 * interval
+                v_y = vp_y + (data!.userAcceleration.y * weight + data!.gravity.y) * 1000 * interval
             }
             //速度
             let v = 3000.0
@@ -458,7 +458,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                     if self.Circle!.position.x < self.frame.maxX && self.Circle!.position.x > self.frame.minX {
                         self.ballout_flag=false
                         self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
-                        println("in")
+                        print("in")
                     }
                 } else {
                     if v_x * v_x <= v * v {
@@ -506,7 +506,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                     if self.Circle!.position.y < self.frame.maxY && self.Circle!.position.y > self.frame.minY {
                         self.ballout_flag=false
                         self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
-                        println("in")
+                        print("in")
                     }
                 } else {
                     if v_y * v_y <= v * v {
@@ -532,7 +532,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
     }
 }
 extension UIColor {
-    class func rgb(#r: Int, g: Int, b: Int, alpha: CGFloat) -> UIColor{
+    class func rgb(r r: Int, g: Int, b: Int, alpha: CGFloat) -> UIColor{
         return UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: alpha)
     }
 }

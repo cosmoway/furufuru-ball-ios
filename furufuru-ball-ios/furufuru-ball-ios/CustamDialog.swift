@@ -15,7 +15,7 @@ class CustomDialog : UIView{
     var backGroundView : UIView!
     var scene : SKScene!
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
 }
     init(scene : SKScene,frame : CGRect){
@@ -50,7 +50,13 @@ class CustomDialog : UIView{
         //ヘルプテキスト
         if let filePath = NSBundle.mainBundle().pathForResource("help", ofType: "txt"){
             var error:NSError?
-            let userPolicy = String(contentsOfFile: filePath, encoding: NSUTF8StringEncoding, error: &error)
+            let userPolicy: String?
+            do {
+                userPolicy = try String(contentsOfFile: filePath, encoding: NSUTF8StringEncoding)
+            } catch let error1 as NSError {
+                error = error1
+                userPolicy = nil
+            }
             if userPolicy != nil && userPolicy!.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) > 0{
         
                 
@@ -71,7 +77,7 @@ class CustomDialog : UIView{
         }
         
         // 閉じるボタンを追加.
-        let myWindowExitButton = UIButton.buttonWithType(UIButtonType.ContactAdd) as! UIButton
+        let myWindowExitButton = UIButton(type: UIButtonType.ContactAdd)
         myWindowExitButton.tintColor = UIColor.blackColor()
         myWindowExitButton.layer.position = CGPointMake(board.bounds.maxX - myWindowExitButton.bounds.midX - 5, myWindowExitButton.bounds.midY + 5)
         
