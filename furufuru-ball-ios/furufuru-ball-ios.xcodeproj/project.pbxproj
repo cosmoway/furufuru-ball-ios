@@ -17,6 +17,7 @@
 		599CEBCB1B4BB5EA003B6B6D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 599CEBC91B4BB5EA003B6B6D /* LaunchScreen.xib */; };
 		599CEBD71B4BB5EA003B6B6D /* furufuru_ball_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599CEBD61B4BB5EA003B6B6D /* furufuru_ball_iosTests.swift */; };
 		59E00F071B5E06B9000ACD21 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E00F061B5E06B9000ACD21 /* JSON.swift */; };
+		6880A0891BE0E5C9001DF3E3 /* Images-3.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6880A0881BE0E5C9001DF3E3 /* Images-3.xcassets */; settings = {ASSET_TAGS = (); }; };
 		9DD840F8B56A529CB6CF03FA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 334C9367631844C3E26859A7 /* libPods.a */; };
 		AC53A8DF1B85B65A00ED6D6B /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC53A8DE1B85B65A00ED6D6B /* Images-2.xcassets */; };
 		AC95A8611B846018009D2658 /* CustamDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC95A8601B846018009D2658 /* CustamDialog.swift */; };
@@ -53,6 +54,7 @@
 		599CEBD51B4BB5EA003B6B6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		599CEBD61B4BB5EA003B6B6D /* furufuru_ball_iosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = furufuru_ball_iosTests.swift; sourceTree = "<group>"; };
 		59E00F061B5E06B9000ACD21 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
+		6880A0881BE0E5C9001DF3E3 /* Images-3.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-3.xcassets"; sourceTree = "<group>"; };
 		9448D7100CBE782D4E985F7C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		AC53A8DE1B85B65A00ED6D6B /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-2.xcassets"; sourceTree = "<group>"; };
 		AC95A8601B846018009D2658 /* CustamDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustamDialog.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				AC53A8DE1B85B65A00ED6D6B /* Images-2.xcassets */,
 				AC95A8601B846018009D2658 /* CustamDialog.swift */,
 				AC95A8641B846D00009D2658 /* help.txt */,
+				6880A0881BE0E5C9001DF3E3 /* Images-3.xcassets */,
 			);
 			path = "furufuru-ball-ios";
 			sourceTree = "<group>";
@@ -218,7 +221,7 @@
 				TargetAttributes = {
 					599CEBB61B4BB5EA003B6B6D = {
 						CreatedOnToolsVersion = 6.3.2;
-						DevelopmentTeam = 2TGX3CU8Y8;
+						DevelopmentTeam = 8G4657RF84;
 					};
 					599CEBCF1B4BB5EA003B6B6D = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -253,6 +256,7 @@
 				AC53A8DF1B85B65A00ED6D6B /* Images-2.xcassets in Resources */,
 				5948C6E01B4FA59000E754A5 /* Podfile in Resources */,
 				AC95A8651B846D00009D2658 /* help.txt in Resources */,
+				6880A0891BE0E5C9001DF3E3 /* Images-3.xcassets in Resources */,
 				599CEBCB1B4BB5EA003B6B6D /* LaunchScreen.xib in Resources */,
 				599CEBC81B4BB5EA003B6B6D /* Images.xcassets in Resources */,
 				599CEBBF1B4BB5EA003B6B6D /* GameScene.sks in Resources */,
@@ -446,6 +450,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_MAP_FILE_PATH = "$(TARGET_TEMP_DIR)/$(PRODUCT_NAME)-LinkMap-$(CURRENT_VARIANT)-$(CURRENT_ARCH).txt";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.cosmoway.furufuru-ball";
 				PRODUCT_NAME = furufuruball;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PROJECT)/Bridging-Header.h";
@@ -465,6 +470,7 @@
 				INFOPLIST_FILE = "furufuru-ball-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.cosmoway.furufuru-ball";
 				PRODUCT_NAME = furufuruball;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PROJECT)/Bridging-Header.h";
