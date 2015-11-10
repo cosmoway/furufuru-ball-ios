@@ -1,0 +1,60 @@
+/* Header above a list of device sensors. Note the capitalization. (40 chars) */
+"GNSSharedNearbySensorsListTitle" = "आस-पास के सेंसर";
+
+/* Button on an alert view. (20 chars) */
+"GNSSharedPermissionAlertButtonAllow" = "अनुमति दें";
+
+/* Button on an alert view. (20 chars) */
+"GNSSharedPermissionAlertButtonDeny" = "अस्वीकार करें";
+
+/* Button on an alert view. (20 chars) */
+"GNSSharedPermissionAlertButtonLearnMore" = "और जानें";
+
+/* Title of an alert view. The %@ will be replaced with the name of the application. (80 chars) */
+"GNSSharedPermissionAlertTitle" = "%@ को आस-पास के डिवाइस से कनेक्ट करने दें?";
+
+/* Element of a sub-list describing how the audio sensor is used. Will have a • character prepended. (200 chars) */
+"GNSSharedPermissionsAudioBulletOne" = "डिवाइस छोटे अल्ट्रासॉनिक जैसे कोड चलाते हैं. आपके माइक्रोफ़ोन का उपयोग इस कोड का पता लगाने के लिए किया जाता है.";
+
+/* Element of a sub-list describing how the audio sensor is used. Will have a • character prepended. (200 chars) */
+"GNSSharedPermissionsAudioBulletThree" = "कुछ लोग अल्ट्रासॉनिक सीमा जैसी ध्वनियों को सुन सकते हैं.";
+
+/* Element of a sub-list describing how the audio sensor is used. Will have a • character prepended. (200 chars) */
+"GNSSharedPermissionsAudioBulletTwo" = "यदि कोई कोड मिलता है, तो उसे डिवाइसों को कनेक्ट करने के लिए Google सर्वर को भेज दिया जाता है. Google सर्वर पर कोई भी ऑडियो नहीं भेजा जाता है.";
+
+/* Subtitle of an item in the list of device sensors (80 chars) */
+"GNSSharedPermissionsAudioSubtitle" = "नहीं सुनाई देने वाले युग्मन कोड भेजें और प्राप्त करें";
+
+/* Title of an item in the list of device sensors. (30 chars) */
+"GNSSharedPermissionsAudioTitle" = "ऑडियो";
+
+/* Element of a sub-list describing how the audio sensor is used. Will have a • character prepended. (200 chars) */
+"GNSSharedPermissionsRadioBulletFour" = "युग्मन कोड बदलें, वाई-फ़ाई नेटवर्क की तुलना करें और Google सर्वर का उपयोग करके डेटा ट्रांसफर करें.";
+
+/* Element of a sub-list describing how the audio sensor is used. Will have a • character prepended. (200 chars) */
+"GNSSharedPermissionsRadioBulletOne" = "ब्‍लूटूथ और वाई-फ़ाई का उपयोग करके डिवाइस और आस-पास के स्‍थान खोजें.";
+
+/* Element of a sub-list describing how the audio sensor is used. Will have a • character prepended. (200 chars) */
+"GNSSharedPermissionsRadioBulletThree" = "डिवाइसों के बीच डेटा ट्रांसफर करने के लिए अस्थायी कनेक्शन स्थापित करें.";
+
+/* Element of a sub-list describing how the audio sensor is used. Will have a • character prepended. (200 chars) */
+"GNSSharedPermissionsRadioBulletTwo" = "ब्लूटूथ कम ऊर्जा का उपयोग करके युग्मन कोड को अस्थायी रूप से ब्रॉडकास्ट करें.";
+
+/* Subtitle of an item in the list of device sensors (80 chars) */
+"GNSSharedPermissionsRadioSubtitle" = "आवश्यक होने पर खोजने और डेटा ट्रांसफर करने के लिए चालू करें";
+
+/* Title of an item in the list of device sensors. (30 chars) */
+"GNSSharedPermissionsRadioTitle" = "ब्लूटूथ और वाई-फ़ाई";
+
+/* Body text on a page describing the device sensors that the Nearby library needs. (250 chars */
+"GNSSharedSensorPermissionDescription" = "कम दूरी वाले अन्य सभी डिवाइसों के साथ कनेक्ट करने हेतु अपने डिवाइस के सेंसर का उपयोग करें. Nearby, कनेक्शन की सुविधा देने हेतु Google सर्वर का उपयोग करता है. हो सकता है आपको अपने माइक्रोफ़ोन और ब्लूटूथ का उपयोग करने के लिए इस ऐप को अनुमति देनी पड़े.";
+
+/* Title of a button in the header bar. (10 chars) */
+"GNSSharedTurnOnCancel" = "रहने दें";
+
+/* Title in a screen header. (25 chars) */
+"GNSSharedTurnOnNearby" = "Nearby चालू करें";
+
+/* Title of a button in the header bar. (10 chars) */
+"GNSSharedTurnOnOK" = "ठीक";
+

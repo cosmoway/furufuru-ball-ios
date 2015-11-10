@@ -1,0 +1,60 @@
+/* Header above a list of device sensors. Note the capitalization. (40 chars) */
+"GNSSharedNearbySensorsListTitle" = "ΚΟΝΤΙΝΟΙ ΑΙΣΘΗΤΗΡΕΣ";
+
+/* Button on an alert view. (20 chars) */
+"GNSSharedPermissionAlertButtonAllow" = "Αποδοχή";
+
+/* Button on an alert view. (20 chars) */
+"GNSSharedPermissionAlertButtonDeny" = "Απόρριψη";
+
+/* Button on an alert view. (20 chars) */
+"GNSSharedPermissionAlertButtonLearnMore" = "Μάθετε περισσότερα";
+
+/* Title of an alert view. The %@ will be replaced with the name of the application. (80 chars) */
+"GNSSharedPermissionAlertTitle" = "Σύνδεση %@ με άλλες κοντινές συσκευές;";
+
+/* Element of a sub-list describing how the audio sensor is used. Will have a • character prepended. (200 chars) */
+"GNSSharedPermissionsAudioBulletOne" = "Οι συσκευές εκπέμπουν έναν σύντομο σχεδόν υπερηχητικό κωδικό. Το μικρόφωνο χρησιμοποιείται για την ανίχνευση αυτού του κωδικού.";
+
+/* Element of a sub-list describing how the audio sensor is used. Will have a • character prepended. (200 chars) */
+"GNSSharedPermissionsAudioBulletThree" = "Ορισμένα άτομα ενδέχεται να έχουν τη δυνατότητα να ακούν ήχους σε σχεδόν υπερηχητικό φάσμα.";
+
+/* Element of a sub-list describing how the audio sensor is used. Will have a • character prepended. (200 chars) */
+"GNSSharedPermissionsAudioBulletTwo" = "Εάν εντοπιστεί κωδικός, αποστέλλεται στους διακομιστές της Google για τη σύνδεση των συσκευών. Δεν αποστέλλεται ήχος στους διακομιστές της Google.";
+
+/* Subtitle of an item in the list of device sensors (80 chars) */
+"GNSSharedPermissionsAudioSubtitle" = "Αποστολή και λήψη μη αντιληπτών κωδικών σύζευξης";
+
+/* Title of an item in the list of device sensors. (30 chars) */
+"GNSSharedPermissionsAudioTitle" = "Ήχος";
+
+/* Element of a sub-list describing how the audio sensor is used. Will have a • character prepended. (200 chars) */
+"GNSSharedPermissionsRadioBulletFour" = "Ανταλλαγή κωδικών αντιστοίχισης, σύγκριση δικτύων Wi-Fi, καθώς και μεταφορά δεδομένων, με χρήση των διακομιστών της Google.";
+
+/* Element of a sub-list describing how the audio sensor is used. Will have a • character prepended. (200 chars) */
+"GNSSharedPermissionsRadioBulletOne" = "Ανακάλυψη συσκευών και κοντινών μερών με χρήση Bluetooth και Wi-Fi.";
+
+/* Element of a sub-list describing how the audio sensor is used. Will have a • character prepended. (200 chars) */
+"GNSSharedPermissionsRadioBulletThree" = "Δημιουργία μιας προσωρινής σύνδεσης για τη μεταφορά δεδομένων μεταξύ συσκευών.";
+
+/* Element of a sub-list describing how the audio sensor is used. Will have a • character prepended. (200 chars) */
+"GNSSharedPermissionsRadioBulletTwo" = "Προσωρινή μετάδοση ενός κωδικού σύζευξης χρησιμοποιώντας Bluetooth χαμηλής ενέργειας.";
+
+/* Subtitle of an item in the list of device sensors (80 chars) */
+"GNSSharedPermissionsRadioSubtitle" = "Ενεργοποίηση για ανακάλυψη και μεταφορά δεδομένων όταν απαιτείται";
+
+/* Title of an item in the list of device sensors. (30 chars) */
+"GNSSharedPermissionsRadioTitle" = "Bluetooth και Wi-Fi";
+
+/* Body text on a page describing the device sensors that the Nearby library needs. (250 chars */
+"GNSSharedSensorPermissionDescription" = "Χρήση των αισθητήρων της συσκευής για σύνδεση με άλλες συσκευές σε κοντινή απόσταση. Το Nearby χρησιμοποιεί τους διακομιστές της Google για τη διευκόλυνση συνδέσεων. Πρέπει να δώσετε στην εφαρμογή άδεια να χρησιμοποιεί το μικρόφωνο και το Bluetooth.";
+
+/* Title of a button in the header bar. (10 chars) */
+"GNSSharedTurnOnCancel" = "Ακύρωση";
+
+/* Title in a screen header. (25 chars) */
+"GNSSharedTurnOnNearby" = "Ενεργοποίηση Nearby";
+
+/* Title of a button in the header bar. (10 chars) */
+"GNSSharedTurnOnOK" = "ΟΚ";
+
