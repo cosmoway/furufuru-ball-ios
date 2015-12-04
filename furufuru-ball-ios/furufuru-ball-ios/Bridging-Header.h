@@ -10,3 +10,4 @@
 
 #endif
 #import "SRWebSocket.h"
+#import <GNSMessages.h>

@@ -10,7 +10,7 @@
 /* Button on an alert view. (20 chars) */
 "GNSSharedPermissionAlertButtonLearnMore" = "Daha fazla bilgi";
 
-/* Title of an alert view. The %@ will be replaced with the name of the application. (80 chars) */
+/* Title of an alert view or a screen. The %@ will be replaced with the name of the application. (80 chars) */
 "GNSSharedPermissionAlertTitle" = "%@ uygulamasının etraftaki diğer cihazlara bağlanmasına izin verilsin mi?";
 
 /* Element of a sub-list describing how the audio sensor is used. Will have a • character prepended. (200 chars) */
@@ -49,12 +49,6 @@
 /* Body text on a page describing the device sensors that the Nearby library needs. (250 chars */
 "GNSSharedSensorPermissionDescription" = "Kısa mesafe içindeki diğer cihazlara bağlanmak için cihazınızın sensörlerini kullanın. Etrafımda özelliği, bağlantı kurulması için Google sunucularını kullanır. Bu uygulamanın mikrofonunuzu ve Bluetooth'unuzu kullanmasına izin vermeniz gerekebilir.";
 
-/* Title of a button in the header bar. (10 chars) */
-"GNSSharedTurnOnCancel" = "İptal";
-
 /* Title in a screen header. (25 chars) */
 "GNSSharedTurnOnNearby" = "Etrafımda özelliğini aç";
-
-/* Title of a button in the header bar. (10 chars) */
-"GNSSharedTurnOnOK" = "Tamam";
 

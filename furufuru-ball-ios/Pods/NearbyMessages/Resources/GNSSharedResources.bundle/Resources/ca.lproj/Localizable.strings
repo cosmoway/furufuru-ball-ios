@@ -10,7 +10,7 @@
 /* Button on an alert view. (20 chars) */
 "GNSSharedPermissionAlertButtonLearnMore" = "Més informació";
 
-/* Title of an alert view. The %@ will be replaced with the name of the application. (80 chars) */
+/* Title of an alert view or a screen. The %@ will be replaced with the name of the application. (80 chars) */
 "GNSSharedPermissionAlertTitle" = "Permet que %@ connecti amb disp. propers?";
 
 /* Element of a sub-list describing how the audio sensor is used. Will have a • character prepended. (200 chars) */
@@ -49,12 +49,6 @@
 /* Body text on a page describing the device sensors that the Nearby library needs. (250 chars */
 "GNSSharedSensorPermissionDescription" = "Fes servir els sensors del dispositiu per connectar amb altres dispositius en distàncies curtes. La funció A prop fa servir els servidors de Google per facilitar les connexions. Pot ser que hagis de donar permís per fer servir micròfon i Bluetooth.";
 
-/* Title of a button in the header bar. (10 chars) */
-"GNSSharedTurnOnCancel" = "Cancel·la";
-
 /* Title in a screen header. (25 chars) */
 "GNSSharedTurnOnNearby" = "Activa A prop";
-
-/* Title of a button in the header bar. (10 chars) */
-"GNSSharedTurnOnOK" = "D'ACORD";
 

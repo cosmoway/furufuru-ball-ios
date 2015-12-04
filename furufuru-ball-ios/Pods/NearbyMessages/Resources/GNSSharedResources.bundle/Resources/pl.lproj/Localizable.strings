@@ -10,7 +10,7 @@
 /* Button on an alert view. (20 chars) */
 "GNSSharedPermissionAlertButtonLearnMore" = "Więcej informacji";
 
-/* Title of an alert view. The %@ will be replaced with the name of the application. (80 chars) */
+/* Title of an alert view or a screen. The %@ will be replaced with the name of the application. (80 chars) */
 "GNSSharedPermissionAlertTitle" = "Zezwolić aplikacji %@ na łączenie się z innymi urządzeniami w pobliżu?";
 
 /* Element of a sub-list describing how the audio sensor is used. Will have a • character prepended. (200 chars) */
@@ -49,12 +49,6 @@
 /* Body text on a page describing the device sensors that the Nearby library needs. (250 chars */
 "GNSSharedSensorPermissionDescription" = "Używa czujników urządzenia, by łączyć się z pobliskimi urządzeniami. Funkcja „W pobliżu” korzysta z serwerów Google podczas nawiązywania połączeń. Może być konieczne przyznanie tej aplikacji uprawnień do używania mikrofonu i łączności Bluetooth.";
 
-/* Title of a button in the header bar. (10 chars) */
-"GNSSharedTurnOnCancel" = "Anuluj";
-
 /* Title in a screen header. (25 chars) */
 "GNSSharedTurnOnNearby" = "Włącz funkcję W pobliżu";
-
-/* Title of a button in the header bar. (10 chars) */
-"GNSSharedTurnOnOK" = "OK";
 

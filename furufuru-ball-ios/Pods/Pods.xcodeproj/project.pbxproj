@@ -35,9 +35,9 @@
 		003003F65DB00969CE84083D1F7E72D4 /* libGTM_AddressBook.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_AddressBook.a; path = Libraries/libGTM_AddressBook.a; sourceTree = "<group>"; };
 		10834806BD7B412BC24F347361FA2C8E /* Pods-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-acknowledgements.plist"; sourceTree = "<group>"; };
 		272643F56613CA0D336AE3DBF19DC404 /* Pods-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-dummy.m"; sourceTree = "<group>"; };
-		29A3B5843DAD7897E33B27CB8D805C96 /* system_icons.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; name = system_icons.xcassets; path = Resources/system_icons.xcassets; sourceTree = "<group>"; };
 		3231ADAADC2783E58CBD0A168E4E43D0 /* libGTM_StringEncoding.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_StringEncoding.a; path = Libraries/libGTM_StringEncoding.a; sourceTree = "<group>"; };
 		32E6FE27219669ABD9722F94B5FC1F0A /* libGTMSessionFetcher_core.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTMSessionFetcher_core.a; path = Libraries/libGTMSessionFetcher_core.a; sourceTree = "<group>"; };
+		33454EB1016C439ED93F8127FD7A8C1A /* ic_expand_more.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; name = ic_expand_more.xcassets; path = Resources/ic_expand_more.xcassets; sourceTree = "<group>"; };
 		3572136EA868E9DCA62838CE218C6911 /* SocketRocket-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SocketRocket-prefix.pch"; sourceTree = "<group>"; };
 		37DB56D75062CC75FCB0966E1C6E8A8E /* Pods-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-acknowledgements.markdown"; sourceTree = "<group>"; };
 		382CC577081A8F3F3CE2EE57F2EBD597 /* GNSMessages.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GNSMessages.h; path = Headers/Public/GNSMessages.h; sourceTree = "<group>"; };
@@ -63,15 +63,14 @@
 		70EAE9EFD95D4BBB113FF5D6EFCEA3B5 /* GNSPermission.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GNSPermission.h; path = Headers/Public/GNSPermission.h; sourceTree = "<group>"; };
 		73C710314FC7A23FED8C90DCFC4AE7E9 /* SRWebSocket.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SRWebSocket.h; path = SocketRocket/SRWebSocket.h; sourceTree = "<group>"; };
 		7E1C34762C059EF1CD1C9F7BA7CE11C2 /* libGTM_NSData+zlib.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = "libGTM_NSData+zlib.a"; path = "Libraries/libGTM_NSData+zlib.a"; sourceTree = "<group>"; };
-		91C84CE9573E762741320B2924EE7223 /* GNSSharedResources.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = GNSSharedResources.bundle; path = Resources/GNSSharedResources.bundle; sourceTree = "<group>"; };
 		971B8C071D1932D63C8B277506FBE68A /* libGTM_KVO.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_KVO.a; path = Libraries/libGTM_KVO.a; sourceTree = "<group>"; };
 		98C98CDFB3F20F2925F6CD1F141BB14F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.release.xcconfig; sourceTree = "<group>"; };
 		9CD86099D2896FED8891A9FF15A10DF4 /* libGNSMessages.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGNSMessages.a; path = Libraries/libGNSMessages.a; sourceTree = "<group>"; };
-		9D3D00550ECDB099EAF32FFA2CEFACE0 /* icons.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; name = icons.xcassets; path = Resources/icons.xcassets; sourceTree = "<group>"; };
 		9E61C8EE35116B4F7E0064822B11A75B /* libGTM_NSStringHTML.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_NSStringHTML.a; path = Libraries/libGTM_NSStringHTML.a; sourceTree = "<group>"; };
 		A10324AD2A80BA0F2090DB9DD99759AB /* libGTM_iPhone.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_iPhone.a; path = Libraries/libGTM_iPhone.a; sourceTree = "<group>"; };
 		A1A36D34413696BE466E2CA0AFF194DA /* Pods-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-resources.sh"; sourceTree = "<group>"; };
 		A8BA07B8243142B7264A03F9A30C6874 /* GNSSubscriptionParams.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GNSSubscriptionParams.h; path = Headers/Public/GNSSubscriptionParams.h; sourceTree = "<group>"; };
+		AA84B063A9FB8813FEC4BEF925F9DDF4 /* ic_nearby_48pt.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; name = ic_nearby_48pt.xcassets; path = Resources/ic_nearby_48pt.xcassets; sourceTree = "<group>"; };
 		B1B2453DCD08020F100BE7794BB2DCB5 /* libGTM_DebugUtils.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_DebugUtils.a; path = Libraries/libGTM_DebugUtils.a; sourceTree = "<group>"; };
 		B62323BA71DD02ABFDE958157B1ED9AD /* GNSStrategy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GNSStrategy.h; path = Headers/Public/GNSStrategy.h; sourceTree = "<group>"; };
 		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -85,6 +84,7 @@
 		DE7C83B29CD900149973EE19444587B0 /* SocketRocket-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SocketRocket-dummy.m"; sourceTree = "<group>"; };
 		E967D042C48D5885583D70105EF16526 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		ED316EE84B1D3AAE415457D92E62A3A0 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
+		EE3A1B9EB7EB96711829EF7EEF2A9240 /* GNSSharedResources.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = GNSSharedResources.bundle; path = Resources/GNSSharedResources.bundle; sourceTree = "<group>"; };
 		F2F53AA20000AEC0F356ED368D208FE4 /* libGTM_RoundedRectPath.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_RoundedRectPath.a; path = Libraries/libGTM_RoundedRectPath.a; sourceTree = "<group>"; };
 		F8CF207CD70588E3EC4620C1B7CC5940 /* SocketRocket.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SocketRocket.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -186,7 +186,7 @@
 				B62323BA71DD02ABFDE958157B1ED9AD /* GNSStrategy.h */,
 				A8BA07B8243142B7264A03F9A30C6874 /* GNSSubscriptionParams.h */,
 				2E270DF46ABC6EA974571424C41E5FFC /* Frameworks */,
-				51231AFF3630D1590051AFD30D478D3F /* Resources */,
+				7D2BCB5584C3DE3AF298DBCC0317B363 /* Resources */,
 			);
 			path = NearbyMessages;
 			sourceTree = "<group>";
@@ -232,16 +232,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		51231AFF3630D1590051AFD30D478D3F /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				91C84CE9573E762741320B2924EE7223 /* GNSSharedResources.bundle */,
-				9D3D00550ECDB099EAF32FFA2CEFACE0 /* icons.xcassets */,
-				29A3B5843DAD7897E33B27CB8D805C96 /* system_icons.xcassets */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
 		51F069D0FA66B726B6EADF384C11FFBE /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -259,6 +249,16 @@
 				5836E0B2A6A735BF1426717311C32C83 /* libProtocolBuffers.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7D2BCB5584C3DE3AF298DBCC0317B363 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EE3A1B9EB7EB96711829EF7EEF2A9240 /* GNSSharedResources.bundle */,
+				33454EB1016C439ED93F8127FD7A8C1A /* ic_expand_more.xcassets */,
+				AA84B063A9FB8813FEC4BEF925F9DDF4 /* ic_nearby_48pt.xcassets */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		7DB346D0F39D3F0E887471402A8071AB = {

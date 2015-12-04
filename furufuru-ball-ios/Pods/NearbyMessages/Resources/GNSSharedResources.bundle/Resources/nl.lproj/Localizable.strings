@@ -10,7 +10,7 @@
 /* Button on an alert view. (20 chars) */
 "GNSSharedPermissionAlertButtonLearnMore" = "Meer informatie";
 
-/* Title of an alert view. The %@ will be replaced with the name of the application. (80 chars) */
+/* Title of an alert view or a screen. The %@ will be replaced with the name of the application. (80 chars) */
 "GNSSharedPermissionAlertTitle" = "%@ toestaan verbinding te maken met andere apparaten in de buurt?";
 
 /* Element of a sub-list describing how the audio sensor is used. Will have a • character prepended. (200 chars) */
@@ -49,12 +49,6 @@
 /* Body text on a page describing the device sensors that the Nearby library needs. (250 chars */
 "GNSSharedSensorPermissionDescription" = "De sensoren van je apparaat gebruiken om over korte afstand verbinding te maken met apparaten. De functie 'Dichtbij' gebruikt Google-servers voor verbindingen. Je moet deze app mogelijk toestemming geven om je microfoon en Bluetooth te gebruiken.";
 
-/* Title of a button in the header bar. (10 chars) */
-"GNSSharedTurnOnCancel" = "Annuleren";
-
 /* Title in a screen header. (25 chars) */
 "GNSSharedTurnOnNearby" = "'Dichtbij' inschakelen";
-
-/* Title of a button in the header bar. (10 chars) */
-"GNSSharedTurnOnOK" = "OK";
 

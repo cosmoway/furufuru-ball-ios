@@ -10,7 +10,7 @@
 /* Button on an alert view. (20 chars) */
 "GNSSharedPermissionAlertButtonLearnMore" = "Další informace";
 
-/* Title of an alert view. The %@ will be replaced with the name of the application. (80 chars) */
+/* Title of an alert view or a screen. The %@ will be replaced with the name of the application. (80 chars) */
 "GNSSharedPermissionAlertTitle" = "Povolit aplikaci %@ připojit se k ostatním zařízením se službou Nablízku?";
 
 /* Element of a sub-list describing how the audio sensor is used. Will have a • character prepended. (200 chars) */
@@ -49,12 +49,6 @@
 /* Body text on a page describing the device sensors that the Nearby library needs. (250 chars */
 "GNSSharedSensorPermissionDescription" = "K ostatním zařízením v blízkém okolí se připojujete pomocí senzorů ve svém zařízení. Funkce Nablízku používá servery Google, aby připojení usnadnila. Této aplikaci možná budete muset udělit oprávnění k použití mikrofonu a Bluetooth.";
 
-/* Title of a button in the header bar. (10 chars) */
-"GNSSharedTurnOnCancel" = "Zrušit";
-
 /* Title in a screen header. (25 chars) */
 "GNSSharedTurnOnNearby" = "Zapnout funkci Nablízku";
-
-/* Title of a button in the header bar. (10 chars) */
-"GNSSharedTurnOnOK" = "OK";
 

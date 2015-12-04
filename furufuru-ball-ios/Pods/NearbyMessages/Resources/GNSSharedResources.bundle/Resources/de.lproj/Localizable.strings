@@ -10,11 +10,11 @@
 /* Button on an alert view. (20 chars) */
 "GNSSharedPermissionAlertButtonLearnMore" = "Mehr erfahren";
 
-/* Title of an alert view. The %@ will be replaced with the name of the application. (80 chars) */
+/* Title of an alert view or a screen. The %@ will be replaced with the name of the application. (80 chars) */
 "GNSSharedPermissionAlertTitle" = "Zulassen, dass %@ sich mit anderen Nearby-Geräten verbindet?";
 
 /* Element of a sub-list describing how the audio sensor is used. Will have a • character prepended. (200 chars) */
-"GNSSharedPermissionsAudioBulletOne" = "Geräte geben den Code als kurzes Beinahe-Ultraschallsignal wieder, das über das Mikrofon Ihres Geräts erkannt wird.";
+"GNSSharedPermissionsAudioBulletOne" = "Geräte geben den Code als kurzes Beinahe-Ultraschallsignal wieder, das über das Mikrofon deines Geräts erkannt wird.";
 
 /* Element of a sub-list describing how the audio sensor is used. Will have a • character prepended. (200 chars) */
 "GNSSharedPermissionsAudioBulletThree" = "Manche Menschen hören möglicherweise Töne im Bereich des Beinahe-Ultraschalls.";
@@ -29,16 +29,16 @@
 "GNSSharedPermissionsAudioTitle" = "Ton";
 
 /* Element of a sub-list describing how the audio sensor is used. Will have a • character prepended. (200 chars) */
-"GNSSharedPermissionsRadioBulletFour" = "Tauschen Sie Pairing-Codes aus, vergleichen Sie WLANs und übertragen Sie Daten über die Google-Server.";
+"GNSSharedPermissionsRadioBulletFour" = "Tausche Pairing-Codes aus, vergleiche WLANs und übertrage Daten über die Google-Server.";
 
 /* Element of a sub-list describing how the audio sensor is used. Will have a • character prepended. (200 chars) */
-"GNSSharedPermissionsRadioBulletOne" = "Sie können Geräte und Orte in der Nähe über Bluetooth und WLAN erkennen.";
+"GNSSharedPermissionsRadioBulletOne" = "Du kannst Geräte und Orte in der Nähe über Bluetooth und WLAN erkennen.";
 
 /* Element of a sub-list describing how the audio sensor is used. Will have a • character prepended. (200 chars) */
-"GNSSharedPermissionsRadioBulletThree" = "Stellen Sie eine vorübergehende Verbindung her, um Daten zwischen Geräten zu übertragen.";
+"GNSSharedPermissionsRadioBulletThree" = "Stelle eine vorübergehende Verbindung her, um Daten zwischen Geräten zu übertragen.";
 
 /* Element of a sub-list describing how the audio sensor is used. Will have a • character prepended. (200 chars) */
-"GNSSharedPermissionsRadioBulletTwo" = "Übertragen Sie vorübergehend einen Pairing-Code mit Bluetooth Low Energy.";
+"GNSSharedPermissionsRadioBulletTwo" = "Übertrage vorübergehend einen Pairing-Code mit Bluetooth Low Energy.";
 
 /* Subtitle of an item in the list of device sensors (80 chars) */
 "GNSSharedPermissionsRadioSubtitle" = "Zur Erkennung und zum Datentransfer bei Bedarf aktivieren";
@@ -47,14 +47,8 @@
 "GNSSharedPermissionsRadioTitle" = "Bluetooth & WLAN";
 
 /* Body text on a page describing the device sensors that the Nearby library needs. (250 chars */
-"GNSSharedSensorPermissionDescription" = "Verwenden Sie die Sensoren Ihres Geräts, um eine Verbindung mit anderen Geräten in der Nähe herzustellen. Nearby verwendet Google-Server, um Verbindungen herzustellen. Möglicherweise müssen Sie dieser App die Berechtigung erteilen, Ihr Mikrofon und Bluetooth zu verwenden.";
-
-/* Title of a button in the header bar. (10 chars) */
-"GNSSharedTurnOnCancel" = "Abbrechen";
+"GNSSharedSensorPermissionDescription" = "Verwende die Sensoren deines Geräts, um eine Verbindung mit anderen Geräten in der Nähe herzustellen. Nearby verwendet Google-Server, um Verbindungen herzustellen. Möglicherweise musst du dieser App die Berechtigung erteilen, dein Mikrofon und Bluetooth zu verwenden.";
 
 /* Title in a screen header. (25 chars) */
 "GNSSharedTurnOnNearby" = "Nearby aktivieren";
-
-/* Title of a button in the header bar. (10 chars) */
-"GNSSharedTurnOnOK" = "OK";
 

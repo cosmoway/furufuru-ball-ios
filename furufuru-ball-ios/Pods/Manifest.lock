@@ -6,7 +6,7 @@ PODS:
   - GoogleSymbolUtilities (1.0.3)
   - GoogleUtilities (1.1.0):
     - GoogleSymbolUtilities (~> 1.0.0)
-  - NearbyMessages (0.9.6):
+  - NearbyMessages (0.9.7):
     - GoogleInterchangeUtilities (~> 1.0)
     - GoogleNetworkingUtilities (~> 1.0)
     - GoogleUtilities (~> 1.0)
@@ -21,7 +21,7 @@ SPEC CHECKSUMS:
   GoogleNetworkingUtilities: 292992ab31b7b4ba32809a0e8b40e324cdfb2c0c
   GoogleSymbolUtilities: 82ad9f93d3615244b3f4ce440f5ab2515e8b4f56
   GoogleUtilities: 8ed9134debe11719097881711464752900668f10
-  NearbyMessages: a7c790bbc9c6942863a5ed7faffca4d3d5595f16
+  NearbyMessages: f83fe352b09e5b5db2d421eb4d65e293a9ce46de
   SocketRocket: 54a4ac2f354c4e8c51ef5dcd4a13bc556d4f2b7c
 
 COCOAPODS: 0.39.0

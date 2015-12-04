@@ -30,6 +30,8 @@ extern const NSInteger kGNSMessageMaximumTypeLength;
 /// disabled.
 @property(nonatomic, copy, readonly) NSData *content;
 
+- (instancetype)init __attribute__((unavailable("Use +messageWithContent.")));
+
 /// Message with the default type.
 /// @see GNSMessage.content for more information about the content.
 + (instancetype)messageWithContent:(NSData *)content;

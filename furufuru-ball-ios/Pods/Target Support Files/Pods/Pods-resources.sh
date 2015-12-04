@@ -58,13 +58,13 @@ install_resource()
   esac
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_resource "NearbyMessages/Resources/system_icons.xcassets"
-  install_resource "NearbyMessages/Resources/icons.xcassets"
+  install_resource "NearbyMessages/Resources/ic_nearby_48pt.xcassets"
+  install_resource "NearbyMessages/Resources/ic_expand_more.xcassets"
   install_resource "NearbyMessages/Resources/GNSSharedResources.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_resource "NearbyMessages/Resources/system_icons.xcassets"
-  install_resource "NearbyMessages/Resources/icons.xcassets"
+  install_resource "NearbyMessages/Resources/ic_nearby_48pt.xcassets"
+  install_resource "NearbyMessages/Resources/ic_expand_more.xcassets"
   install_resource "NearbyMessages/Resources/GNSSharedResources.bundle"
 fi
 

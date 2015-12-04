@@ -103,10 +103,13 @@ typedef void (^GNSMessageHandler)(GNSMessage *message);
                           messageFoundHandler:(GNSMessageHandler)messageFoundHandler
                            messageLostHandler:(GNSMessageHandler)messageLostHandler;
 
-/// Debug logging.  When enabled, log messages for internal operations are written to the console to
-/// help with debugging, even in release builds. This is useful for debugging problems encountered
-/// by 3rd party clients.  By default, it is disabled, even in debug builds.
+/// Enables or disables debug logging.  When enabled, log messages for internal operations are
+/// written to the console to help with debugging, even in release builds. This is useful for
+/// debugging problems encountered by 3rd party clients.  By default, it is disabled, even in debug
+/// builds.
 + (void)setDebugLoggingEnabled:(BOOL)enabled;
+
+/// Returns the current debug logging state.
 + (BOOL)isDebugLoggingEnabled;
 
 @end
