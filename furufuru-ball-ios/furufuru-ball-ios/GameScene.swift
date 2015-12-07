@@ -31,6 +31,9 @@ class GameScene: SKScene, SRWebSocketDelegate{
     var time = "00:00"
     let help = SKSpriteNode(imageNamed: "info_mark")
     var join = 0
+    var messageMgr: GNSMessageManager?
+    var publication: GNSPublication?
+    var subscription: GNSSubscription?
 
     
     override func didMoveToView(view: SKView) {
@@ -297,6 +300,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
     }
     
     func webSocketConnect() {
+        /*
         if isClosed() {
         let url = NSURL(string: "ws://furufuru-ball.herokuapp.com")
         let request = NSMutableURLRequest(URL: url!)
@@ -305,8 +309,45 @@ class GameScene: SKScene, SRWebSocketDelegate{
         webSocketClient?.delegate = self
         webSocketClient?.open()
         }
+        */
+        messageMgr = GNSMessageManager(APIKey: "AIzaSyBUk5recfEggNWHNJhj15EbE1qq4b7tM-U",
+            paramsBlock: {(params: GNSMessageManagerParams!) -> Void in
+                // This is called when microphone permission is enabled or disabled by the user.
+                params.microphonePermissionErrorHandler = { hasError in
+                    if (hasError) {
+                        print("Nearby works better if microphone use is allowed")
+                    }
+                }
+                // This is called when Bluetooth permission is enabled or disabled by the user.
+                params.bluetoothPermissionErrorHandler = { hasError in
+                    if (hasError) {
+                        print("Nearby works better if Bluetooth use is allowed")
+                    }
+                }
+                // This is called when Bluetooth is powered on or off by the user.
+                params.bluetoothPowerErrorHandler = { hasError in
+                    if (hasError) {
+                        print("Nearby works better if Bluetooth is turned on")
+                    }
+                }
+        })
+        GNSMessageManager.setDebugLoggingEnabled(true)
+        GNSPermission.setGranted(true);
+        if let messageMgr = self.messageMgr {
+              let name = String(format:"Anonymous %d", arc4random() % 100)
+            // Publish the name to nearby devices.
+            let pubMessage: GNSMessage = GNSMessage(content: name.dataUsingEncoding(NSUTF8StringEncoding,
+                allowLossyConversion: true))
+            publication = messageMgr.publicationWithMessage(pubMessage)
+            
+            // Subscribe to messages from nearby devices and display them in the message view.
+            subscription = messageMgr.subscriptionWithMessageFoundHandler({[unowned self] (message: GNSMessage!) -> Void in
+                print(message)
+                }, messageLostHandler: {[unowned self](message: GNSMessage!) -> Void in
+                    print(message)
+                })
+        }
     }
-    
     func webSocketDidOpen(webSocket:SRWebSocket){
     }
     
