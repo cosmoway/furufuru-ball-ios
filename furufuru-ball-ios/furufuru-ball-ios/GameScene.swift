@@ -42,7 +42,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
         for (var i=0;i<bg_img.count;i++) {
             if (mobile == "iphone") {
                 bg_img[i].xScale = 0.3
-                bg_img[i].yScale = 0.21
+                bg_img[i].yScale = 0.4
             } else {
                 bg_img[i].xScale = 0.4
                 bg_img[i].yScale = 0.4
