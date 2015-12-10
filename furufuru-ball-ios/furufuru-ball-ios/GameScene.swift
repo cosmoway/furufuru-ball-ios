@@ -28,7 +28,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
     var join_img :[SKSpriteNode] = [SKSpriteNode(imageNamed: "join_icon")]
     let underbar = SKSpriteNode(imageNamed: "underbar")
     let time_label = SKLabelNode(fontNamed: "AppleSDGothicNeo")
-    var time = "00:00"
+    var time = ""
     let help = SKSpriteNode(imageNamed: "info_mark")
     var join = 0
 
@@ -153,7 +153,6 @@ class GameScene: SKScene, SRWebSocketDelegate{
            time_label.position = CGPointMake(self.frame.midX+45, self.frame.midY+48)
         }
         time_label.text = time
-        time_label.hidden = true
         time_label.fontColor = UIColor.blackColor()
         self.addChild(time_label)
         
@@ -210,7 +209,6 @@ class GameScene: SKScene, SRWebSocketDelegate{
             //スタートをタッチでサーバーに伝達
             if touchNode.name == "START"{
                 //リスタートの処理
-                initialize()
                 if (self.isOpen()) {
                     //サーバーにメッセージをjson形式で送る処理
                     let obj: [String:AnyObject] = [
@@ -320,12 +318,10 @@ class GameScene: SKScene, SRWebSocketDelegate{
             mark.hidden = false
             next_img.hidden = false
             next_img.name = "NEXT"
-            if(title_img.hidden){
-                //ゲームオーバー時にカウントを表示
-                time_img.hidden = false
-                time_label.text = time
-                time_label.hidden = false
-            }
+            //ゲームオーバー時にカウントを表示
+            time_img.hidden = false
+            time_label.text = time
+            time_label.hidden = false
             gameover_timer?.invalidate()
         }
     }
