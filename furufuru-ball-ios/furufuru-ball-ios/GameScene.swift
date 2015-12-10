@@ -345,7 +345,9 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 self.myMotionManager?.stopDeviceMotionUpdates()
                 Circle?.fillColor = UIColor.rgb(r: 252, g: 238, b: 33, alpha: 1)
                 Circle!.strokeColor = UIColor.rgb(r: 252, g: 238, b: 33, alpha: 1)
-                Circle?.physicsBody?.affectedByGravity = true
+                if (!ballout_flag) {
+                    Circle?.physicsBody?.affectedByGravity = true
+                }
                 self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
                 gameover_timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "gameover", userInfo: nil, repeats: true)
                 if self.isOpen() {
