@@ -441,22 +441,19 @@ class GameScene: SKScene, SRWebSocketDelegate{
                     if self.Circle?.position.x<self.frame.minX+radius {
                         vp_x = 1000
                         self.Circle!.position.x += CGFloat(v_x*interval)
-                        //timerが他にセットされていれば削除する
-                        self.timer?.invalidate()
-                        //ボールが入ってきた時タイマーに値を入れる
-                        self.timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "update", userInfo: nil, repeats: true)
                     }else if self.Circle?.position.x>self.frame.maxX-radius{
                         vp_x = -1000
                         self.Circle?.position.x += CGFloat(v_x*interval)
-                        //timerが他にセットされていれば削除する
-                        self.timer?.invalidate()
-                        //ボールが入ってきた時タイマーに値を入れる
-                        self.timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "update", userInfo: nil, repeats: true)
                     }
                     //ボールが中に入ったら壁を作る.
                     if self.Circle!.position.x < self.frame.maxX && self.Circle!.position.x > self.frame.minX {
                         self.ballout_flag=false
                         self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
+                        //timerが他にセットされていれば削除する
+                        self.timer?.invalidate()
+                        //ボールが入ってきた時タイマーに値を入れる
+                        self.timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "update", userInfo: nil, repeats: true)
+
                         print("in")
                     }
                 } else {
@@ -488,23 +485,19 @@ class GameScene: SKScene, SRWebSocketDelegate{
                     if self.Circle?.position.y<self.frame.minY+radius {
                         vp_y = 1000
                         self.Circle?.position.y += CGFloat(v_y*interval)
-                        //timerが他にセットされていれば削除する
-                        self.timer?.invalidate()
-                        //ボールが入ってきた時タイマーに値を入れる
-                        self.timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "update", userInfo: nil, repeats: true)
-                        
                     }else if self.Circle?.position.y > self.frame.maxY-radius {
                         vp_y = -1000
                         self.Circle?.position.y += CGFloat(v_y*interval)
-                        //timerが他にセットされていれば削除する
-                        self.timer?.invalidate()
-                        //ボールが入ってきた時タイマーに値を入れる
-                        self.timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "update", userInfo: nil, repeats: true)
                     }
                     //ボールが中に入ったら壁を作る.
                     if self.Circle!.position.y < self.frame.maxY && self.Circle!.position.y > self.frame.minY {
                         self.ballout_flag=false
                         self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
+                        //timerが他にセットされていれば削除する
+                        self.timer?.invalidate()
+                        //ボールが入ってきた時タイマーに値を入れる
+                        self.timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "update", userInfo: nil, repeats: true)
+
                         print("in")
                     }
                 } else {
