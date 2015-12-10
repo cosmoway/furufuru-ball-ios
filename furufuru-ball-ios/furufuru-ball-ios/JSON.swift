@@ -49,7 +49,7 @@ extension JSON {
         var obj:AnyObject?
         do {
             obj = try NSJSONSerialization.JSONObjectWithData(
-                        data, options:[])
+                data, options:[])
         } catch let error as NSError {
             err = error
             obj = nil
@@ -69,13 +69,12 @@ extension JSON {
     /// constructs JSON object from the content of NSURL
     public convenience init(nsurl:NSURL) {
         var enc:NSStringEncoding = NSUTF8StringEncoding
-        let err:NSError? = nil
-        let str =
-        String(try! NSString(
-            contentsOfURL:nsurl, usedEncoding:&enc))
-        if err != nil { self.init(err!) }
-            
-        else { self.init(string:str) }
+        do {
+            let str = try NSString(contentsOfURL:nsurl, usedEncoding:&enc)
+            self.init(string:str as String)
+        } catch let err as NSError {
+            self.init(err)
+        }
     }
     /// fetch the JSON string from NSURL and parse it
     /// same as JSON(nsurl:NSURL)
@@ -103,12 +102,12 @@ extension JSON {
     /// when the 2nd argument is set to true it pretty prints
     public class func stringify(obj:AnyObject, pretty:Bool=false) -> String! {
         if !NSJSONSerialization.isValidJSONObject(obj) {
-            JSON(NSError(
+            let error = JSON(NSError(
                 domain:"JSONErrorDomain",
                 code:422,
                 userInfo:[NSLocalizedDescriptionKey: "not an JSON object"]
                 ))
-            return nil
+            return JSON(error).toString(pretty)
         }
         return JSON(obj).toString(pretty)
     }
@@ -118,7 +117,7 @@ extension JSON {
     /// access the element like array
     public subscript(idx:Int) -> JSON {
         switch _value {
-        case let err as NSError:
+        case _ as NSError:
             return self
         case let ary as NSArray:
             if 0 <= idx && idx < ary.count {
@@ -139,7 +138,7 @@ extension JSON {
     /// access the element like dictionary
     public subscript(key:String)->JSON {
         switch _value {
-        case let err as NSError:
+        case _ as NSError:
             return self
         case let dic as NSDictionary:
             if let val:AnyObject = dic[key] { return JSON(val) }
@@ -358,10 +357,10 @@ extension JSON {
     }
     // gives all keys content in JSON object.
     public var allKeys:JSON{
-        if(self._value.allKeys == nil) {
+        if(self._value.allObjects == nil) {
             return JSON([])
         }
-        return JSON(self._value.allKeys)
+        return JSON(self._value.allObjects)
     }
 }
 extension JSON : SequenceType {
@@ -418,10 +417,9 @@ extension JSON : CustomStringConvertible {
         case let o as NSString:
             return o.debugDescription
         default:
-            let opts :NSJSONWritingOptions? = pretty
-                ? NSJSONWritingOptions.PrettyPrinted : nil
+            let opts = pretty ? NSJSONWritingOptions.PrettyPrinted : NSJSONWritingOptions()
             if let data = (try? NSJSONSerialization.dataWithJSONObject(
-                _value, options:opts!)) as NSData? {
+                _value, options:opts)) as NSData? {
                     if let result = NSString(
                         data:data, encoding:NSUTF8StringEncoding
                         ) as? String {
