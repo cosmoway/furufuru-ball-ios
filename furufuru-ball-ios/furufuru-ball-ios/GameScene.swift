@@ -34,6 +34,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
     var messageMgr: GNSMessageManager?
     var publication: GNSPublication?
     var subscription: GNSSubscription?
+    var connectCnt = 1
 
     
     override func didMoveToView(view: SKView) {
@@ -222,6 +223,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                     let json = JSON(obj).toString(true)
                     self.webSocketClient?.send(json)
                 }
+                message("start")
             }
         }
     }
@@ -333,19 +335,48 @@ class GameScene: SKScene, SRWebSocketDelegate{
         })
         GNSMessageManager.setDebugLoggingEnabled(true)
         GNSPermission.setGranted(true);
+        message("メッセージ送ったよ")
+        self.join_img.append(SKSpriteNode(imageNamed: "join_icon"))
+        self.join_img[self.connectCnt].xScale = 0.3
+        self.join_img[self.connectCnt].yScale = 0.3
+        self.join_img[self.connectCnt].position = CGPointMake(self.frame.maxX-CGFloat(30*self.connectCnt), self.frame.maxY-30)
+        self.addChild(self.join_img[self.connectCnt])
+    }
+    func message(var name:String) {
         if let messageMgr = self.messageMgr {
-              let name = String(format:"Anonymous %d", arc4random() % 100)
             // Publish the name to nearby devices.
             let pubMessage: GNSMessage = GNSMessage(content: name.dataUsingEncoding(NSUTF8StringEncoding,
                 allowLossyConversion: true))
+            print(name,String(data: pubMessage.content, encoding:NSUTF8StringEncoding))
             publication = messageMgr.publicationWithMessage(pubMessage)
             
             // Subscribe to messages from nearby devices and display them in the message view.
             subscription = messageMgr.subscriptionWithMessageFoundHandler({[unowned self] (message: GNSMessage!) -> Void in
-                print(message)
-                }, messageLostHandler: {[unowned self](message: GNSMessage!) -> Void in
-                    print(message)
-                })
+                print("メッセージがきたよ",String(data: message.content, encoding:NSUTF8StringEncoding))
+                if (String(data: message.content, encoding:NSUTF8StringEncoding)=="メッセージ送ったよ") {
+                    self.connectCnt++
+                    self.join_img.append(SKSpriteNode(imageNamed: "join_icon"))
+                    self.join_img[self.connectCnt].xScale = 0.3
+                    self.join_img[self.connectCnt].yScale = 0.3
+                    self.join_img[self.connectCnt].position = CGPointMake(self.frame.maxX-CGFloat(30*self.connectCnt), self.frame.maxY-30)
+                    self.addChild(self.join_img[self.connectCnt])
+                } else {
+                    self.initialize();
+                    let ran = (Int)(arc4random_uniform(3));
+                    self.bg_img[ran].hidden = false
+                    name = "ボールを出す";
+                    // Publish the name to nearby devices.
+                    let pubMessage: GNSMessage = GNSMessage(content: name.dataUsingEncoding(NSUTF8StringEncoding,
+                        allowLossyConversion: true))
+                    print(name,String(data: pubMessage.content, encoding:NSUTF8StringEncoding))
+                    self.publication = messageMgr.publicationWithMessage(pubMessage)
+                }
+            }, messageLostHandler: {[unowned self](message: GNSMessage!) -> Void in
+                print("ロストしたよ",String(data: message.content, encoding:NSUTF8StringEncoding))
+                self.removeChildrenInArray([self.join_img[self.connectCnt]])
+                self.join_img.removeLast()
+                self.connectCnt--
+            })
         }
     }
     func webSocketDidOpen(webSocket:SRWebSocket){
