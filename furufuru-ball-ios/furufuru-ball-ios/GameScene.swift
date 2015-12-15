@@ -35,6 +35,8 @@ class GameScene: SKScene, SRWebSocketDelegate{
     var publication: GNSPublication?
     var subscription: GNSSubscription?
     var connectCnt = 1
+    let uuid: NSString = NSUUID().UUIDString
+    var uuids : [NSString] = []
 
     
     override func didMoveToView(view: SKView) {
@@ -176,6 +178,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
         Circle!.zPosition = 1
         self.addChild(Circle!)
         self.backgroundColor = UIColor.rgb(r: 240, g: 240, b: 235, alpha: 1);
+        uuids.append(uuid)
         webSocketConnect()
     }
     //リスタートのボタン
@@ -215,6 +218,8 @@ class GameScene: SKScene, SRWebSocketDelegate{
             if touchNode.name == "START"{
                 //リスタートの処理
                 initialize()
+
+                /*
                 if (self.isOpen()) {
                     //サーバーにメッセージをjson形式で送る処理
                     let obj: [String:AnyObject] = [
@@ -222,8 +227,20 @@ class GameScene: SKScene, SRWebSocketDelegate{
                     ]
                     let json = JSON(obj).toString(true)
                     self.webSocketClient?.send(json)
+                }*/
+                let random = arc4random_uniform(UInt32(uuids.count))
+                let obj: [String:AnyObject] = [
+                    "game" : "start",
+                    "uuid" : uuids[Int(random)]
+                ]
+                let json = JSON(obj).toString(true)
+                message(json)
+                let ran = (Int)(arc4random_uniform(3));
+                self.bg_img[ran].hidden = false
+                print(uuids[Int(random)])
+                if (uuids[Int(random)] == uuid) {
+                    motion(40.0)
                 }
-                message("start")
             }
         }
     }
@@ -335,14 +352,19 @@ class GameScene: SKScene, SRWebSocketDelegate{
         })
         GNSMessageManager.setDebugLoggingEnabled(true)
         GNSPermission.setGranted(true);
-        message("メッセージ送ったよ")
+        let obj: [String:AnyObject] = [
+            "connect" : "start",
+            "uuid" : uuid
+        ]
+        let json = JSON(obj).toString(true)
+        message(json)
         self.join_img.append(SKSpriteNode(imageNamed: "join_icon"))
         self.join_img[self.connectCnt].xScale = 0.3
         self.join_img[self.connectCnt].yScale = 0.3
         self.join_img[self.connectCnt].position = CGPointMake(self.frame.maxX-CGFloat(30*self.connectCnt), self.frame.maxY-30)
         self.addChild(self.join_img[self.connectCnt])
     }
-    func message(var name:String) {
+    func message(name:AnyObject) {
         if let messageMgr = self.messageMgr {
             // Publish the name to nearby devices.
             let pubMessage: GNSMessage = GNSMessage(content: name.dataUsingEncoding(NSUTF8StringEncoding,
@@ -352,30 +374,45 @@ class GameScene: SKScene, SRWebSocketDelegate{
             
             // Subscribe to messages from nearby devices and display them in the message view.
             subscription = messageMgr.subscriptionWithMessageFoundHandler({[unowned self] (message: GNSMessage!) -> Void in
-                print("メッセージがきたよ",String(data: message.content, encoding:NSUTF8StringEncoding))
-                if (String(data: message.content, encoding:NSUTF8StringEncoding)=="メッセージ送ったよ") {
-                    self.connectCnt++
-                    self.join_img.append(SKSpriteNode(imageNamed: "join_icon"))
-                    self.join_img[self.connectCnt].xScale = 0.3
-                    self.join_img[self.connectCnt].yScale = 0.3
-                    self.join_img[self.connectCnt].position = CGPointMake(self.frame.maxX-CGFloat(30*self.connectCnt), self.frame.maxY-30)
-                    self.addChild(self.join_img[self.connectCnt])
-                } else {
-                    self.initialize();
-                    let ran = (Int)(arc4random_uniform(3));
-                    self.bg_img[ran].hidden = false
-                    name = "ボールを出す";
-                    // Publish the name to nearby devices.
-                    let pubMessage: GNSMessage = GNSMessage(content: name.dataUsingEncoding(NSUTF8StringEncoding,
-                        allowLossyConversion: true))
-                    print(name,String(data: pubMessage.content, encoding:NSUTF8StringEncoding))
-                    self.publication = messageMgr.publicationWithMessage(pubMessage)
+                if let string = String(data: message.content, encoding:NSUTF8StringEncoding) {
+                    let object = JSON.parse(string)
+                    print("メッセージがきたよ",object["connect"].asString)
+                    if (object["connect"].asString == "start") {
+                        self.connectCnt++
+                        self.join_img.append(SKSpriteNode(imageNamed: "join_icon"))
+                        self.join_img[self.connectCnt].xScale = 0.3
+                        self.join_img[self.connectCnt].yScale = 0.3
+                        self.join_img[self.connectCnt].position = CGPointMake(self.frame.maxX-CGFloat(30*self.connectCnt), self.frame.maxY-30)
+                        self.addChild(self.join_img[self.connectCnt])
+                        for uuid in self.uuids {
+                            if (uuid != object["uuid"].asString) {
+                                self.uuids.append(object["uuid"].asString!)
+                            }
+                        }
+                    } else if (object["game"].asString == "start") {
+                        print(object["uuid"])
+                        self.initialize();
+                        let ran = (Int)(arc4random_uniform(3));
+                        self.bg_img[ran].hidden = false
+                        if (object["uuid"].asString == self.uuid) {
+                            self.motion(40.0)
+                        }
+                    } else if (object["move"].asString == "out") {
+                        if (object["uuid"].asString == self.uuid) {
+                            self.motion(40.0)
+                        }
+                    }
                 }
             }, messageLostHandler: {[unowned self](message: GNSMessage!) -> Void in
-                print("ロストしたよ",String(data: message.content, encoding:NSUTF8StringEncoding))
-                self.removeChildrenInArray([self.join_img[self.connectCnt]])
-                self.join_img.removeLast()
-                self.connectCnt--
+                if let string = String(data: message.content, encoding:NSUTF8StringEncoding) {
+                    let object = JSON.parse(string)
+                    if ("start" == object["connect"].asString ) {
+                        print("ロストしたよ",object["connect"])
+                        self.removeChildrenInArray([self.join_img[self.connectCnt]])
+                        self.join_img.removeLast()
+                        self.connectCnt--
+                    }
+                }
             })
         }
     }
@@ -465,18 +502,28 @@ class GameScene: SKScene, SRWebSocketDelegate{
     
     //ボールが壁をすり抜けたら呼ばれる関数
     func moveOut(){
-        if self.isOpen() {
             //サーバーにメッセージをjson形式で送る処理
+            let random = arc4random_uniform(UInt32(uuids.count))
             let obj: [String:AnyObject] = [
-                "move" : "out"
+                "move" : "out",
+                "uuid" : uuids[Int(random)]
             ]
             let json = JSON(obj).toString(true)
-            self.webSocketClient?.send(json)
-        }
+            message(json)
+            print(uuids[Int(random)])
+            if (uuids[Int(random)] == uuid) {
+                //センサーの停止
+                self.myMotionManager!.stopDeviceMotionUpdates()
+                //ボールが出た時タイマーを削除
+                timer?.invalidate()
+                motion(40.0)
+            } else {
+            //self.webSocketClient?.send(json)
         //センサーの停止
         self.myMotionManager!.stopDeviceMotionUpdates()
         //ボールが出た時タイマーを削除
         timer?.invalidate()
+        }
     }
     
     func motion(radius: CGFloat) {
