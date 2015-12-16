@@ -350,7 +350,6 @@ class GameScene: SKScene, SRWebSocketDelegate{
                     }
                 }
         })
-        GNSMessageManager.setDebugLoggingEnabled(true)
         GNSPermission.setGranted(true);
         let obj: [String:AnyObject] = [
             "connect" : "start",
@@ -376,7 +375,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
             subscription = messageMgr.subscriptionWithMessageFoundHandler({[unowned self] (message: GNSMessage!) -> Void in
                 if let string = String(data: message.content, encoding:NSUTF8StringEncoding) {
                     let object = JSON.parse(string)
-                    print("メッセージがきたよ",object["connect"].asString)
+                    print("メッセージがきたよ",String(data: message.content, encoding:NSUTF8StringEncoding))
                     if (object["connect"].asString == "start") {
                         self.connectCnt++
                         self.join_img.append(SKSpriteNode(imageNamed: "join_icon"))
@@ -406,8 +405,8 @@ class GameScene: SKScene, SRWebSocketDelegate{
             }, messageLostHandler: {[unowned self](message: GNSMessage!) -> Void in
                 if let string = String(data: message.content, encoding:NSUTF8StringEncoding) {
                     let object = JSON.parse(string)
+                    print("ロストしたよ",String(data: message.content, encoding:NSUTF8StringEncoding))
                     if ("start" == object["connect"].asString ) {
-                        print("ロストしたよ",object["connect"])
                         self.removeChildrenInArray([self.join_img[self.connectCnt]])
                         self.join_img.removeLast()
                         self.connectCnt--
