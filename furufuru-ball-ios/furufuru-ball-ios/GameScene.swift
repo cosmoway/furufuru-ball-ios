@@ -258,8 +258,6 @@ class GameScene: SKScene, SRWebSocketDelegate{
         }
         //x秒たったか判定
         if s >= x{
-            timer?.invalidate()
-            time = "----"
             
             //センサーの停止
             self.myMotionManager?.stopDeviceMotionUpdates()
@@ -270,6 +268,8 @@ class GameScene: SKScene, SRWebSocketDelegate{
             }
             self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
             gameover_timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "gameover", userInfo: nil, repeats: true)
+            time = "----"
+            timer?.invalidate()
         }
     }
     
