@@ -1,11 +1,8 @@
 language: objective-c
 osx_image: xcode7.2
-xcode_workspace: furufuru-ball-ios/furufuru-ball-ios.xcworkspace
-xcode_scheme: furufuru-ball-ios
-xcode_sdk: iphonesimulator
 env:
   global:
-  - APP_NAME="FuruFuru Ball"
+  - APP_NAME="furufuru-ball-ios/furufuru-ball-ios"
   - DEVELOPER_NAME="iPhone Distribution: Cosmoway, Inc."
   - PROFILE_NAME="AdHoc"
   - secure: m1trRhRq1FcLZOpdpApPESG7Jpl71j4PJC5CW15bMmejXrdBnGTAmE1s4JhmBIEGWRijbWads4gEzTPBmiLBy7jTlhLcsPUlRo1M9r8bTWh4wPO9XdqFBQO00zDYPRAOOU7SdejQlO3GlUYDnsI1s1bsOstGF9AGDAg1L589oNtKVQUIAgxN9SWHnDS0NWe5jkexU2qr0y6QTyAYnpcSnzRZJ6gs2N+igsj/icM0yZq3SR69wNaLOCwHquQxLRJO/zg8XZRTGGKi3Smbb4V5wLpicOgx2+mgajRZQeF6ZjRZ+AaFI7TmY+8vFnUKVthdsj0tH6Qyk7t3LNUzf3+A1+ucmh4ZwEDc5/W5QiLXoMP1JmuJW0YrAPuTiZaGE0hE0jKMFXrCWIXKMVDhC87U0I1OMDt79yus1DiSL5JfiQyVGIYu9wGdoh8LVOJw/btv5BafPa7gUCoL1gGDTPUQU+laGLOPI1mnpSgFrnvGVKlRKLNQ8EjOlzSYpSTK5mHU8OELP942nXZor5goKgWf0gQa29BEIZhW7IGFxkN3Rp1CQ7IRbk3mbazhx0JyL6OVOvMiEWbRseWJni3jpqK+IuYPxLevCQmXaJ0GmOgSiIXPDnFXzwILaMlEqDZmeKOgQdHriD37H3xKxYaSNCEudO4WTmtoVCAdwcy7YtzOfVg=
@@ -14,3 +11,12 @@ env:
   - secure: 0Y/pOihkbINY7MboVmbrFCVWzI863bSK3jVEyla+0luyWOmAxDRyEQE//hv9Intw5vZTF6AZml0a7JDhf2FeQa2Kd2wV+HfPmCcqKJvTqcE0LulixSwy2VjyRB440xOU5zVyN1GhVHb3MK1Jc6c0RGWkvV+sYh/bUUd2YGkh7EYihR0ZZwk9LgeUkRsq09hXgUQYD/SoBoxTSzFeX1NBlNKrbzWQNy9XgDynulfvcVwkuXYeOMwNMaqTRNC//o577wcpK7flenJ25LKk8R3tOf7xQrGLXykIvpHMS6D4FyIG2WsO8uA32TON0PAh+1iG1WW0c6bDDyQkx2IJHAhsq1C8iHr27Feh6qZa0LE2PxWDnAUgj8ysUFUVQB3RdvP3zK0qpmdYyutvcIcSz+E8l3TpU4zwCYYdUdJHFdoYJMZXZWpIK15Fv2POBQ4Vpl/LMEeyufURN8ABk2q+wiv207DxOP2FYgaMN2o3osRokCYADht40nntbUh6SFzue5VhgXPPqCeGvNXhUfSsNVFSERVLyNt521w3kcFfUjCfKJnB7gLUCgAWzZW2vjOrZ9edi+Fc3niIYB3DtCndrlv2xIlr6i+ebnLLzVPxqEjcRntbCiOyXoFN8HkH+D6tsH65i63sI6IkjfPxheyAkQ7TdzVf9hRoX+Aac/pbyBQJ3H8=
 notifications:
   slack: cosmoway:3wDRM2l9Hl45tGuDeZWDN6GH
+before_script:
+- ./Travis/Scripts/setup_keychain.sh
+script:
+- xctool -workspace furufuru-ball-ios/furufuru-ball-ios.xcworkspace -scheme furufuru-ball-ios -sdk iphonesimulator -configuration Release OBJROOT=$PWD/build SYMROOT=$PWD/build ONLY_ACTIVE_ARCH=NO
+after_success:
+- ./Travis/Scripts/teardown_keychain.sh
+- ./Travis/Scripts/build_ipa.sh
+- ./Travis/Scripts/upload_ipa.sh
+after_script:
