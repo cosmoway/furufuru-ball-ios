@@ -31,3 +31,12 @@ DerivedData
 # Carthage/Checkouts
 
 Carthage/Build
+
+# Travis
+#
+Travis/Certs/**/*.*
+!Travis/Certs/**/*.encrypted
+Travis/Profiles/**/*.*
+!Travis/Profiles/**/*.encrypted
+!AppleWorldwideDeveloperRelationsCertificationAuthority.cer
+
