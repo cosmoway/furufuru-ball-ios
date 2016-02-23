@@ -8,6 +8,9 @@
 
 import UIKit
 import SpriteKit
+import GoogleMobileAds
+
+var banner:GADBannerView!
 
 extension SKNode {
     class func unarchiveFromFile(file : String) -> SKNode? {
@@ -25,7 +28,7 @@ extension SKNode {
     }
 }
 
-class GameViewController: UIViewController {
+class GameViewController: UIViewController, GADBannerViewDelegate, GADInterstitialDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +49,18 @@ class GameViewController: UIViewController {
             
             skView.presentScene(scene)
         }
+        showAd()
+    }
+    
+    func showAd() {
+        banner = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
+        banner.frame.origin = CGPointMake(0, self.view.frame.size.height - banner.frame.height)
+        banner.adUnitID = "ca-app-pub-3940256099942544/6300978111"
+        banner.delegate = self
+        banner.rootViewController = self
+        let gadRequest:GADRequest = GADRequest()
+        banner.loadRequest(gadRequest)
+        self.view.addSubview(banner)
     }
 
     override func shouldAutorotate() -> Bool {
@@ -67,5 +82,23 @@ class GameViewController: UIViewController {
 
     override func prefersStatusBarHidden() -> Bool {
         return true
+    }
+    func adViewDidReceiveAd(adView: GADBannerView){
+        print("adViewDidReceiveAd:\(adView)")
+    }
+    func adView(adView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError){
+        print("error:\(error)")
+    }
+    func adViewWillPresentScreen(adView: GADBannerView){
+        print("adViewWillPresentScreen")
+    }
+    func adViewWillDismissScreen(adView: GADBannerView){
+        print("adViewWillDismissScreen")
+    }
+    func adViewDidDismissScreen(adView: GADBannerView){
+        print("adViewDidDismissScreen")
+    }
+    func adViewWillLeaveApplication(adView: GADBannerView){
+        print("adViewWillLeaveApplication")
     }
 }
