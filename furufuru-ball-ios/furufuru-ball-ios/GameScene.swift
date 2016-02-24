@@ -14,6 +14,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
     var count = 0
     var timer: NSTimer?
     var gameover_timer: NSTimer?
+    var banner_timer: NSTimer?
     var Circle: SKShapeNode?
     private var webSocketClient: SRWebSocket?
     var ballout_flag = true
@@ -193,7 +194,6 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 if touchNode.name == "NEXT"{
                     //リスタートの処理
                     initialize()
-                    banner.hidden = false
                     title_img.hidden = false
                     title_ball.hidden = false
                     underbar.hidden = false
@@ -354,6 +354,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 for (var i=0;i<bg_img.count;i++) {
                     bg_img[i].hidden = true
                 }
+                banner_timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "viewBanner", userInfo: nil, repeats: false)
                 bg_img[3].hidden = false
                 gameover_img.hidden = false
                 mark.hidden = false
@@ -512,6 +513,9 @@ class GameScene: SKScene, SRWebSocketDelegate{
             self.moveOut()
             self.ballout_flag = true
         }
+    }
+    func viewBanner() {
+        banner.hidden = false
     }
 }
 extension UIColor {
