@@ -14,6 +14,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
     var count = 0
     var timer: NSTimer?
     var gameover_timer: NSTimer?
+    var banner_timer: NSTimer?
     var Circle: SKShapeNode?
     private var webSocketClient: SRWebSocket?
     var ballout_flag = true
@@ -27,6 +28,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
     let start_img = SKSpriteNode(imageNamed: "start_mark")
     var join_img :[SKSpriteNode] = [SKSpriteNode(imageNamed: "join_icon")]
     let underbar = SKSpriteNode(imageNamed: "underbar")
+    var bar: SKShapeNode?
     let time_label = SKLabelNode(fontNamed: "AppleSDGothicNeo")
     var time = ""
     let help = SKSpriteNode(imageNamed: "info_mark")
@@ -69,11 +71,11 @@ class GameScene: SKScene, SRWebSocketDelegate{
         if (mobile == "iphone") {
             start_img.xScale = 0.2
             start_img.yScale = 0.2
-            start_img.position = CGPointMake(self.frame.midX, self.frame.minY+100.0)
+            start_img.position = CGPointMake(self.frame.midX, self.frame.minY+130.0)
         } else {
             start_img.xScale = 0.35
             start_img.yScale = 0.35
-            start_img.position = CGPointMake(self.frame.midX, self.frame.minY+200.0)
+            start_img.position = CGPointMake(self.frame.midX, self.frame.minY+220.0)
         }
         start_img.name = "START"
         self.addChild(start_img)
@@ -116,12 +118,23 @@ class GameScene: SKScene, SRWebSocketDelegate{
         if (mobile == "iphone") {
             underbar.xScale = 0.3
             underbar.yScale = 0.3
+            underbar.position = CGPointMake(self.frame.midX, self.frame.minY+65)
         } else {
             underbar.xScale = 0.5
             underbar.yScale = 0.4
+            underbar.position = CGPointMake(self.frame.midX, self.frame.minY+110)
         }
-        underbar.position = CGPointMake(self.frame.midX, self.frame.minY+10)
         self.addChild(underbar)
+        
+        if (mobile == "iphone") {
+            bar = SKShapeNode(rect: CGRectMake(0.0, 0.0, self.frame.size.width+2, 55.0))
+        } else {
+            bar = SKShapeNode(rect: CGRectMake(0.0, 0.0, self.frame.size.width+2, 110.0))
+        }
+
+        bar?.position = CGPointMake(self.frame.minX-1, self.frame.minY-1)
+        bar?.fillColor = UIColor.blackColor()
+        self.addChild(bar!)
         
         //リスタートのテキスト設定
         if (mobile == "iphone") {
@@ -332,6 +345,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
             if ("start" == object["game"].asString){
                 //初期化処理
                 initialize()
+                banner.hidden = true
                 let ran = (Int)(arc4random_uniform(3));
                 bg_img[ran].hidden = false
             }
@@ -340,6 +354,7 @@ class GameScene: SKScene, SRWebSocketDelegate{
                 for (var i=0;i<bg_img.count;i++) {
                     bg_img[i].hidden = true
                 }
+                banner_timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "viewBanner", userInfo: nil, repeats: false)
                 bg_img[3].hidden = false
                 gameover_img.hidden = false
                 mark.hidden = false
@@ -498,6 +513,9 @@ class GameScene: SKScene, SRWebSocketDelegate{
             self.moveOut()
             self.ballout_flag = true
         }
+    }
+    func viewBanner() {
+        banner.hidden = false
     }
 }
 extension UIColor {
